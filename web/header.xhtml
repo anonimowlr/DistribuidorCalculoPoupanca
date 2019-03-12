@@ -8,7 +8,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <f:view contentType="text/html">
     <h:head>
-        <title>Cálculo de poupança</title>
+        <title><ui:insert name="titulo"></ui:insert></title>
+       
         <h:outputStylesheet library="css" name="header.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
@@ -42,7 +43,7 @@
                        
                        
                        
-                       Cálculo Planos Econômicos
+                       Distribuidor Cálculo Planos Econônomicos
                     </a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarButtons">
                         <span class="icon-bar"></span>
@@ -61,7 +62,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><h:link outcome="consulta-cep.jsf" value="Consultar Cep" ></h:link></li>
+                                <li><h:link outcome="tratamento.jsf" value="Efetuar análise" ></h:link></li>
+                                <li><h:link outcome="gerencial.jsf" value="Gerenciar" ></h:link></li>
                             </ul>
                         </li>
                     </ul>
@@ -83,12 +85,7 @@
         
         
         
-         <div class="container" >
-        <div><p>Eu sou o header para todas as páginas</p></div>
-        <div><p>Menus do header</p></div>
-        <h:button outcome="novo-calculo.jsf" value="Chamar página de novo cálculo" styleClass="bt btn-primary"></h:button>
-        <h:button outcome="home.jsf" value="Página inicial" styleClass="bt btn-success"></h:button>
-        </div>
+        
         
         
          <div class="container "  style="background-color: #FFF" >
