@@ -206,7 +206,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
             //varre todas as linhas da planila 
             int i = 0;
             while (rowIterator.hasNext()) {
-               
+               String tipoDado = null;
                 
 
                 int numeroLinha = i;
@@ -228,13 +228,16 @@ public class FormProgressoUpload extends javax.swing.JFrame {
 
                         case Cell.CELL_TYPE_STRING:
                             System.out.println("tipo String " + cell.getStringCellValue());
+                            tipoDado = "string";
                             break;
                         case Cell.CELL_TYPE_NUMERIC:
 
                             System.out.println("tipo numerico " + cell.getNumericCellValue());
+                            tipoDado = "numerio";
                             break;
                         case Cell.CELL_TYPE_FORMULA:
-                            System.out.println("Tippo formula" + cell.getCellFormula());
+                            tipoDado = "formula";
+                            System.out.println("Tipo formula" + cell.getCellFormula());
                             
                     }
                     if (numeroLinha > 0) {
@@ -261,7 +264,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                                 poupanca.setOrigem(cell.getStringCellValue());
                                 break;
                             case 7:
-                               
+                               if(tipoDado.equals("string")){
+                                 poupanca.setCpf((cell.getStringCellValue()));  
+                               }
                                 poupanca.setCpf(Utils.tratarNumeroNotacao(cell.getNumericCellValue()));
                                 break;
                             case 8:
