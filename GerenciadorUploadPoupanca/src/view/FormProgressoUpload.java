@@ -5,7 +5,9 @@
  */
 package view;
 
+import dao.ArquivoPoupancaDAO;
 import dao.PoupancaDAO;
+import endidades.ArquivoPoupanca;
 import endidades.Poupanca;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -174,8 +176,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
 
      public void lerXlsx(String arq) throws SQLException, Exception {
          PoupancaDAO poupancaDAO = new PoupancaDAO();
-        
-       
+         ArquivoPoupancaDAO arquivoPoupancaDAO = new ArquivoPoupancaDAO();
+         Poupanca poupanca = new Poupanca();
+         ArquivoPoupanca arquivoPoupanca = new ArquivoPoupanca();
 
         //String nomeArquivo = "C:\\Users\\suporte\\Desktop\\Pasta1.xlsx";
         File file = new File(arq);
@@ -216,7 +219,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 Row row = rowIterator.next();
                 //pega todas as celulas da linha   
                 Iterator<Cell> cellIterator = row.iterator();
-                Poupanca poupanca = new Poupanca();
+                
+                
+                
                 //varremos todas as celulas da linha atual
                 int j = 1;
                 while (cellIterator.hasNext()) {
@@ -266,8 +271,10 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                             case 7:
                                if(tipoDado.equals("string")){
                                  poupanca.setCpf((cell.getStringCellValue()));  
+                               } else{
+                                  poupanca.setCpf(Utils.tratarNumeroNotacao(cell.getNumericCellValue()));  
                                }
-                                poupanca.setCpf(Utils.tratarNumeroNotacao(cell.getNumericCellValue()));
+                               
                                 break;
                             case 8:
                                 poupanca.setDataUop((Utils.getDataPlanilhaFormatoMysql(cell.getDateCellValue())));
@@ -281,11 +288,13 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 }
                 i++;
                 if (numeroLinha > 0) {
-                    poupancaDAO.salvar(poupanca);
+                    
+                    arquivoPoupanca.adicionarPoupanca(poupanca);
+                   
                 }
             }
-            
-            
+            arquivoPoupanca.setDataArquivo(Utils.getDataAtualFormatoMysql());
+            arquivoPoupancaDAO.salvar(arquivoPoupanca);
            
 
         } catch (FileNotFoundException ex) {

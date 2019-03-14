@@ -5,6 +5,7 @@
  */
 package endidades;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,6 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,7 +24,21 @@ import javax.persistence.Id;
  */
 @Entity
 
-public class Poupanca{
+public class Poupanca implements Serializable{
+
+    /**
+     * @return the arquivoPoupanca
+     */
+    public ArquivoPoupanca getArquivoPoupanca()  {
+        return arquivoPoupanca;
+    }
+
+    /**
+     * @param arquivoPoupanca the arquivoPoupanca to set
+     */
+    public void setArquivoPoupanca(ArquivoPoupanca arquivoPoupanca) {
+        this.arquivoPoupanca = arquivoPoupanca;
+    }
 
    @Id
    @Column(name = "id")
@@ -46,6 +65,7 @@ public class Poupanca{
    @Column(name = "conta")
    private Integer conta;
    @Column(name = "data_base")
+   @Temporal(TemporalType.DATE)
    private Date dataBase;
    @Column(name = "valor_saldo")
    private BigDecimal valorSaldo;
@@ -60,8 +80,12 @@ public class Poupanca{
    @Column(name = "funci")
    private String funci;
    @Column(name = "data_execucao")
+   @Temporal(TemporalType.DATE)
    private Date dataExecucao; 
    
+   @ManyToOne()
+   @JoinColumn(name = "id_arquivo", referencedColumnName = "id")
+   private ArquivoPoupanca arquivoPoupanca;
     
     
     
