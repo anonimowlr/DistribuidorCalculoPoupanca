@@ -51,7 +51,7 @@ public class Poupanca implements Serializable{
    @Column(name = "poupador")
    private String poupador;
    @Column(name = "escritorio_bb")
-   private String EscritorioBB;
+   private String escritorioBB;
    @Column(name = "advogado_bb")
    private String advogadoAdverso;
    @Column(name = "origem")
@@ -139,19 +139,6 @@ public class Poupanca implements Serializable{
         this.poupador = poupador;
     }
 
-    /**
-     * @return the EscritorioBB
-     */
-    public String getEscritorioBB() {
-        return EscritorioBB;
-    }
-
-    /**
-     * @param EscritorioBB the EscritorioBB to set
-     */
-    public void setEscritorioBB(String EscritorioBB) {
-        this.EscritorioBB = EscritorioBB;
-    }
 
     /**
      * @return the advogadoAdverso
@@ -361,6 +348,20 @@ public class Poupanca implements Serializable{
      */
     public void setCnj(String cnj) {
         this.cnj = cnj;
+    }
+
+    /**
+     * @return the escritorioBB
+     */
+    public String getEscritorioBB() {
+        return escritorioBB;
+    }
+
+    /**
+     * @param escritorioBB the escritorioBB to set
+     */
+    public void setEscritorioBB(String escritorioBB) {
+        this.escritorioBB = escritorioBB;
     }
  
    

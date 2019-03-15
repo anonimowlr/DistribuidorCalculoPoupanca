@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//F5078775
+
+
 package br.com.calculopoupanca.model.dao;
 
 import br.com.calculopoupanca.util.ErroSistema;
 import java.util.List;
 
 
-/**
- *
- * @author PC_LENOVO
- */
+
+
+// DAO GERENICO PARA JDBC
+
 public interface CrudDAO<E> {//E representa a entidade
     
     

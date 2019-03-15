@@ -1,91 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:h="http://xmlns.jcp.org/jsf/html"
-             template="header.xhtml"
-             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             xmlns:f="http://xmlns.jcp.org/jsf/core"
-             >
-   
-        <ui:define name="titulo">Tratar novo cálculo</ui:define>
-    
-    <h:body>
-        
-       
-        <div >
-            <p id="rodape"></p>
-        </div>
-        
-        <div id="editor"></div>
-     
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-        <button      id="btGerarPDF"  class="btn btn-success">Imprimir </button>
-        <h:form id="formPrincipal">
-            
-             <h:messages  style="color: red; font-size: 20px"  ></h:messages>
-        
-             
-            <h:panelGroup rendered="#{bairroBean.isEditar()==false}" >
-                <h:commandButton action="#{bairroBean.novo()}" value="pesquisar cep" class="btn btn-primary"></h:commandButton>
-            </h:panelGroup>
-       
-            <h:panelGrid columns="2" rendered="#{bairroBean.isEditar()}" >
-           <h:outputLabel for="" value="Informe o CEP"></h:outputLabel>
-           <h:inputText value="#{bairroBean.entidade.cep}"></h:inputText>
-           <h:commandButton  action="#{bairroBean.buscar()}"    value="Pesquisar" class="btn btn-primary"></h:commandButton>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-            
-        </h:panelGrid>
-             
-             
-        
-        
-        
-         </h:form> 
-        
-        <div id="tblCep">
-            <h:dataTable value="#{bairroBean.entidades}" var="bairro" rendered="#{bairroBean.isBuscar()}" class="table table-hover" id="dataCep"  >
-            
-            <h:column  >
-                <f:facet name="header">Rua</f:facet>
-                #{bairro.logradouro}
-            </h:column>
-            <h:column >
-                <f:facet name="header">Bairro</f:facet>
-                #{bairro.bairro}
-            </h:column>
-             <h:column  >
-                <f:facet name="header">Cidade</f:facet>
-                #{bairro.cidade}
-            </h:column>
-              <h:column  >
-                <f:facet name="header">nome do estado</f:facet>
-                #{bairro.estado_info.nome}
-            </h:column>
-            <h:column  >
-                <f:facet name="header">Uf</f:facet>
-                #{bairro.estado}
-            </h:column>
-            <h:column  >
-                <f:facet name="header">Area total do estado</f:facet>
-                #{bairro.estado_info.area_km2}
-            </h:column>
-          
-            <h:column    >
-                <f:facet name="header" >Area total da cidade</f:facet>
-                #{bairro.cidade_info.area_km2}
-            </h:column>
-            <h:column  >
-                <f:facet name="header">Ação</f:facet>
-                <button      id="btnImprimir"  class="btn btn-success" >Pdf </button>
-            </h:column>
-           
-            
-            
-        </h:dataTable>
-        </div>
-       
-        
-    </h:body>
-    </ui:decorate>
+    <ui:composition template="header.xhtml" >
 
+        <ui:define name="titulo">
+            Página de tratamento
+        </ui:define>
+
+
+        <ui:define name="conteudo">
+            <p> Página inicial do sistema</p>
+
+
+            <h:form id="fomIndex">
+
+
+                <h:dataTable 
+                    value="#{controlePoupanca.daoPoupanca.listaObjetos}" var="p" class="table">
+                   
+
+                    <h:column>
+                        <f:facet name="header">NPJ</f:facet>
+                            #{p.npj}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">CNJ</f:facet>
+                            #{p.npj}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ESCRITORIO</f:facet>
+                            #{p.escritorioBB}
+                    </h:column>
+
+                    
+                </h:dataTable>
+
+
+            </h:form>
+
+
+
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+
+</html>

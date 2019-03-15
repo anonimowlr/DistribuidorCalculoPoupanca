@@ -24,7 +24,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -177,7 +176,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
      public void lerXlsx(String arq) throws SQLException, Exception {
          PoupancaDAO poupancaDAO = new PoupancaDAO();
          ArquivoPoupancaDAO arquivoPoupancaDAO = new ArquivoPoupancaDAO();
-         Poupanca poupanca = new Poupanca();
+         Poupanca poupanca = null;
          ArquivoPoupanca arquivoPoupanca = new ArquivoPoupanca();
 
         //String nomeArquivo = "C:\\Users\\suporte\\Desktop\\Pasta1.xlsx";
@@ -210,6 +209,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
             int i = 0;
             while (rowIterator.hasNext()) {
                String tipoDado = null;
+               poupanca = new Poupanca();
                 
 
                 int numeroLinha = i;
@@ -293,7 +293,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                    
                 }
             }
-            arquivoPoupanca.setDataArquivo(Utils.getDataAtualFormatoMysql());
+            arquivoPoupanca.setDataArquivo(Utils.getDataHoraAtualMysqlDate());
             arquivoPoupancaDAO.salvar(arquivoPoupanca);
            
 

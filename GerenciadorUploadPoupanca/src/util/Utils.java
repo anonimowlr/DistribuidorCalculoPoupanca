@@ -397,6 +397,14 @@ public class Utils {
 
         return sdf.format(d);
     }
+    
+    public static Date getDataHoraAtualMysqlDate() {
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        
+
+        return (d);
+    }
    
     
     public static Double converterStringParaDouble(String v) {
