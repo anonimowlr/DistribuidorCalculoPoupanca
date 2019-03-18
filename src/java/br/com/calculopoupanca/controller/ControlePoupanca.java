@@ -6,10 +6,13 @@
 package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
+import endidades.ComplementoPoupanca;
+import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 import util.Util;
 
 /**
@@ -22,7 +25,10 @@ public class ControlePoupanca implements  Serializable{
     
     private String estadoTela = "";
     private Poupanca poupanca;
-    private PoupancaDAO<Poupanca> daoPoupanca;
+    private ComplementoPoupanca complementoPoupanca;
+    private IdPoupanca idPoupanca;
+    private PoupancaDAO<Poupanca,IdPoupanca> daoPoupanca;
+
 
     public ControlePoupanca() {
     daoPoupanca = new PoupancaDAO<>();
@@ -57,7 +63,7 @@ public class ControlePoupanca implements  Serializable{
         }
         
         
-        
+      mudarParaBuscar();
     }
     
     
@@ -67,18 +73,24 @@ public class ControlePoupanca implements  Serializable{
          setEstadoTela("editar");
      }
      
+      public void mudarParaBuscar(){
+         setEstadoTela("buscar");
+     }
      
      
      public boolean isEditar(){
          
          return "editar".equals(getEstadoTela());
      }
+     public boolean isBuscar(){
+         
+         return "buscar".equals(getEstadoTela());
+     }
     
      
-     
-     public void editar(Poupanca poupanca){
+     public void editar(Integer index){
          mudarParaEditar();
-         poupanca = getDaoPoupanca().localizar(poupanca.getId());
+         setPoupanca(getDaoPoupanca().localizar(index));
      }
 
     /**
@@ -112,15 +124,29 @@ public class ControlePoupanca implements  Serializable{
     /**
      * @return the daoPoupanca
      */
-    public PoupancaDAO<Poupanca> getDaoPoupanca() {
+    public PoupancaDAO<Poupanca,IdPoupanca> getDaoPoupanca() {
         return daoPoupanca;
     }
 
     /**
      * @param daoPoupanca the daoPoupanca to set
      */
-    public void setDaoPoupanca(PoupancaDAO<Poupanca> daoPoupanca) {
+    public void setDaoPoupanca(PoupancaDAO<Poupanca,IdPoupanca> daoPoupanca) {
         this.daoPoupanca = daoPoupanca;
+    }
+
+    /**
+     * @return the complementoPoupanca
+     */
+    public ComplementoPoupanca getComplementoPoupanca() {
+        return complementoPoupanca;
+    }
+
+    /**
+     * @param complementoPoupanca the complementoPoupanca to set
+     */
+    public void setComplementoPoupanca(ComplementoPoupanca complementoPoupanca) {
+        this.complementoPoupanca = complementoPoupanca;
     }
     
      

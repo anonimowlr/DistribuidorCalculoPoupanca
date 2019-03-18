@@ -7,14 +7,19 @@ package endidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -40,53 +45,26 @@ public class Poupanca implements Serializable{
         this.arquivoPoupanca = arquivoPoupanca;
     }
 
-   @Id
-   @Column(name = "id")
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer id;
-   @Column(name = "npj")
-   private String npj;
-   @Column(name = "cnj")
-   private String cnj;
-   @Column(name = "poupador")
-   private String poupador;
+  @EmbeddedId
+  private IdPoupanca idPoupanca;
+    
    @Column(name = "escritorio_bb")
    private String escritorioBB;
    @Column(name = "advogado_bb")
    private String advogadoAdverso;
    @Column(name = "origem")
    private String origem;
-   @Column(name = "cpf")
-   private String cpf;
+  
    @Column(name = "data_uop")
    private Date dataUop;
-   @Column(name = "agencia")
-   private Integer agencia;
-   @Column(name = "conta")
-   private Integer conta;
-   @Column(name = "data_base")
-   @Temporal(TemporalType.DATE)
-   private Date dataBase;
-   @Column(name = "valor_saldo")
-   private BigDecimal valorSaldo;
-   @Column(name = "valor_acordo")
-   private BigDecimal valorAcordo;
-   @Column(name = "observacao")
-   private String observacao;
-   @Column(name = "complemento_obs")
-   private String complementoObs;
-   @Column(name = "faz_juz")
-   private String fazJuz;
-   @Column(name = "funci")
-   private String funci;
-   @Column(name = "data_execucao")
-   @Temporal(TemporalType.DATE)
-   private Date dataExecucao; 
    
    @ManyToOne()
    @JoinColumn(name = "id_arquivo", referencedColumnName = "id")
    private ArquivoPoupanca arquivoPoupanca;
     
+   
+    @OneToMany(mappedBy = "poupanca",cascade = CascadeType.ALL,orphanRemoval = false)
+   private List<ComplementoPoupanca> listaComplementoPoupanca =  new ArrayList<>();
     
     
     public Poupanca() {
@@ -94,51 +72,39 @@ public class Poupanca implements Serializable{
 
     
     
-    
-    
-    
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
+    public void adicionarComplementoPoupanca(ComplementoPoupanca complementoPoupanca){
+        complementoPoupanca.setPoupanca(this);
+        getListaComplementoPoupanca().add(complementoPoupanca);
+        
     }
 
     /**
-     * @param id the id to set
+     * @return the idPoupanca
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public IdPoupanca getIdPoupanca() {
+        return idPoupanca;
     }
 
     /**
-     * @return the npj
+     * @param idPoupanca the idPoupanca to set
      */
-    public String getNpj() {
-        return npj;
+    public void setIdPoupanca(IdPoupanca idPoupanca) {
+        this.idPoupanca = idPoupanca;
     }
 
     /**
-     * @param npj the npj to set
+     * @return the escritorioBB
      */
-    public void setNpj(String npj) {
-        this.npj = npj;
+    public String getEscritorioBB() {
+        return escritorioBB;
     }
 
     /**
-     * @return the poupador
+     * @param escritorioBB the escritorioBB to set
      */
-    public String getPoupador() {
-        return poupador;
+    public void setEscritorioBB(String escritorioBB) {
+        this.escritorioBB = escritorioBB;
     }
-
-    /**
-     * @param poupador the poupador to set
-     */
-    public void setPoupador(String poupador) {
-        this.poupador = poupador;
-    }
-
 
     /**
      * @return the advogadoAdverso
@@ -169,20 +135,6 @@ public class Poupanca implements Serializable{
     }
 
     /**
-     * @return the cpf
-     */
-    public String getCpf() {
-        return cpf;
-    }
-
-    /**
-     * @param cpf the cpf to set
-     */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    /**
      * @return the dataUop
      */
     public Date getDataUop() {
@@ -197,178 +149,18 @@ public class Poupanca implements Serializable{
     }
 
     /**
-     * @return the agencia
+     * @return the listaComplementoPoupanca
      */
-    public Integer getAgencia() {
-        return agencia;
+    public List<ComplementoPoupanca> getListaComplementoPoupanca() {
+        return listaComplementoPoupanca;
     }
 
     /**
-     * @param agencia the agencia to set
+     * @param listaComplementoPoupanca the listaComplementoPoupanca to set
      */
-    public void setAgencia(Integer agencia) {
-        this.agencia = agencia;
+    public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
+        this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
-
-    /**
-     * @return the conta
-     */
-    public Integer getConta() {
-        return conta;
-    }
-
-    /**
-     * @param conta the conta to set
-     */
-    public void setConta(Integer conta) {
-        this.conta = conta;
-    }
-
-    /**
-     * @return the dataBase
-     */
-    public Date getDataBase() {
-        return dataBase;
-    }
-
-    /**
-     * @param dataBase the dataBase to set
-     */
-    public void setDataBase(Date dataBase) {
-        this.dataBase = dataBase;
-    }
-
-    /**
-     * @return the valorSaldo
-     */
-    public BigDecimal getValorSaldo() {
-        return valorSaldo;
-    }
-
-    /**
-     * @param valorSaldo the valorSaldo to set
-     */
-    public void setValorSaldo(BigDecimal valorSaldo) {
-        this.valorSaldo = valorSaldo;
-    }
-
-    /**
-     * @return the valorAcordo
-     */
-    public BigDecimal getValorAcordo() {
-        return valorAcordo;
-    }
-
-    /**
-     * @param valorAcordo the valorAcordo to set
-     */
-    public void setValorAcordo(BigDecimal valorAcordo) {
-        this.valorAcordo = valorAcordo;
-    }
-
-    /**
-     * @return the observacao
-     */
-    public String getObservacao() {
-        return observacao;
-    }
-
-    /**
-     * @param observacao the observacao to set
-     */
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    /**
-     * @return the complementoObs
-     */
-    public String getComplementoObs() {
-        return complementoObs;
-    }
-
-    /**
-     * @param complementoObs the complementoObs to set
-     */
-    public void setComplementoObs(String complementoObs) {
-        this.complementoObs = complementoObs;
-    }
-
-    /**
-     * @return the fazJuz
-     */
-    public String getFazJuz() {
-        return fazJuz;
-    }
-
-    /**
-     * @param fazJuz the fazJuz to set
-     */
-    public void setFazJuz(String fazJuz) {
-        this.fazJuz = fazJuz;
-    }
-
-    /**
-     * @return the funci
-     */
-    public String getFunci() {
-        return funci;
-    }
-
-    /**
-     * @param funci the funci to set
-     */
-    public void setFunci(String funci) {
-        this.funci = funci;
-    }
-
-    /**
-     * @return the dataExecucao
-     */
-    public Date getDataExecucao() {
-        return dataExecucao;
-    }
-
-    /**
-     * @param dataExecucao the dataExecucao to set
-     */
-    public void setDataExecucao(Date dataExecucao) {
-        this.dataExecucao = dataExecucao;
-    }
-
-    /**
-     * @return the cnj
-     */
-    public String getCnj() {
-        return cnj;
-    }
-
-    /**
-     * @param cnj the cnj to set
-     */
-    public void setCnj(String cnj) {
-        this.cnj = cnj;
-    }
-
-    /**
-     * @return the escritorioBB
-     */
-    public String getEscritorioBB() {
-        return escritorioBB;
-    }
-
-    /**
-     * @param escritorioBB the escritorioBB to set
-     */
-    public void setEscritorioBB(String escritorioBB) {
-        this.escritorioBB = escritorioBB;
-    }
- 
-   
-   
-   
-   
-    
     
     
 }

@@ -20,9 +20,7 @@ public class TestePersistirPoupanca {
         Poupanca poupanca  = new Poupanca();
         
        poupanca.setAdvogadoAdverso("advogado adverso");
-       poupanca.setAgencia(3848);
-       poupanca.setConta(215295);
-       poupanca.setCpf("03861581930");
+       
        
        
        

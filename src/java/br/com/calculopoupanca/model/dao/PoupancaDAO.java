@@ -5,19 +5,21 @@
  */
 package br.com.calculopoupanca.model.dao;
 
+import endidades.IdPoupanca;
 import endidades.Poupanca;
 
 /**
  *
  * @author f5078775
  */
-public class PoupancaDAO<T> extends DAOGenerico<Poupanca, T>{
+public class PoupancaDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
 
     public PoupancaDAO() {
        super();
        classePersistente = Poupanca.class;
        ordem = "npj";
        maximoObjeto = 1;
+       chaveComposta = IdPoupanca.class;
        
         
     }
