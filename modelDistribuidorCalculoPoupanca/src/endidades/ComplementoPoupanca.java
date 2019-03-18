@@ -11,8 +11,11 @@ import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,6 +31,7 @@ public class ComplementoPoupanca implements Serializable {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "agencia")
     private Integer agencia;
@@ -58,13 +62,14 @@ public class ComplementoPoupanca implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataExecucao;
     @Temporal(TemporalType.DATE)
-     @Column(name = "data_op")       
+    @Column(name = "data_op")       
     Date dataUop;
 
     
-    @ManyToOne
-    @JoinColumn(name = "id_poupanca",referencedColumnName = "id")
-    private Poupanca poupanca;
+    @ManyToOne()
+     @JoinColumns( {
+     @JoinColumn(name="npj"), @JoinColumn(name="cnj")})
+      private Poupanca poupanca;
     
     
     

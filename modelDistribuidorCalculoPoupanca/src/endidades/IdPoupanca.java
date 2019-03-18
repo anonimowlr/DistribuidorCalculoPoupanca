@@ -5,6 +5,7 @@
  */
 package endidades;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -13,13 +14,25 @@ import javax.persistence.Embeddable;
  * @author PC_LENOVO
  */
 @Embeddable
-public class IdPoupanca {
+public class IdPoupanca implements  Serializable{
     
     @Column(name = "npj", nullable = false)
     private Long npj;
     @Column(name = "cnj", nullable = false)
-    private Long cnj;
+    private String cnj;
 
+    public IdPoupanca() {
+    }
+
+    public IdPoupanca(Long npj, String cnj) {
+        this.npj = npj;
+        this.cnj = cnj;
+    }
+
+    
+    
+    
+    
     /**
      * @return the npj
      */
@@ -37,14 +50,14 @@ public class IdPoupanca {
     /**
      * @return the cnj
      */
-    public Long getCnj() {
+    public String getCnj() {
         return cnj;
     }
 
     /**
      * @param cnj the cnj to set
      */
-    public void setCnj(Long cnj) {
+    public void setCnj(String cnj) {
         this.cnj = cnj;
     }
     

@@ -8,6 +8,8 @@ package view;
 import dao.ArquivoPoupancaDAO;
 import dao.PoupancaDAO;
 import endidades.ArquivoPoupanca;
+import endidades.ComplementoPoupanca;
+import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -17,7 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -177,7 +181,10 @@ public class FormProgressoUpload extends javax.swing.JFrame {
          PoupancaDAO poupancaDAO = new PoupancaDAO();
          ArquivoPoupancaDAO arquivoPoupancaDAO = new ArquivoPoupancaDAO();
          Poupanca poupanca = null;
+         IdPoupanca idPoupanca = null;
+         ComplementoPoupanca complementoPoupanca = null;
          ArquivoPoupanca arquivoPoupanca = new ArquivoPoupanca();
+         
 
         //String nomeArquivo = "C:\\Users\\suporte\\Desktop\\Pasta1.xlsx";
         File file = new File(arq);
@@ -210,8 +217,8 @@ public class FormProgressoUpload extends javax.swing.JFrame {
             while (rowIterator.hasNext()) {
                String tipoDado = null;
                poupanca = new Poupanca();
-                
-
+               idPoupanca = new IdPoupanca();
+                 complementoPoupanca = new ComplementoPoupanca();
                 int numeroLinha = i;
                 System.out.println("numero da linha : " + numeroLinha);
                 txtArea.setText("numero da linha sendo carregada : " + numeroLinha + " de " + qtdReg);
@@ -248,15 +255,15 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                     if (numeroLinha > 0) {
                         switch (j) {
                             case 1:
-                                poupanca.setNpj(Utils.tratarNpj(cell.getNumericCellValue()));
+                                idPoupanca.setNpj(Utils.converterNpjToLong(cell.getNumericCellValue()));
                                 break;
 
                             case 2:
-                                poupanca.setCnj(cell.getStringCellValue());
+                                idPoupanca.setCnj(cell.getStringCellValue());
                                 break;
 
                             case 3:
-                                poupanca.setPoupador(cell.getStringCellValue());
+                                complementoPoupanca.setPoupador(cell.getStringCellValue());
                                 break;
                             case 4:
                                 poupanca.setEscritorioBB(cell.getStringCellValue());
@@ -270,9 +277,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                                 break;
                             case 7:
                                if(tipoDado.equals("string")){
-                                 poupanca.setCpf((cell.getStringCellValue()));  
+                                 complementoPoupanca.setCpf((cell.getStringCellValue()));  
                                } else{
-                                  poupanca.setCpf(Utils.tratarNumeroNotacao(cell.getNumericCellValue()));  
+                                  complementoPoupanca.setCpf(Utils.tratarNumeroNotacao(cell.getNumericCellValue()));  
                                }
                                
                                 break;
@@ -289,6 +296,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 i++;
                 if (numeroLinha > 0) {
                     
+                    
+                    poupanca.setIdPoupanca(idPoupanca);
+                    poupanca.adicionarComplementoPoupanca(complementoPoupanca);
                     arquivoPoupanca.adicionarPoupanca(poupanca);
                    
                 }

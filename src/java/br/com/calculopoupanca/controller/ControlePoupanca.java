@@ -12,7 +12,6 @@ import endidades.Poupanca;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.view.ViewScoped;
 import util.Util;
 
 /**

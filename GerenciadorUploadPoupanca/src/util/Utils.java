@@ -662,6 +662,24 @@ public class Utils {
        
     }
      
+      public static Long converterNpjToLong(Double v) {
+        Long numero = v.longValue();
+        System.out.println(numero);
+        
+        return numero;
+       
+    }
+      public static Long converterNpjToLong(String v) {
+        
+        
+        
+        Long x = Long.parseLong(v);
+        System.out.println(x);
+        return x;
+       
+    }
+     
+     
      
       public static String tratarNumeroNotacao(Double v) {
         Long numero = v.longValue();
