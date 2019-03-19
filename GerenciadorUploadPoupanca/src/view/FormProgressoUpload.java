@@ -184,6 +184,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
          IdPoupanca idPoupanca = null;
          ComplementoPoupanca complementoPoupanca = null;
          ArquivoPoupanca arquivoPoupanca = new ArquivoPoupanca();
+         Boolean adicionarExistente;
          
 
         //String nomeArquivo = "C:\\Users\\suporte\\Desktop\\Pasta1.xlsx";
@@ -216,7 +217,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
             int i = 0;
             while (rowIterator.hasNext()) {
                String tipoDado = null;
-               poupanca = new Poupanca();
+               adicionarExistente = false;
                idPoupanca = new IdPoupanca();
                  complementoPoupanca = new ComplementoPoupanca();
                 int numeroLinha = i;
@@ -260,6 +261,34 @@ public class FormProgressoUpload extends javax.swing.JFrame {
 
                             case 2:
                                 idPoupanca.setCnj(cell.getStringCellValue());
+                                
+                                
+                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
+                                  poupanca = new Poupanca();
+                                  
+                                }
+                                
+                                for (Poupanca p : arquivoPoupanca.getListaPoupanca()) {
+                                    if(p.getIdPoupanca().equals(idPoupanca)){
+                                      poupanca = p;
+                                      adicionarExistente = true;
+                                    } else{
+                                        poupanca = new Poupanca();
+                                        poupanca.setIdPoupanca(idPoupanca);
+                                       
+                                    }
+                                    
+                                }
+                                
+                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
+                                  poupanca.setIdPoupanca(idPoupanca);
+                                  arquivoPoupanca.adicionarPoupanca(poupanca);
+                                }
+                                
+                                if(adicionarExistente == false){
+                                    arquivoPoupanca.adicionarPoupanca(poupanca); 
+                                }
+                                
                                 break;
 
                             case 3:
@@ -284,7 +313,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                                
                                 break;
                             case 8:
-                                poupanca.setDataUop((Utils.getDataPlanilhaFormatoMysql(cell.getDateCellValue())));
+                                complementoPoupanca.setDataUop((Utils.getDataPlanilhaFormatoMysql(cell.getDateCellValue())));
                                 break;
 
                         }
@@ -297,9 +326,9 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 if (numeroLinha > 0) {
                     
                     
-                    poupanca.setIdPoupanca(idPoupanca);
+                  
                     poupanca.adicionarComplementoPoupanca(complementoPoupanca);
-                    arquivoPoupanca.adicionarPoupanca(poupanca);
+                    
                    
                 }
             }

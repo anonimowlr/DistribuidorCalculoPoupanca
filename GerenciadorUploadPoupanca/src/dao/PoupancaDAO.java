@@ -26,9 +26,21 @@ public class PoupancaDAO {
     
     public void salvar(Poupanca poupanca){
         
-        em.getTransaction().begin();
-        em.persist(poupanca);
-        em.getTransaction().commit();
+      
+        try{
+          if(poupanca.getIdPoupanca()==null){
+         em.getTransaction().begin();
+         em.persist(poupanca);
+        }else{
+            em.merge(poupanca);
+        }
+        em.getTransaction().commit();  
+        }catch(Exception e){
+          em.getTransaction().rollback();
+        }
+        
+        
+        
         
     }
     

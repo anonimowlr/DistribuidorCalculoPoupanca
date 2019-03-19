@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -155,6 +156,58 @@ public class Poupanca implements Serializable{
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.idPoupanca);
+        hash = 67 * hash + Objects.hashCode(this.escritorioBB);
+        hash = 67 * hash + Objects.hashCode(this.advogadoAdverso);
+        hash = 67 * hash + Objects.hashCode(this.origem);
+        hash = 67 * hash + Objects.hashCode(this.dataUop);
+        hash = 67 * hash + Objects.hashCode(this.arquivoPoupanca);
+        hash = 67 * hash + Objects.hashCode(this.listaComplementoPoupanca);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Poupanca other = (Poupanca) obj;
+        if (!Objects.equals(this.escritorioBB, other.escritorioBB)) {
+            return false;
+        }
+        if (!Objects.equals(this.advogadoAdverso, other.advogadoAdverso)) {
+            return false;
+        }
+        if (!Objects.equals(this.origem, other.origem)) {
+            return false;
+        }
+        if (!Objects.equals(this.idPoupanca, other.idPoupanca)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataUop, other.dataUop)) {
+            return false;
+        }
+        if (!Objects.equals(this.arquivoPoupanca, other.arquivoPoupanca)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaComplementoPoupanca, other.listaComplementoPoupanca)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
     
     
 }

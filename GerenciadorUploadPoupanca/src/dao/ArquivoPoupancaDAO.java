@@ -26,7 +26,7 @@ public class ArquivoPoupancaDAO {
     public void salvar(ArquivoPoupanca arquivoPoupanca){
         
         em.getTransaction().begin();
-        em.persist(arquivoPoupanca);
+        em.merge(arquivoPoupanca);
         em.getTransaction().commit();
         
     }

@@ -62,13 +62,13 @@ public class ComplementoPoupanca implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataExecucao;
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_op")       
-    Date dataUop;
+    @Column(name = "data_uop")       
+    private Date dataUop;
 
     
     @ManyToOne()
      @JoinColumns( {
-     @JoinColumn(name="npj"), @JoinColumn(name="cnj")})
+     @JoinColumn(name="cnj"), @JoinColumn(name="npj")})
       private Poupanca poupanca;
     
     
@@ -283,6 +283,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    /**
+     * @return the dataUop
+     */
+    public Date getDataUop() {
+        return dataUop;
+    }
+
+    /**
+     * @param dataUop the dataUop to set
+     */
+    public void setDataUop(Date dataUop) {
+        this.dataUop = dataUop;
     }
 
 }
