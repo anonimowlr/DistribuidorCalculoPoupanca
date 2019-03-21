@@ -5,6 +5,7 @@
  */
 package dao;
 
+import endidades.IdPoupanca;
 import endidades.Poupanca;
 import javax.persistence.EntityManager;
 import jpa.EntityManagerUtil;
@@ -28,17 +29,17 @@ public class PoupancaDAO {
         
       
         try{
-          if(poupanca.getIdPoupanca()==null){
+        
          em.getTransaction().begin();
          em.persist(poupanca);
-        }else{
-            em.merge(poupanca);
-        }
-        em.getTransaction().commit();  
+         em.getTransaction().commit();  
         }catch(Exception e){
           em.getTransaction().rollback();
         }
         
+        
+        
+       
         
         
         
@@ -47,7 +48,12 @@ public class PoupancaDAO {
     
     
     
-    
+     public Poupanca localizarObjeto(IdPoupanca idPoupanca){
+            
+            Poupanca objeto = (Poupanca) em.find(Poupanca.class, idPoupanca);
+            return objeto;
+            
+        }
     
     
     

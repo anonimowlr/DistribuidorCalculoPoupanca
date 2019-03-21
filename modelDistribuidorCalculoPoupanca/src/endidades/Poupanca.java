@@ -26,19 +26,9 @@ import javax.persistence.OneToMany;
 
 public class Poupanca implements Serializable{
 
-    /**
-     * @return the arquivoPoupanca
-     */
-    public ArquivoPoupanca getArquivoPoupanca()  {
-        return arquivoPoupanca;
-    }
+   
 
-    /**
-     * @param arquivoPoupanca the arquivoPoupanca to set
-     */
-    public void setArquivoPoupanca(ArquivoPoupanca arquivoPoupanca) {
-        this.arquivoPoupanca = arquivoPoupanca;
-    }
+  
 
   @EmbeddedId
   private IdPoupanca idPoupanca;
@@ -53,9 +43,7 @@ public class Poupanca implements Serializable{
    @Column(name = "data_uop")
    private Date dataUop;
    
-   @ManyToOne()
-   @JoinColumn(name = "id_arquivo", referencedColumnName = "id")
-   private ArquivoPoupanca arquivoPoupanca;
+  
     
    
     @OneToMany(mappedBy = "poupanca",cascade = CascadeType.ALL,orphanRemoval = false)
@@ -159,14 +147,13 @@ public class Poupanca implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.idPoupanca);
-        hash = 67 * hash + Objects.hashCode(this.escritorioBB);
-        hash = 67 * hash + Objects.hashCode(this.advogadoAdverso);
-        hash = 67 * hash + Objects.hashCode(this.origem);
-        hash = 67 * hash + Objects.hashCode(this.dataUop);
-        hash = 67 * hash + Objects.hashCode(this.arquivoPoupanca);
-        hash = 67 * hash + Objects.hashCode(this.listaComplementoPoupanca);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.idPoupanca);
+        hash = 59 * hash + Objects.hashCode(this.escritorioBB);
+        hash = 59 * hash + Objects.hashCode(this.advogadoAdverso);
+        hash = 59 * hash + Objects.hashCode(this.origem);
+        hash = 59 * hash + Objects.hashCode(this.dataUop);
+        hash = 59 * hash + Objects.hashCode(this.listaComplementoPoupanca);
         return hash;
     }
 
@@ -197,14 +184,14 @@ public class Poupanca implements Serializable{
         if (!Objects.equals(this.dataUop, other.dataUop)) {
             return false;
         }
-        if (!Objects.equals(this.arquivoPoupanca, other.arquivoPoupanca)) {
-            return false;
-        }
         if (!Objects.equals(this.listaComplementoPoupanca, other.listaComplementoPoupanca)) {
             return false;
         }
         return true;
     }
+
+   
+    
     
     
     

@@ -5,10 +5,10 @@
  */
 package view;
 
-import dao.ArquivoPoupancaDAO;
+
 import dao.PoupancaDAO;
-import endidades.ArquivoPoupanca;
 import endidades.ComplementoPoupanca;
+
 import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.awt.Image;
@@ -179,11 +179,11 @@ public class FormProgressoUpload extends javax.swing.JFrame {
 
      public void lerXlsx(String arq) throws SQLException, Exception {
          PoupancaDAO poupancaDAO = new PoupancaDAO();
-         ArquivoPoupancaDAO arquivoPoupancaDAO = new ArquivoPoupancaDAO();
+       
          Poupanca poupanca = null;
          IdPoupanca idPoupanca = null;
          ComplementoPoupanca complementoPoupanca = null;
-         ArquivoPoupanca arquivoPoupanca = new ArquivoPoupanca();
+       
          Boolean adicionarExistente;
          
 
@@ -263,31 +263,40 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                                 idPoupanca.setCnj(cell.getStringCellValue());
                                 
                                 
-                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
-                                  poupanca = new Poupanca();
-                                  
+//                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
+//                                  poupanca = new Poupanca();
+//                                  
+//                                }
+                                
+                               poupanca = poupancaDAO.localizarObjeto(idPoupanca);
+                                
+                                
+                                if(poupanca == null){
+                                    poupanca = new Poupanca();
+                                    poupanca.setIdPoupanca(idPoupanca);
                                 }
                                 
-                                for (Poupanca p : arquivoPoupanca.getListaPoupanca()) {
-                                    if(p.getIdPoupanca().equals(idPoupanca)){
-                                      poupanca = p;
-                                      adicionarExistente = true;
-                                    } else{
-                                        poupanca = new Poupanca();
-                                        poupanca.setIdPoupanca(idPoupanca);
-                                       
-                                    }
-                                    
-                                }
                                 
-                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
-                                  poupanca.setIdPoupanca(idPoupanca);
-                                  arquivoPoupanca.adicionarPoupanca(poupanca);
-                                }
+//                                for (Poupanca p : arquivoPoupanca.getListaPoupanca()) {
+//                                    if(p.getIdPoupanca().equals(idPoupanca)){
+//                                      poupanca = p;
+//                                      adicionarExistente = true;
+//                                    } else{
+//                                        poupanca = new Poupanca();
+//                                        poupanca.setIdPoupanca(idPoupanca);
+//                                       
+//                                    }
+//                                    
+//                                }
                                 
-                                if(adicionarExistente == false){
-                                    arquivoPoupanca.adicionarPoupanca(poupanca); 
-                                }
+//                                if(arquivoPoupanca.getListaPoupanca().size()<=0){
+//                                  poupanca.setIdPoupanca(idPoupanca);
+//                                  arquivoPoupanca.adicionarPoupanca(poupanca);
+//                                }
+//                                
+//                                if(adicionarExistente == false){
+//                                    arquivoPoupanca.adicionarPoupanca(poupanca); 
+//                                }
                                 
                                 break;
 
@@ -328,13 +337,15 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                     
                   
                     poupanca.adicionarComplementoPoupanca(complementoPoupanca);
-                    
+                     poupancaDAO.salvar(poupanca);
                    
                 }
+                
+              
             }
-            arquivoPoupanca.setDataArquivo(Utils.getDataHoraAtualMysqlDate());
-            arquivoPoupancaDAO.salvar(arquivoPoupanca);
-           
+         //   arquivoPoupanca.setDataArquivo(Utils.getDataHoraAtualMysqlDate());
+          //  arquivoPoupancaDAO.salvar(arquivoPoupanca);
+         
 
         } catch (FileNotFoundException ex) {
          
