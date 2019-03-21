@@ -109,8 +109,8 @@
 
                 </div>
 
-                <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar" class="btn btn-primary"></h:commandButton>
-                <h:commandButton       value="Novo" class="btn btn-success" >
+                <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}"></h:commandButton>
+                <h:commandButton       value="Novo" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
                     <f:ajax   listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
