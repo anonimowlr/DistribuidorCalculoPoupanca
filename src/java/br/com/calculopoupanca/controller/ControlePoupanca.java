@@ -87,9 +87,9 @@ public class ControlePoupanca implements  Serializable{
      }
     
      
-     public void editar(Integer index){
+     public void editar(IdPoupanca idpoupanca){
          mudarParaEditar();
-         setPoupanca(getDaoPoupanca().localizar(index));
+         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
      }
 
     /**
