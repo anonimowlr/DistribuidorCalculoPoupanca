@@ -74,9 +74,17 @@
 
 
                     <h:dataTable value="#{controlePoupanca.poupanca.listaComplementoPoupanca}" var="c"  class="table table-hover" style="font-size: 7pt"   rendered="#{controlePoupanca.editar == true}">
+                        <div align="center">
+                           <f:facet name="header" >
+                              
+                            <h:outputLabel value="DADOS DO NPJ: #{controlePoupanca.poupanca.idPoupanca.npj}"></h:outputLabel>
+                        </f:facet> 
+                        </div>>
+                        
+                        
                         
                             <h:column>
-                                <f:facet name="header">AGENCIA</f:facet>
+                                <f:facet name="header">POUPADOR</f:facet>
                                 <h:outputText value="#{c.poupador}"></h:outputText>
 
                             </h:column>
@@ -102,7 +110,7 @@
                 </div>
 
                 <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar" class="btn btn-primary"></h:commandButton>
-                <h:commandButton       value="Adicionar" class="btn btn-success" >
+                <h:commandButton       value="Novo" class="btn btn-success" >
                     <f:ajax   listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
