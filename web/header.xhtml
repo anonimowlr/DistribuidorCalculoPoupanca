@@ -6,10 +6,11 @@
       
           
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:view contentType="text/html">
+ 
     <h:head>
-        <link rel="shortcut icon" href="img/bancobrasil4.png" />
+        
         <title><ui:insert name="titulo"></ui:insert></title>
+         <link rel="shortcut icon" href="resources/img/bb-logo.png" />
         <h:outputStylesheet library="css" name="header.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
@@ -34,7 +35,8 @@
         
         
     </h:head>
-    <h:body>
+     <f:view >
+   
         
          <div class = "page-header"></div>
         <div class = "navbar navbar-cor-bb navbar-fixed-top">
@@ -95,7 +97,7 @@
              <ui:insert name="conteudo"></ui:insert><!--as páginas chamadas entrarão aqui-->
         </div>
         
-    </h:body>
+   
      <footer class="navbar-fixed-bottom" style="background-color: #d1d1d1">
         <div class = "container">
             <p id = "rodape" style="color: rgb(30, 73, 115); margin-bottom: 0px; font-weight: 600;">#{funcionarioBean.chave}-#{funcionarioBean.nomeInteiro}</p>

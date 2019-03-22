@@ -22,13 +22,16 @@
 
             <h:form id="fomIndex">
 
-                <h:messages ></h:messages>
+
+
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" showSummary="true" showDetail="false" globalOnly="true"    ></h:messages>
+
 
 
                 <div class="table-responsive">
 
 
-                    <h:dataTable value="#{controlePoupanca.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controlePoupanca.editar== false}" >
+                    <h:dataTable value="#{controlePoupanca.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controlePoupanca.isBuscar()}" >
 
 
 
@@ -61,62 +64,131 @@
 
 
 
-               
+
 
 
 
 
             </h:form>
-            
-            
-            <h:form>
-                 <div class="table-responsive">
 
 
-                    <h:dataTable value="#{controlePoupanca.poupanca.listaComplementoPoupanca}" var="c"  class="table table-hover" style="font-size: 7pt"   rendered="#{controlePoupanca.editar == true}">
+            <h:form id="formComplemento">
+                <div class="table-responsive">
+
+
+                    <h:dataTable value="#{controlePoupanca.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controlePoupanca.editar == true}">
                         <div align="center">
-                           <f:facet name="header" >
-                              
-                            <h:outputLabel value="DADOS DO NPJ: #{controlePoupanca.poupanca.idPoupanca.npj}"></h:outputLabel>
-                        </f:facet> 
+                            <f:facet name="header" >
+
+                                <h:outputLabel value="DADOS DO NPJ: #{controlePoupanca.poupanca.idPoupanca.npj}"></h:outputLabel>
+                            </f:facet> 
                         </div>>
-                        
-                        
-                        
-                            <h:column>
-                                <f:facet name="header">POUPADOR</f:facet>
-                                <h:outputText value="#{c.poupador}"></h:outputText>
-
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">CPF</f:facet>
-                                <h:outputText value="#{c.cpf}"></h:outputText>
-
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">DATA UOP</f:facet>
-                                <h:outputText value="#{c.dataUop}">
-                                    <f:converter converterId="converterDate"></f:converter>
-                                </h:outputText>
-
-                            </h:column>
 
 
-                       
+
+                        <h:column>
+                            <f:facet name="header">POUPADOR</f:facet>
+                            <h:outputText value="#{c.poupador}"></h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CPF</f:facet>
+                            <h:outputText value="#{c.cpf}"></h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">DATA UOP</f:facet>
+                            <h:outputText value="#{c.dataUop}">
+                                <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">AGENCIA</f:facet>
+                            <h:outputText value="#{c.agencia}">
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CONTA</f:facet>
+                            <h:outputText value="#{c.conta}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">VALOR BASE</f:facet>
+                            <h:outputText value="#{c.valorBase}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">DATA BASE</f:facet>
+                            <h:outputText value="#{c.dataBase}">
+                              <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">VALOR ACORDO</f:facet>
+                            <h:outputText value="#{c.valorAcordo}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">OBSERVACAO</f:facet>
+                            <h:outputText value="#{c.observacao}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Plano</f:facet>
+                            <h:outputText value="#{c.plano}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">ACOES</f:facet>
+                            <h:commandButton       value="Calcular" class="btn btn-success">
+                                <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click"  ></f:ajax>
+                            </h:commandButton>
+
+                        </h:column>
+
+
+
 
 
                     </h:dataTable>
 
                 </div>
 
-                <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}"></h:commandButton>
-                <h:commandButton       value="Novo" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
+                <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar Npj" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}"></h:commandButton>
+                <h:commandButton       value="Novo Poupador" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
                     <f:ajax   listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
 
             </h:form>
 
+            
+            
+            <form id="formCalculo">
+                <h:panelGrid columns="2" rendered="#{controlePoupanca.isEditarComplemento()}">
+                    <h:outputLabel value="Poupador:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}"></h:inputText>
+                    <h:outputLabel value="Cpf"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}"></h:inputText>
+                    
+                </h:panelGrid>
+                <h:commandButton value="Ok" class="btn btn-success" rendered="#{controlePoupanca.isEditarComplemento()}">
+                    <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
+                </h:commandButton>
+            </form>
 
         </ui:define>
 

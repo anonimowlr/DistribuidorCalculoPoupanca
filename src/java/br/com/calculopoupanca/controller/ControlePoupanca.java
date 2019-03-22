@@ -20,77 +20,90 @@ import util.Util;
  */
 @ManagedBean
 @SessionScoped
-public class ControlePoupanca implements  Serializable{
-    
-    private String estadoTela = "";
+public class ControlePoupanca implements Serializable {
+
+    private String estadoTela = "buscar";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private IdPoupanca idPoupanca;
-    private PoupancaDAO<Poupanca,IdPoupanca> daoPoupanca;
-
+    private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
 
     public ControlePoupanca() {
-    daoPoupanca = new PoupancaDAO<>();
+        daoPoupanca = new PoupancaDAO<>();
     }
-    
-    
-    public void  novo(){
+
+    public void novo() {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
-    
-    
-    public String listar(){
-         return  "tratamento?faces-redirect=true";
+
+    public String listar() {
+        return "tratamento?faces-redirect=true";
     }
-    
-    
-    
-    public void salvar(){
+
+    public void salvar() {
         boolean persistiu = false;
-        
-        if(isEditar()){
-           persistiu = getDaoPoupanca().atualizar(getPoupanca());
-        } else{
+
+        if (isEditar()) {
+            persistiu = getDaoPoupanca().atualizar(getPoupanca());
+        } else {
             persistiu = getDaoPoupanca().salvar(getPoupanca());
         }
-        
-        if(persistiu){
+
+        if (persistiu) {
             Util.mensagemInformacao(getDaoPoupanca().getMensagem());
-        } else{
+        } else {
             Util.mensagemErro(getDaoPoupanca().getMensagem());
         }
-        
-        
-      mudarParaBuscar();
+
+        mudarParaBuscar();
+    }
+
+    public void mudarParaEditar() {
+        setEstadoTela("editar");
+    }
+
+    public void mudarParaEditarComplemento() {
+        setEstadoTela("editarComplemento");
+    }
+
+    public void mudarParaBuscar() {
+        setEstadoTela("buscar");
+    }
+
+    public boolean isEditar() {
+
+        return "editar".equals(getEstadoTela());
+    }
+
+    public boolean isEditarComplemento() {
+
+        return "editarComplemento".equals(getEstadoTela());
+    }
+
+    public boolean isBuscar() {
+
+        return "buscar".equals(getEstadoTela());
+    }
+
+    public void editar(IdPoupanca idpoupanca) {
+        mudarParaEditar();
+        setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
     }
     
+    public void editarComplemento(Integer index) {
+        mudarParaEditarComplemento();
+        poupanca = getPoupanca();
     
-    
-    
-     public void mudarParaEditar(){
-         setEstadoTela("editar");
-     }
-     
-      public void mudarParaBuscar(){
-         setEstadoTela("buscar");
-     }
-     
-     
-     public boolean isEditar(){
-         
-         return "editar".equals(getEstadoTela());
-     }
-     public boolean isBuscar(){
-         
-         return "buscar".equals(getEstadoTela());
-     }
-    
-     
-     public void editar(IdPoupanca idpoupanca){
-         mudarParaEditar();
-         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
-     }
+        for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
+         if(c.getId().equals(index)){
+             setComplementoPoupanca(c);
+             break;
+         }
+            
+        }
+        
+    }
 
     /**
      * @return the estadoTela
@@ -123,14 +136,14 @@ public class ControlePoupanca implements  Serializable{
     /**
      * @return the daoPoupanca
      */
-    public PoupancaDAO<Poupanca,IdPoupanca> getDaoPoupanca() {
+    public PoupancaDAO<Poupanca, IdPoupanca> getDaoPoupanca() {
         return daoPoupanca;
     }
 
     /**
      * @param daoPoupanca the daoPoupanca to set
      */
-    public void setDaoPoupanca(PoupancaDAO<Poupanca,IdPoupanca> daoPoupanca) {
+    public void setDaoPoupanca(PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca) {
         this.daoPoupanca = daoPoupanca;
     }
 
@@ -147,13 +160,5 @@ public class ControlePoupanca implements  Serializable{
     public void setComplementoPoupanca(ComplementoPoupanca complementoPoupanca) {
         this.complementoPoupanca = complementoPoupanca;
     }
-    
-     
-     
-     
+
 }
-
-
-
-
-

@@ -18,7 +18,7 @@ public class PoupancaDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
        super();
        classePersistente = Poupanca.class;
        ordem = "npj";
-       maximoObjeto = 5;
+       maximoObjeto = 1;
        chaveComposta = IdPoupanca.class;
        
         
