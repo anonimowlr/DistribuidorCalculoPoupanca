@@ -10,6 +10,9 @@ import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import util.Util;
@@ -22,15 +25,35 @@ import util.Util;
 @SessionScoped
 public class ControlePoupanca implements Serializable {
 
-    private String estadoTela = "buscar";
+    private String estadoTela = "";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private IdPoupanca idPoupanca;
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
-
+    private List<Poupanca> listaPoupanca = new ArrayList<>();
+  
+    
+    
+    @PostConstruct
+    public void init(){
+     
+        buscar();
+    }
+    
+    
+    
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
     }
+    
+    
+    
+    public void buscar(){
+        mudarParaBuscar();
+        setListaPoupanca(getDaoPoupanca().getListaObjetos());
+        setListaPoupanca(getListaPoupanca());
+    }
+    
 
     public void novo() {
         setEstadoTela("");
@@ -79,6 +102,7 @@ public class ControlePoupanca implements Serializable {
     public boolean isEditarComplemento() {
 
         return "editarComplemento".equals(getEstadoTela());
+       
     }
 
     public boolean isBuscar() {
@@ -92,8 +116,11 @@ public class ControlePoupanca implements Serializable {
     }
     
     public void editarComplemento(Integer index) {
+       
+       
+     
         mudarParaEditarComplemento();
-        poupanca = getPoupanca();
+      
     
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
          if(c.getId().equals(index)){
@@ -159,6 +186,34 @@ public class ControlePoupanca implements Serializable {
      */
     public void setComplementoPoupanca(ComplementoPoupanca complementoPoupanca) {
         this.complementoPoupanca = complementoPoupanca;
+    }
+
+    /**
+     * @return the idPoupanca
+     */
+    public IdPoupanca getIdPoupanca() {
+        return idPoupanca;
+    }
+
+    /**
+     * @param idPoupanca the idPoupanca to set
+     */
+    public void setIdPoupanca(IdPoupanca idPoupanca) {
+        this.idPoupanca = idPoupanca;
+    }
+
+    /**
+     * @return the listaPoupanca
+     */
+    public List<Poupanca> getListaPoupanca() {
+        return listaPoupanca;
+    }
+
+    /**
+     * @param listaPoupanca the listaPoupanca to set
+     */
+    public void setListaPoupanca(List<Poupanca> listaPoupanca) {
+        this.listaPoupanca = listaPoupanca;
     }
 
 }

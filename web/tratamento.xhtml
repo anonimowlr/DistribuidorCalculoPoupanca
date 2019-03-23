@@ -31,7 +31,7 @@
                 <div class="table-responsive">
 
 
-                    <h:dataTable value="#{controlePoupanca.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controlePoupanca.isBuscar()}" >
+                    <h:dataTable value="#{controlePoupanca.listaPoupanca}" var="p" class="table" style="font-size: 7pt" rendered="#{controlePoupanca.isBuscar()}" >
 
 
 
@@ -60,23 +60,10 @@
                 </div>
 
 
-
-
-
-
-
-
-
-
-
-            </h:form>
-
-
-            <h:form id="formComplemento">
                 <div class="table-responsive">
 
 
-                    <h:dataTable value="#{controlePoupanca.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controlePoupanca.editar == true}">
+                    <h:dataTable value="#{controlePoupanca.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controlePoupanca.isEditar()}">
                         <div align="center">
                             <f:facet name="header" >
 
@@ -126,7 +113,7 @@
                         <h:column>
                             <f:facet name="header">DATA BASE</f:facet>
                             <h:outputText value="#{c.dataBase}">
-                              <f:converter converterId="converterDate"></f:converter>
+                                <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
 
                         </h:column>
@@ -151,11 +138,14 @@
                             </h:outputText>
 
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">ACOES</f:facet>
-                            <h:commandButton       value="Calcular" class="btn btn-success">
-                                <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click"  ></f:ajax>
+                       <h:column >
+                            <f:facet name="header" >AÇÃO</f:facet>
+                            <h:commandButton  value="Calcular"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"   >
+
+                                <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+
+
 
                         </h:column>
 
@@ -172,22 +162,58 @@
                     <f:ajax   listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
+           <h:panelGrid columns="2" rendered="#{controlePoupanca.editarComplemento}">
+               <f:facet name="header">
+                   <h:outputLabel  value=" NPJ: #{controlePoupanca.poupanca.idPoupanca.npj} " style="color: blue"></h:outputLabel>
+               </f:facet>
+               
+               
+                    <h:outputLabel value="Poupador:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}"></h:inputText>
+                    
+                    <h:outputLabel value="Cpf:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}"></h:inputText>
+                   
+                    <h:outputLabel value="Agencia:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}"></h:inputText>
+                   
+                    <h:outputLabel value="Conta"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}"></h:inputText>
+                  
+                    <h:outputLabel value="Valor Base:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.valorBase}"></h:inputText>
+                    
+                    <h:outputLabel value="Data base:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.dataBase}" required="true" requiredMessage="Data inválida">
+                        <f:converter converterId="converterDate"></f:converter>
+                    </h:inputText>
+                    
+                    <h:outputLabel value="Valor Acordo"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.valorAcordo}"></h:inputText>
+                   
+                    <h:outputLabel value="Plano:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.plano}"></h:inputText>
+                    
+                    <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
+                    <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
+                </h:commandButton>
+                </h:panelGrid>
+               
+
+
+
+
+
+
 
             </h:form>
 
-            
-            
+
+
+
+
             <form id="formCalculo">
-                <h:panelGrid columns="2" rendered="#{controlePoupanca.isEditarComplemento()}">
-                    <h:outputLabel value="Poupador:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}"></h:inputText>
-                    <h:outputLabel value="Cpf"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}"></h:inputText>
-                    
-                </h:panelGrid>
-                <h:commandButton value="Ok" class="btn btn-success" rendered="#{controlePoupanca.isEditarComplemento()}">
-                    <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
-                </h:commandButton>
+             
             </form>
 
         </ui:define>

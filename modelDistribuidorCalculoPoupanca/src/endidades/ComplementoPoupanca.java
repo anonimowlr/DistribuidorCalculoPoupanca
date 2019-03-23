@@ -36,16 +36,16 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "agencia")
     private Integer agencia;
     @Column(name = "conta")
-    private BigInteger conta;
+    private Long conta;
     @Column(name = "poupador")
     private String poupador;
     @Column(name = "cpf")
     private String cpf;
-    @Column(name = "observacao")
+    @Column(name = "observacao", length = 450)
     private String observacao;
     @Column(name = "plano")
     private String plano;
-    @Column(name = "complemento_obs")
+    @Column(name = "complemento_obs", length = 450)
     private String complementoObs;
     @Column(name = "data_base")
     @Temporal(TemporalType.DATE)
@@ -103,20 +103,8 @@ public class ComplementoPoupanca implements Serializable {
         this.agencia = agencia;
     }
 
-    /**
-     * @return the conta
-     */
-    public BigInteger getConta() {
-        return conta;
-    }
-
-    /**
-     * @param conta the conta to set
-     */
-    public void setConta(BigInteger conta) {
-        this.conta = conta;
-    }
-
+    
+   
     /**
      * @return the poupador
      */
@@ -297,6 +285,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setDataUop(Date dataUop) {
         this.dataUop = dataUop;
+    }
+
+    /**
+     * @return the conta
+     */
+    public Long getConta() {
+        return conta;
+    }
+
+    /**
+     * @param conta the conta to set
+     */
+    public void setConta(Long conta) {
+        this.conta = conta;
     }
 
 }
