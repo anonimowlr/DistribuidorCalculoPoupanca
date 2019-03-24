@@ -15,6 +15,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 import util.Util;
 
 /**
@@ -22,7 +26,7 @@ import util.Util;
  * @author f5078775
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ControlePoupanca implements Serializable {
 
     private String estadoTela = "";
@@ -36,8 +40,9 @@ public class ControlePoupanca implements Serializable {
     
     @PostConstruct
     public void init(){
-     
+      
         buscar();
+        listar();
     }
     
     
@@ -49,6 +54,7 @@ public class ControlePoupanca implements Serializable {
     
     
     public void buscar(){
+        poupanca = null;
         mudarParaBuscar();
         setListaPoupanca(getDaoPoupanca().getListaObjetos());
         setListaPoupanca(getListaPoupanca());
@@ -61,7 +67,7 @@ public class ControlePoupanca implements Serializable {
     }
 
     public String listar() {
-        return "tratamento?faces-redirect=true";
+        return "home?faces-redirect=true";
     }
 
     public void salvar() {
@@ -78,8 +84,13 @@ public class ControlePoupanca implements Serializable {
         } else {
             Util.mensagemErro(getDaoPoupanca().getMensagem());
         }
-
+      
         mudarParaBuscar();
+        getDaoPoupanca().getEm().clear();
+        novo();
+        buscar();
+       
+        listar();
     }
 
     public void mudarParaEditar() {

@@ -20,6 +20,7 @@ public class PoupancaDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
        ordem = "npj";
        maximoObjeto = 1;
        chaveComposta = IdPoupanca.class;
+       em.clear();
        
         
     }

@@ -188,8 +188,14 @@
                         <f:converter converterId="converterDate"></f:converter>
                     </h:inputText>
                     
-                    <h:outputLabel value="Valor Acordo"></h:outputLabel>
+                    <h:outputLabel value="Valor Acordo:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.valorAcordo}"></h:inputText>
+                   
+                    <h:outputLabel value="Observacao:"></h:outputLabel>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.observacao}"></h:inputText>
+                    
+                    <h:outputLabel value="Complemento obs:" ></h:outputLabel>
+                    <h:inputTextarea value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
                    
                     <h:outputLabel value="Plano:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.plano}"></h:inputText>

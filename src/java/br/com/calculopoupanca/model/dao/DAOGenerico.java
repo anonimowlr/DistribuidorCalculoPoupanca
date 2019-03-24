@@ -32,6 +32,7 @@ public class DAOGenerico<T,D> implements Serializable {
     protected Integer totalObjetos;
 
     public DAOGenerico() {
+        
         em = EntityManagerUtil.getEntityManager();
     }
     
@@ -82,6 +83,8 @@ public class DAOGenerico<T,D> implements Serializable {
         posicaoAtual=0;
     }
     
+    
+  
     
     public void ultimaPagina(){
         int resto = totalObjetos % maximoObjeto;
