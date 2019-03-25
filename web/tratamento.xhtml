@@ -19,12 +19,15 @@
         <ui:define name="conteudo">
 
 
-
+            <h:messages rendered="true" errorStyle="color: red" infoStyle="color: green" layout="table" showSummary="true" showDetail="false" globalOnly="true"   >
+               
+                
+            </h:messages>
+           
             <h:form id="fomIndex">
 
 
 
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" showSummary="true" showDetail="false" globalOnly="true"    ></h:messages>
 
 
 
@@ -169,27 +172,28 @@
                
                
                     <h:outputLabel value="Poupador:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" ></h:inputText>
                     
                     <h:outputLabel value="Cpf:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"></h:inputText>
                    
                     <h:outputLabel value="Agencia:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px"></h:inputText>
                    
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}" style="width: 150px"></h:inputText>
                   
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.valorBase}"></h:inputText>
+                    <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px"></h:inputText>
                     
                     <h:outputLabel value="Data base:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.dataBase}" required="true" requiredMessage="Data inválida">
+                    <h:inputText id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px">
                         <f:converter converterId="converterDate"></f:converter>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo" event="change"></f:ajax>
                     </h:inputText>
                     
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.valorAcordo}"></h:inputText>
+                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 100px"></h:inputText>
                    
                     <h:outputLabel value="Observacao:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.observacao}"></h:inputText>

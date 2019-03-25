@@ -10,6 +10,7 @@ import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -45,7 +46,9 @@ public class ControlePoupanca implements Serializable {
         listar();
     }
     
-    
+    public void calcularValorAcordo(){
+        this.complementoPoupanca.setValorAcordo(complementoPoupanca.getValorBase().multiply(new BigDecimal("3")));
+    }
     
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
