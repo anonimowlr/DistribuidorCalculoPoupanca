@@ -68,6 +68,12 @@ public class ControlePoupanca implements Serializable {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
+    
+    public void novoComplemento() {
+        setEstadoTela("editarComplemento");
+        setComplementoPoupanca(new ComplementoPoupanca());
+        getPoupanca().adicionarComplementoPoupanca(complementoPoupanca);
+    }
 
     public String listar() {
         return "home?faces-redirect=true";

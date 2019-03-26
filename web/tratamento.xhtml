@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
 
@@ -19,15 +20,12 @@
         <ui:define name="conteudo">
 
 
-            <h:messages rendered="true" errorStyle="color: red" infoStyle="color: green" layout="table" showSummary="true" showDetail="false" globalOnly="true"   >
-               
                 
-            </h:messages>
+                
            
             <h:form id="fomIndex">
 
-
-
+                <p:messages autoUpdate="true" closable="true"></p:messages>
 
 
 
@@ -162,7 +160,7 @@
 
                 <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar Npj" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}"></h:commandButton>
                 <h:commandButton       value="Novo Poupador" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
-                    <f:ajax   listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                    <f:ajax   listener="#{controlePoupanca.novoComplemento()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
            <h:panelGrid columns="2" rendered="#{controlePoupanca.editarComplemento}">
@@ -172,28 +170,32 @@
                
                
                     <h:outputLabel value="Poupador:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" ></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" required="true" requiredMessage="Informe o nome"></h:inputText>
                     
                     <h:outputLabel value="Cpf:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px" required="true" requiredMessage="Informe o cpf"></h:inputText>
                    
                     <h:outputLabel value="Agencia:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px" required="true" requiredMessage="Informe a agência"></h:inputText>
                    
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}" style="width: 150px"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}" style="width: 150px" required="true" requiredMessage="Infome a conta"></h:inputText>
                   
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
-                    <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px"></h:inputText>
                     
-                    <h:outputLabel value="Data base:"></h:outputLabel>
-                    <h:inputText id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px">
-                        <f:converter converterId="converterDate"></f:converter>
-                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo" event="change"></f:ajax>
+                    <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px" required="true" requiredMessage="Informe o valor base">
                     </h:inputText>
                     
+                    <h:outputLabel value="Data base:"></h:outputLabel>
+                    <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px" required="true" requiredMessage="Informe a data base">
+                        <f:converter converterId="converterDate"></f:converter>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo" event="change"></f:ajax>
+                    </p:inputMask>
+                    
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
-                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 100px"></h:inputText>
+                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 100px" >
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo" event="focus" ></f:ajax>
+                    </h:inputText>
                    
                     <h:outputLabel value="Observacao:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.observacao}"></h:inputText>
@@ -204,7 +206,7 @@
                     <h:outputLabel value="Plano:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.plano}"></h:inputText>
                     
-                    <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
+                    <h:commandButton  action="#{controlePoupanca.calcularValorAcordo()}"  value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
                     <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
                 </h:commandButton>
                 </h:panelGrid>
