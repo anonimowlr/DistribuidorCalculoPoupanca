@@ -36,16 +36,15 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "agencia")
     private Integer agencia;
     @Column(name = "conta")
-    private Long conta;
+    private BigInteger conta;
     @Column(name = "poupador")
     private String poupador;
     @Column(name = "cpf")
     private String cpf;
-    @Column(name = "observacao", length = 450)
-    private String observacao;
+   
     @Column(name = "plano")
     private String plano;
-    @Column(name = "complemento_obs", length = 450)
+    @Column(name = "complemento_obs")
     private String complementoObs;
     @Column(name = "data_base")
     @Temporal(TemporalType.DATE)
@@ -65,6 +64,12 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "data_uop")       
     private Date dataUop;
 
+    
+    @ManyToOne
+    @JoinColumn(name = "id_obs",referencedColumnName = "id")
+    private Observacao observacao;
+    
+    
     
     @ManyToOne()
      @JoinColumns( {
@@ -103,8 +108,20 @@ public class ComplementoPoupanca implements Serializable {
         this.agencia = agencia;
     }
 
-    
-   
+    /**
+     * @return the conta
+     */
+    public BigInteger getConta() {
+        return conta;
+    }
+
+    /**
+     * @param conta the conta to set
+     */
+    public void setConta(BigInteger conta) {
+        this.conta = conta;
+    }
+
     /**
      * @return the poupador
      */
@@ -122,16 +139,12 @@ public class ComplementoPoupanca implements Serializable {
     /**
      * @return the observacao
      */
-    public String getObservacao() {
-        return observacao;
-    }
+   
 
     /**
      * @param observacao the observacao to set
      */
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
+   
 
     /**
      * @return the plano
@@ -288,17 +301,24 @@ public class ComplementoPoupanca implements Serializable {
     }
 
     /**
-     * @return the conta
+     * @return the observacao
      */
-    public Long getConta() {
-        return conta;
+   
+
+    /**
+     * @param observacao the observacao to set
+     */
+    public void setObservacao(Observacao observacao) {
+        this.setObservacao(observacao);
     }
 
     /**
-     * @param conta the conta to set
+     * @return the observacao
      */
-    public void setConta(Long conta) {
-        this.conta = conta;
+    public Observacao getObservacao() {
+        return observacao;
     }
+
+    
 
 }

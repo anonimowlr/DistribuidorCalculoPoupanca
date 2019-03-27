@@ -5,9 +5,12 @@
  */
 package br.com.calculopoupanca.controller;
 
+import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
+import endidades.Observacao;
+import endidades.Plano;
 import endidades.Poupanca;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -30,11 +33,21 @@ import util.Util;
 @ViewScoped
 public class ControlePoupanca implements Serializable {
 
+    /**
+     * @return the daoObservacao
+     */
+   
+
+    
+
     private String estadoTela = "";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
+    private Plano plano;
+    private Observacao observacao;
     private IdPoupanca idPoupanca;
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
+    
     private List<Poupanca> listaPoupanca = new ArrayList<>();
   
     
@@ -47,7 +60,7 @@ public class ControlePoupanca implements Serializable {
     }
     
     public void calcularValorAcordo(){
-        this.complementoPoupanca.setValorAcordo(complementoPoupanca.getValorBase().multiply(new BigDecimal("3")));
+        this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("3")));
     }
     
     public ControlePoupanca() {
@@ -57,7 +70,7 @@ public class ControlePoupanca implements Serializable {
     
     
     public void buscar(){
-        poupanca = null;
+        setPoupanca(null);
         mudarParaBuscar();
         setListaPoupanca(getDaoPoupanca().getListaObjetos());
         setListaPoupanca(getListaPoupanca());
@@ -72,7 +85,7 @@ public class ControlePoupanca implements Serializable {
     public void novoComplemento() {
         setEstadoTela("editarComplemento");
         setComplementoPoupanca(new ComplementoPoupanca());
-        getPoupanca().adicionarComplementoPoupanca(complementoPoupanca);
+        getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
 
     public String listar() {
@@ -234,6 +247,34 @@ public class ControlePoupanca implements Serializable {
      */
     public void setListaPoupanca(List<Poupanca> listaPoupanca) {
         this.listaPoupanca = listaPoupanca;
+    }
+
+    /**
+     * @return the plano
+     */
+    public Plano getPlano() {
+        return plano;
+    }
+
+    /**
+     * @param plano the plano to set
+     */
+    public void setPlano(Plano plano) {
+        this.plano = plano;
+    }
+
+    /**
+     * @return the observacao
+     */
+    public Observacao getObservacao() {
+        return observacao;
+    }
+
+    /**
+     * @param observacao the observacao to set
+     */
+    public void setObservacao(Observacao observacao) {
+        this.observacao = observacao;
     }
 
 }

@@ -14,9 +14,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -43,10 +42,13 @@ public class Poupanca implements Serializable{
    @Column(name = "data_uop")
    private Date dataUop;
    
-  
+    
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Plano plano;
     
    
-    @OneToMany(mappedBy = "poupanca",cascade = CascadeType.ALL,orphanRemoval = false)
+   @OneToMany(mappedBy = "poupanca",cascade = CascadeType.ALL,orphanRemoval = false)
    private List<ComplementoPoupanca> listaComplementoPoupanca =  new ArrayList<>();
     
     
@@ -148,12 +150,12 @@ public class Poupanca implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.idPoupanca);
-        hash = 59 * hash + Objects.hashCode(this.escritorioBB);
-        hash = 59 * hash + Objects.hashCode(this.advogadoAdverso);
-        hash = 59 * hash + Objects.hashCode(this.origem);
-        hash = 59 * hash + Objects.hashCode(this.dataUop);
-        hash = 59 * hash + Objects.hashCode(this.listaComplementoPoupanca);
+        hash = 59 * hash + Objects.hashCode(this.getIdPoupanca());
+        hash = 59 * hash + Objects.hashCode(this.getEscritorioBB());
+        hash = 59 * hash + Objects.hashCode(this.getAdvogadoAdverso());
+        hash = 59 * hash + Objects.hashCode(this.getOrigem());
+        hash = 59 * hash + Objects.hashCode(this.getDataUop());
+        hash = 59 * hash + Objects.hashCode(this.getListaComplementoPoupanca());
         return hash;
     }
 
@@ -188,6 +190,25 @@ public class Poupanca implements Serializable{
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the observacao
+     */
+   
+
+    /**
+     * @return the plano
+     */
+    public Plano getPlano() {
+        return plano;
+    }
+
+    /**
+     * @param plano the plano to set
+     */
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 
    

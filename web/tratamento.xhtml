@@ -198,7 +198,12 @@
                     </h:inputText>
                    
                     <h:outputLabel value="Observacao:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.observacao}"></h:inputText>
+                    <h:selectOneMenu id="selectObs" value="#{controlePoupanca.complementoPoupanca.observacao}" required="true" requiredMessage="Não foi informado a observação">
+                        <f:converter converterId="converterObs"></f:converter>
+                        <f:selectItem itemLabel="Selecione uma opçao" noSelectionOption="true"></f:selectItem>
+                        <f:selectItems value="#{controleObservacao.listaObservacao}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
+                    </h:selectOneMenu>
+                    
                     
                     <h:outputLabel value="Complemento obs:" ></h:outputLabel>
                     <h:inputTextarea value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
