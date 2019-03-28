@@ -18,11 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpSession;
 import util.Util;
 
 /**
@@ -48,7 +44,7 @@ public class ControlePoupanca implements Serializable {
     private IdPoupanca idPoupanca;
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
-     private List<Observacao> listaObservacao = new ArrayList<>();
+    private List<Observacao> listaObservacao = new ArrayList<>();
     
     private List<Poupanca> listaPoupanca = new ArrayList<>();
   
@@ -60,6 +56,12 @@ public class ControlePoupanca implements Serializable {
         buscar();
         listar();
     }
+    
+    public void mostrarConteudo(){
+        System.out.println(observacao);
+    }
+    
+    
     
     public void calcularValorAcordo(){
         this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("3")));

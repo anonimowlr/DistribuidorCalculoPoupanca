@@ -127,7 +127,7 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">OBSERVACAO</f:facet>
-                            <h:outputText value="#{c.observacao.obs}">
+                            <h:outputText value="#{c.observacao}">
 
                             </h:outputText>
 
@@ -199,9 +199,10 @@
                    
                     <h:outputLabel value="Observacao:"></h:outputLabel>
                     <h:selectOneMenu id="selectObs" value="#{controlePoupanca.complementoPoupanca.observacao}" required="true" requiredMessage="Não foi informado a observação">
-                        <f:converter converterId="converterObs"></f:converter>
+                       
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
-                        <f:selectItems value="#{controlePoupanca.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
+                        <f:selectItems value="#{controlePoupanca.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" itemValue="#{o.obs}" ></f:selectItems>
+                        
                     </h:selectOneMenu>
                     
                     
