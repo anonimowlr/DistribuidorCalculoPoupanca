@@ -47,6 +47,8 @@ public class ControlePoupanca implements Serializable {
     private Observacao observacao;
     private IdPoupanca idPoupanca;
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
+    private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
+     private List<Observacao> listaObservacao = new ArrayList<>();
     
     private List<Poupanca> listaPoupanca = new ArrayList<>();
   
@@ -65,6 +67,7 @@ public class ControlePoupanca implements Serializable {
     
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
+        daoObservacao = new ObservacaoDAO<>();
     }
     
     
@@ -275,6 +278,34 @@ public class ControlePoupanca implements Serializable {
      */
     public void setObservacao(Observacao observacao) {
         this.observacao = observacao;
+    }
+
+    /**
+     * @return the daoObservacao
+     */
+    public ObservacaoDAO<Observacao, IdPoupanca> getDaoObservacao() {
+        return daoObservacao;
+    }
+
+    /**
+     * @param daoObservacao the daoObservacao to set
+     */
+    public void setDaoObservacao(ObservacaoDAO<Observacao, IdPoupanca> daoObservacao) {
+        this.daoObservacao = daoObservacao;
+    }
+
+    /**
+     * @return the listaObservacao
+     */
+    public List<Observacao> getListaObservacao() {
+        return listaObservacao;
+    }
+
+    /**
+     * @param listaObservacao the listaObservacao to set
+     */
+    public void setListaObservacao(List<Observacao> listaObservacao) {
+        this.listaObservacao = listaObservacao;
     }
 
 }

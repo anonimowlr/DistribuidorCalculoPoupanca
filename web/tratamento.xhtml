@@ -201,7 +201,7 @@
                     <h:selectOneMenu id="selectObs" value="#{controlePoupanca.complementoPoupanca.observacao}" required="true" requiredMessage="Não foi informado a observação">
                         <f:converter converterId="converterObs"></f:converter>
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
-                        <f:selectItems value="#{controleObservacao.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
+                        <f:selectItems value="#{controlePoupanca.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
                     </h:selectOneMenu>
                     
                     
