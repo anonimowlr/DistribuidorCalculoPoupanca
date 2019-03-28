@@ -29,6 +29,15 @@ public class ControleObservacao implements Serializable {
    
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
+
+    public ControleObservacao() {
+  
+    daoObservacao = new ObservacaoDAO<>();
+    }
+    
+    
+    
+    
     
 
     /**

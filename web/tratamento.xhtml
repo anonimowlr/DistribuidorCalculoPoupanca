@@ -201,7 +201,7 @@
                     <h:selectOneMenu id="selectObs" value="#{controlePoupanca.complementoPoupanca.observacao}" required="true" requiredMessage="Não foi informado a observação">
                         <f:converter converterId="converterObs"></f:converter>
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
-                        <f:selectItems value="#{controleObservacao.listaObservacao}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
+                        <f:selectItems value="#{controleObservacao.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" ></f:selectItems>
                     </h:selectOneMenu>
                     
                     
@@ -211,7 +211,7 @@
                     <h:outputLabel value="Plano:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.plano}"></h:inputText>
                     
-                    <h:commandButton  action="#{controlePoupanca.calcularValorAcordo()}"  value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
+                    <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
                     <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
                 </h:commandButton>
                 </h:panelGrid>
