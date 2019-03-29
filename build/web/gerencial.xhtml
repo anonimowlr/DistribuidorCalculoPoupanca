@@ -28,15 +28,17 @@
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
 
-
                 <div class="table-responsive">
-
+                    
 
                     <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" >
                         <f:facet name="header">
                             <p>Lista de tratamentos</p>
+                            
                         </f:facet>
-
+                        
+                              
+                       
 
                         <p:column filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
                             <f:facet name="header">NPJ</f:facet>
@@ -67,6 +69,33 @@
                             <f:facet name="header">PLANO</f:facet>
                                   #{p.plano}
                         </p:column>
+                        <p:column  filterBy="#{p.valorBase}" filterMatchMode="contains" sortBy="#{p.valorBase}">
+                            <f:facet name="header">VALOR BASE</f:facet>
+                                  #{p.valorBase}
+                        </p:column>
+                        <p:column  filterBy="#{p.dataBase}" filterMatchMode="contains" sortBy="#{p.dataBase}">
+                            <f:facet name="header">DATA BASE</f:facet>
+                                  #{p.dataBase}
+                        </p:column>
+                        <p:column  filterBy="#{p.valorAcordo}" filterMatchMode="contains" sortBy="#{p.valorAcordo}">
+                            <f:facet name="header">VALOR ACORDO</f:facet>
+                                  #{p.valorAcordo}
+                        </p:column>
+                        <p:column  filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}">
+                            <f:facet name="header">FAZ JUS?</f:facet>
+                                  #{p.fazJus}
+                        </p:column>
+                        <p:column  filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}">
+                            <f:facet name="header">FUNCI</f:facet>
+                                  #{p.funci}
+                        </p:column>
+                        <p:column  filterBy="#{p.dataExecucao}" filterMatchMode="contains" sortBy="#{p.dataExecucao}">
+                            <f:facet name="header">DATA EXECUÇÃO</f:facet>
+                                  #{p.dataExecucao}
+                        </p:column>
+                       
+                      
+                        
 
 
                     </p:dataTable>

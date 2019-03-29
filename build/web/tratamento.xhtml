@@ -158,7 +158,9 @@
 
                 </div>
 
-                <h:commandButton actionListener="#{controlePoupanca.salvar()}"  value="Salvar Npj" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}"></h:commandButton>
+                <h:commandButton   value="Salvar Npj" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}">
+                    <f:ajax listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
                 <h:commandButton       value="Novo Poupador" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
                     <f:ajax   listener="#{controlePoupanca.novoComplemento()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
@@ -170,9 +172,11 @@
                
                
                     <h:outputLabel value="Poupador:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" required="true" requiredMessage="Informe o nome"></h:inputText>
+                    <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" required="true" requiredMessage="Informe o nome">
+                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
+                    </h:inputText>
                     
-                    <h:outputLabel value="Cpf:"></h:outputLabel>
+                    <h:outputLabel value="CPF:"></h:outputLabel>
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px" required="true" requiredMessage="Informe o cpf"></h:inputText>
                    
                     <h:outputLabel value="Agencia:"></h:outputLabel>
