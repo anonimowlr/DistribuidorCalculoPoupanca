@@ -41,7 +41,8 @@ public class ComplementoPoupanca implements Serializable {
     private String poupador;
     @Column(name = "cpf")
     private String cpf;
-   
+    @Column(name = "observacao")
+    private String observacao;
     @Column(name = "plano")
     private String plano;
     @Column(name = "complemento_obs")
@@ -65,9 +66,7 @@ public class ComplementoPoupanca implements Serializable {
     private Date dataUop;
 
     
-    @ManyToOne
-    @JoinColumn(name = "id_obs",referencedColumnName = "id")
-    private Observacao observacao;
+    
     
     
     
@@ -315,9 +314,21 @@ public class ComplementoPoupanca implements Serializable {
     /**
      * @return the observacao
      */
-    public Observacao getObservacao() {
+    public String getObservacao() {
         return observacao;
     }
+
+    /**
+     * @param observacao the observacao to set
+     */
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    /**
+     * @return the observacao
+     */
+    
 
     
 
