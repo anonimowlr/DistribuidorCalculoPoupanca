@@ -5,7 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       
           
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+          
+      xmlns:p="http://primefaces.org/ui">
  
     <h:head>
         
@@ -75,10 +77,15 @@
                     </ul>
                 </div>
                 
-                
+                   <div id="fotoFunci"  style="float: right">
+                       <h:outputLink value="https://humanograma.intranet.bb.com.br/#{funcionarioBean.chave}" title="Ir para Humanograma" target="_blank">
+                            <img src="http://connections.bb.com.br/profiles/photo.do?uid=#{funcionarioBean.chave}" height="50" width="50" style="border-radius:50px"/>
+                        </h:outputLink>
+                   </div>   
                 
                 
             </div>
+           
         </div>
         
         
@@ -105,5 +112,15 @@
         </div>
     </footer>
     </f:view>
+    
+     <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:50%;bottom:50%">  
+        <f:facet name="start">  
+            <p:graphicImage library="img" name="carregando_1.gif" />  
+        </f:facet>  
+        <f:facet name="complete">  
+            <h:outputText value="" />  
+        </f:facet>  
+    </p:ajaxStatus>  
+    
 </html>
 

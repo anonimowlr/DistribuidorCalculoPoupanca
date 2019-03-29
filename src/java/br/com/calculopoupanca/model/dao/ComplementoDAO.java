@@ -13,14 +13,14 @@ import endidades.Poupanca;
  *
  * @author f5078775
  */
-public class ComplementoDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
+public class ComplementoDAO<T,D> extends DAOGenerico<ComplementoPoupanca, IdPoupanca>{
 
     public ComplementoDAO() {
        super();
        classePersistente = ComplementoPoupanca.class;
        ordem = "npj";
        maximoObjeto = 500;
-       em.clear();
+       
       
        
         

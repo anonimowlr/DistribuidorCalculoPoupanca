@@ -35,7 +35,6 @@ public class ControleComplemento implements Serializable {
      * @return the daoObservacao
      */
    
-
     
 
 
@@ -97,7 +96,10 @@ public class ControleComplemento implements Serializable {
     
     
    
-    
+    public void buscar(){
+        getDaoComplementoPoupanca().getEm().clear();
+        setListaComplemento(getDaoComplementoPoupanca().getListaObjetos());
+    }
     
     
     

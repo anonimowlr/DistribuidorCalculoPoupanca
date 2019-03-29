@@ -60,6 +60,12 @@ public class ControlePoupanca implements Serializable {
     public void mostrarConteudo(){
         System.out.println(observacao);
     }
+   
+    public void alterarTamanhoLetra(){
+        
+      
+       complementoPoupanca.setPoupador(complementoPoupanca.getPoupador().toUpperCase());
+    }
     
     
     
