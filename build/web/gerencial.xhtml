@@ -1,12 +1,93 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+
+    <ui:composition template="header.xhtml" >
+
+        <ui:define name="titulo">
+          Gerenciamento
+        </ui:define>
+
+
+        <ui:define name="conteudo">
+
+
+                
+                
+           
+            <h:form id="fomIndex">
+
+                <p:messages autoUpdate="true" closable="true"></p:messages>
+
+
+
+                <div class="table-responsive">
+
+
+                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" >
+                        <f:facet name="header">
+                            <p>Lista de tratamentos</p>
+                        </f:facet>
+
+
+                        <p:column filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
+                            <f:facet name="header">NPJ</f:facet>
+                                #{p.poupanca.idPoupanca.npj}
+                        </p:column>
+                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
+                            <f:facet name="header">CNJ</f:facet>
+                                  #{p.poupanca.idPoupanca.cnj}
+                        </p:column>
+                        <p:column  filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}">
+                            <f:facet name="header">POUPADOR</f:facet>
+                                  #{p.poupador}
+                        </p:column>
+                        <p:column  filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}">
+                            <f:facet name="header">CPF</f:facet>
+                                  #{p.cpf}
+                        </p:column>
+                        <p:column  filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}">
+                            <f:facet name="header">OBSERVACAO</f:facet>
+                                  #{p.observacao}
+                        </p:column>
+                        <p:column  >
+                            <f:facet name="header">COMPLEMENTO</f:facet>
+                                  #{p.complementoObs}
+                        </p:column>
+
+                        <p:column  filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}">
+                            <f:facet name="header">PLANO</f:facet>
+                                  #{p.plano}
+                        </p:column>
+
+
+                    </p:dataTable>
+                </div>
+
+
+
+            </h:form>
+
+
+
+
+
+            
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+
+</html>
