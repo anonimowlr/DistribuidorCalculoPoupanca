@@ -198,7 +198,8 @@
                     </p:inputMask>
                     
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
-                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 100px" >
+                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 150px" >
+                            <f:convertNumber  type="currency" />
                         <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano" event="focus" ></f:ajax>
                     </h:inputText>
                    <h:outputLabel value="Plano:"></h:outputLabel>

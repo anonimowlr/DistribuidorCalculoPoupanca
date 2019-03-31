@@ -27,15 +27,29 @@
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
+               
+                
+             
+                
+                
+                
 
                 <div class="table-responsive">
-                    
 
 
-                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt" >
+
+                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt"  id="listagem">
                         <f:facet name="header">
-                            <p>Lista de tratamentos</p>
+                            
+                        
+                            <p:commandButton value="Primeiro" actionListener="#{controleComplemento.daoComplementoPoupanca.primeiraPagina()}" icon="ui-icon-seek-first" update="listagem"></p:commandButton>
 
+                            <p:commandButton value="Anterior" actionListener="#{controleComplemento.daoComplementoPoupanca.paginaAnterior()}" icon="ui-icon-seek-prev" update="listagem"></p:commandButton>
+
+                            <p:commandButton value="Próximo" actionListener="#{controleComplemento.daoComplementoPoupanca.proximaPagina()}" icon="ui-icon-seek-next" update="listagem"></p:commandButton>
+
+                            <p:commandButton value="Ultima pagina" actionListener="#{controleComplemento.daoComplementoPoupanca.ultimaPagina()}" icon="ui-icon-seek-end" update="listagem"></p:commandButton>
+                            
                         </f:facet>
 
 
@@ -48,6 +62,14 @@
                         <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
                             <f:facet name="header">CNJ</f:facet>
                                 #{p.poupanca.idPoupanca.cnj}
+                        </p:column>
+                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
+                            <f:facet name="header">AGENCIA</f:facet>
+                                #{p.agencia}
+                        </p:column>
+                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
+                            <f:facet name="header">CONTA</f:facet>
+                                #{p.conta}
                         </p:column>
                         <p:column  filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}">
                             <f:facet name="header">POUPADOR</f:facet>
@@ -70,13 +92,13 @@
                             <f:facet name="header">PLANO</f:facet>
                                 #{p.plano}
                         </p:column>
-                      <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" >
+                        <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" >
                             <h:outputText value="#{p.valorBase}" >
                                 <f:convertNumber  type="currency" />
                             </h:outputText>
                         </p:column>
-                      
-                      <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" >
+
+                        <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" >
                             <h:outputText value="#{p.dataBase}" >
                                 <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
