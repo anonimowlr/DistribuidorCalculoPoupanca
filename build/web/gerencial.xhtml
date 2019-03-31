@@ -13,16 +13,16 @@
     <ui:composition template="header.xhtml" >
 
         <ui:define name="titulo">
-          Gerenciamento
+            Gerenciamento
         </ui:define>
 
 
         <ui:define name="conteudo">
 
 
-                
-                
-           
+
+
+
             <h:form id="fomIndex">
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
@@ -31,14 +31,15 @@
                 <div class="table-responsive">
                     
 
-                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" >
+
+                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt" >
                         <f:facet name="header">
                             <p>Lista de tratamentos</p>
-                            
+
                         </f:facet>
-                        
-                              
-                       
+
+
+
 
                         <p:column filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
                             <f:facet name="header">NPJ</f:facet>
@@ -46,56 +47,65 @@
                         </p:column>
                         <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
                             <f:facet name="header">CNJ</f:facet>
-                                  #{p.poupanca.idPoupanca.cnj}
+                                #{p.poupanca.idPoupanca.cnj}
                         </p:column>
                         <p:column  filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}">
                             <f:facet name="header">POUPADOR</f:facet>
-                                  #{p.poupador}
+                                #{p.poupador}
                         </p:column>
                         <p:column  filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}">
                             <f:facet name="header">CPF</f:facet>
-                                  #{p.cpf}
+                                #{p.cpf}
                         </p:column>
                         <p:column  filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}">
                             <f:facet name="header">OBSERVACAO</f:facet>
-                                  #{p.observacao}
+                                #{p.observacao}
                         </p:column>
                         <p:column  >
                             <f:facet name="header">COMPLEMENTO</f:facet>
-                                  #{p.complementoObs}
+                                #{p.complementoObs}
                         </p:column>
 
                         <p:column  filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}">
                             <f:facet name="header">PLANO</f:facet>
-                                  #{p.plano}
+                                #{p.plano}
                         </p:column>
-                        <p:column  filterBy="#{p.valorBase}" filterMatchMode="contains" sortBy="#{p.valorBase}">
-                            <f:facet name="header">VALOR BASE</f:facet>
-                                  #{p.valorBase}
+                      <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" >
+                            <h:outputText value="#{p.valorBase}" >
+                                <f:convertNumber  type="currency" />
+                            </h:outputText>
                         </p:column>
-                        <p:column  filterBy="#{p.dataBase}" filterMatchMode="contains" sortBy="#{p.dataBase}">
-                            <f:facet name="header">DATA BASE</f:facet>
-                                  #{p.dataBase}
+                      
+                      <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" >
+                            <h:outputText value="#{p.dataBase}" >
+                                <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
                         </p:column>
-                        <p:column  filterBy="#{p.valorAcordo}" filterMatchMode="contains" sortBy="#{p.valorAcordo}">
-                            <f:facet name="header">VALOR ACORDO</f:facet>
-                                  #{p.valorAcordo}
+
+                        <p:column headerText="VALOR ACORDO" filterBy="#{p.valorAcordo}" filterMatchMode="contains"  sortBy="#{p.valorAcordo}" >
+                            <h:outputText value="#{p.valorAcordo}" >
+                                <f:convertNumber  type="currency" />
+                            </h:outputText>
                         </p:column>
+
+
+
                         <p:column  filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}">
                             <f:facet name="header">FAZ JUS?</f:facet>
-                                  #{p.fazJus}
+                                #{p.fazJus}
                         </p:column>
                         <p:column  filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}">
                             <f:facet name="header">FUNCI</f:facet>
-                                  #{p.funci}
+                                #{p.funci}
                         </p:column>
-                        <p:column  filterBy="#{p.dataExecucao}" filterMatchMode="contains" sortBy="#{p.dataExecucao}">
-                            <f:facet name="header">DATA EXECUÇÃO</f:facet>
-                                  #{p.dataExecucao}
+                        <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"   >
+                            <h:outputText value="#{p.dataExecucao}" >
+                                <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
                         </p:column>
-                       
-                      
-                        
+
+
+
 
 
                     </p:dataTable>
@@ -109,7 +119,7 @@
 
 
 
-            
+
 
         </ui:define>
 

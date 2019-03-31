@@ -16,6 +16,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -38,15 +40,23 @@ public class Poupanca implements Serializable{
    private String advogadoAdverso;
    @Column(name = "origem")
    private String origem;
-  
+   @Column(name = "avocado")
+   private String avocado;
+  @Column(name = "data_avocacao")
+  @Temporal(TemporalType.TIMESTAMP)
+   private Date dataAvocacao;
+   @Column(name = "status")
+   private String status;
+   @Column(name = "data_status")
+    @Temporal(TemporalType.DATE)
+   private Date dataStatus;
+   @Column(name = "funci_avocado")
+   private String funciAvocado;
+   
+   
    @Column(name = "data_uop")
    private Date dataUop;
    
-    
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    private Plano plano;
-    
    
    @OneToMany(mappedBy = "poupanca",cascade = CascadeType.ALL,orphanRemoval = false)
    private List<ComplementoPoupanca> listaComplementoPoupanca =  new ArrayList<>();
@@ -197,18 +207,75 @@ public class Poupanca implements Serializable{
      */
    
 
+  
     /**
-     * @return the plano
+     * @return the avocado
      */
-    public Plano getPlano() {
-        return plano;
+    public String getAvocado() {
+        return avocado;
     }
 
     /**
-     * @param plano the plano to set
+     * @param avocado the avocado to set
      */
-    public void setPlano(Plano plano) {
-        this.plano = plano;
+    public void setAvocado(String avocado) {
+        this.avocado = avocado;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the dataAvocacao
+     */
+    public Date getDataAvocacao() {
+        return dataAvocacao;
+    }
+
+    /**
+     * @param dataAvocacao the dataAvocacao to set
+     */
+    public void setDataAvocacao(Date dataAvocacao) {
+        this.dataAvocacao = dataAvocacao;
+    }
+
+    /**
+     * @return the dataStatus
+     */
+    public Date getDataStatus() {
+        return dataStatus;
+    }
+
+    /**
+     * @param dataStatus the dataStatus to set
+     */
+    public void setDataStatus(Date dataStatus) {
+        this.dataStatus = dataStatus;
+    }
+
+    /**
+     * @return the funciAvocado
+     */
+    public String getFunciAvocado() {
+        return funciAvocado;
+    }
+
+    /**
+     * @param funciAvocado the funciAvocado to set
+     */
+    public void setFunciAvocado(String funciAvocado) {
+        this.funciAvocado = funciAvocado;
     }
 
    

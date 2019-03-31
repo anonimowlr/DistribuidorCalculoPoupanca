@@ -159,7 +159,7 @@
                 </div>
 
                 <h:commandButton   value="Salvar Npj" class="btn btn-primary" rendered="#{controlePoupanca.isEditar()}">
-                    <f:ajax listener="#{controlePoupanca.salvar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                    <f:ajax listener="#{controlePoupanca.avaliarParaSalvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
                 <h:commandButton       value="Novo Poupador" class="btn btn-success" rendered="#{controlePoupanca.isEditar()}" >
                     <f:ajax   listener="#{controlePoupanca.novoComplemento()}" execute="@all" render="@all" event="click" ></f:ajax>
@@ -188,6 +188,7 @@
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
                     
                     <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px" required="true" requiredMessage="Informe o valor base">
+                  
                     </h:inputText>
                     
                     <h:outputLabel value="Data base:"></h:outputLabel>
@@ -198,10 +199,10 @@
                     
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
                     <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 100px" >
-                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo" event="focus" ></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano" event="focus" ></f:ajax>
                     </h:inputText>
                    <h:outputLabel value="Plano:"></h:outputLabel>
-                   <h:selectOneMenu style="width: 150px" id="selectPlano" value="#{controlePoupanca.complementoPoupanca.plano}" required="true" requiredMessage="Não foi informado um plano">
+                   <h:selectOneMenu  style="width: 150px" id="selectPlano" value="#{controlePoupanca.complementoPoupanca.plano}" >
                        
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
                         <f:selectItems value="#{controlePlano.daoPlano.listaTodos}" var="o" itemLabel="#{o.plano}" itemValue="#{o.plano}"  ></f:selectItems>
@@ -222,7 +223,7 @@
                     <h:inputTextarea value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
                     
                     <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
-                    <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
+                    <f:ajax   listener="#{controlePoupanca.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
                 </h:commandButton>
                 </h:panelGrid>
                

@@ -43,6 +43,7 @@ public class ComplementoPoupanca implements Serializable {
     private String cpf;
     @Column(name = "observacao")
     private String observacao;
+   
     @Column(name = "plano")
     private String plano;
     @Column(name = "complemento_obs")
@@ -65,7 +66,6 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "data_uop")       
     private Date dataUop;
 
-    
     
     
     
@@ -299,24 +299,10 @@ public class ComplementoPoupanca implements Serializable {
         this.dataUop = dataUop;
     }
 
-    /**
-     * @return the observacao
-     */
+  
+
    
-
-    /**
-     * @param observacao the observacao to set
-     */
-    public void setObservacao(Observacao observacao) {
-        this.setObservacao(observacao);
-    }
-
-    /**
-     * @return the observacao
-     */
-    public String getObservacao() {
-        return observacao;
-    }
+    
 
     /**
      * @param observacao the observacao to set
@@ -328,7 +314,9 @@ public class ComplementoPoupanca implements Serializable {
     /**
      * @return the observacao
      */
-    
+    public String getObservacao() {
+        return observacao;
+    }
 
     
 

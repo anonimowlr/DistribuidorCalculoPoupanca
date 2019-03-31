@@ -5,8 +5,6 @@
  */
 package endidades;
 
-import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Observacao implements  Serializable{
+public class Observacao {
     
     @Id
     @Column(name = "id")
@@ -54,35 +52,6 @@ public class Observacao implements  Serializable{
      */
     public void setObs(String obs) {
         this.obs = obs;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.obs);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Observacao other = (Observacao) obj;
-        if (!Objects.equals(this.obs, other.obs)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
     }
     
     

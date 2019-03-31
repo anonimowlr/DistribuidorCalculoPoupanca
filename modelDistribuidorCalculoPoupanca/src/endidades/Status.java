@@ -15,19 +15,16 @@ import javax.persistence.Id;
 
 /**
  *
- * @author f5078775
+ * @author PC_LENOVO
  */
-
 @Entity
-public class Plano implements Serializable{
-    
-    
- @Id
- @Column(name = "id")     
- @GeneratedValue(strategy = GenerationType.IDENTITY)        
- private Integer id;
- @Column(name = "plano")
- private String plano;
+public class Status implements  Serializable{
+   
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String status;
 
     /**
      * @return the id
@@ -44,24 +41,24 @@ public class Plano implements Serializable{
     }
 
     /**
-     * @return the plano
+     * @return the status
      */
-    public String getPlano() {
-        return plano;
+    public String getStatus() {
+        return status;
     }
 
     /**
-     * @param plano the plano to set
+     * @param status the status to set
      */
-    public void setPlano(String plano) {
-        this.plano = plano;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.plano);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -76,8 +73,8 @@ public class Plano implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Plano other = (Plano) obj;
-        if (!Objects.equals(this.plano, other.plano)) {
+        final Status other = (Status) obj;
+        if (!Objects.equals(this.status, other.status)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -85,7 +82,8 @@ public class Plano implements Serializable{
         }
         return true;
     }
- 
+    
+    
     
     
 }

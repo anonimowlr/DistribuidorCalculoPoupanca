@@ -7,7 +7,9 @@ package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
+import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
+import endidades.Funcionario;
 import endidades.IdPoupanca;
 import endidades.Observacao;
 import endidades.Plano;
@@ -15,10 +17,13 @@ import endidades.Poupanca;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import util.Util;
 
 /**
@@ -32,10 +37,6 @@ public class ControlePoupanca implements Serializable {
     /**
      * @return the daoObservacao
      */
-   
-
-    
-
     private String estadoTela = "";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
@@ -45,54 +46,73 @@ public class ControlePoupanca implements Serializable {
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
-    
+
     private List<Poupanca> listaPoupanca = new ArrayList<>();
-  
-    
-    
+
     @PostConstruct
-    public void init(){
-      
+    public void init() {
+
         buscar();
-        listar();
+
     }
-    
-    public void mostrarConteudo(){
+
+    public void mostrarConteudo() {
         System.out.println(observacao);
     }
-   
-    public void alterarTamanhoLetra(){
-        
-      
-       complementoPoupanca.setPoupador(complementoPoupanca.getPoupador().toUpperCase());
+
+    public void alterarTamanhoLetra() {
+
+        complementoPoupanca.setPoupador(complementoPoupanca.getPoupador().toUpperCase());
     }
-    
-    
-    
-    public void calcularValorAcordo(){
-        this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("3")));
+
+    public void calcularValorAcordo() {
+
+        try {
+            Date data1 = Utils.formataData("01/06/1987");
+            Date data2 = Utils.formataData("15/06/1987");
+            Date data3 = Utils.formataData("01/01/1989");
+            Date data4 = Utils.formataData("15/01/1989");
+            Date data5 = Utils.formataData("03/01/1991");
+            Date data6 = Utils.formataData("31/01/1991");
+
+            if ((complementoPoupanca.getDataBase().before(data2) || complementoPoupanca.getDataBase().equals(data2)) && (complementoPoupanca.getDataBase().after(data1) || complementoPoupanca.getDataBase().equals(data1))) {
+                complementoPoupanca.setPlano("BRESSER");
+                complementoPoupanca.setFazJus("SIM");
+            } else if ((complementoPoupanca.getDataBase().before(data4) || complementoPoupanca.getDataBase().equals(data4)) && (complementoPoupanca.getDataBase().after(data3) || complementoPoupanca.getDataBase().equals(data3))) {
+                complementoPoupanca.setPlano("VERAO");
+                complementoPoupanca.setFazJus("SIM");
+            } else if ((complementoPoupanca.getDataBase().before(data6) || complementoPoupanca.getDataBase().equals(data6)) && (complementoPoupanca.getDataBase().after(data5) || complementoPoupanca.getDataBase().equals(data5))) {
+                complementoPoupanca.setPlano("COLOR II");
+                complementoPoupanca.setFazJus("SIM");
+            } else {
+                complementoPoupanca.setFazJus("NAO");
+            }
+
+            this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("3")));
+        } catch (Exception e) {
+
+        }
+
     }
-    
+
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
     }
-    
-    
-    
-    public void buscar(){
+
+    public void buscar() {
         setPoupanca(null);
         mudarParaBuscar();
-        setListaPoupanca(getDaoPoupanca().getListaObjetos());
+        setListaPoupanca(getDaoPoupanca().getListaPoupanca());
         setListaPoupanca(getListaPoupanca());
+        avocar();
     }
-    
 
     public void novo() {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
-    
+
     public void novoComplemento() {
         setEstadoTela("editarComplemento");
         setComplementoPoupanca(new ComplementoPoupanca());
@@ -100,7 +120,7 @@ public class ControlePoupanca implements Serializable {
     }
 
     public String listar() {
-        return "home?faces-redirect=true";
+        return "tratamento?faces-redirect=true";
     }
 
     public void salvar() {
@@ -117,12 +137,12 @@ public class ControlePoupanca implements Serializable {
         } else {
             Util.mensagemErro(getDaoPoupanca().getMensagem());
         }
-      
+
         mudarParaBuscar();
         getDaoPoupanca().getEm().clear();
         novo();
         buscar();
-       
+
         listar();
     }
 
@@ -146,7 +166,7 @@ public class ControlePoupanca implements Serializable {
     public boolean isEditarComplemento() {
 
         return "editarComplemento".equals(getEstadoTela());
-       
+
     }
 
     public boolean isBuscar() {
@@ -158,22 +178,19 @@ public class ControlePoupanca implements Serializable {
         mudarParaEditar();
         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
     }
-    
+
     public void editarComplemento(Integer index) {
-       
-       
-     
+
         mudarParaEditarComplemento();
-      
-    
+
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
-         if(c.getId().equals(index)){
-             setComplementoPoupanca(c);
-             break;
-         }
-            
+            if (c.getId().equals(index)) {
+                setComplementoPoupanca(c);
+                break;
+            }
+
         }
-        
+
     }
 
     /**
@@ -316,4 +333,74 @@ public class ControlePoupanca implements Serializable {
         this.listaObservacao = listaObservacao;
     }
 
+    public void avaliarParaSalvar() {
+
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+            Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+
+            poupanca.setStatus("REGULARIZADO");
+            poupanca.setDataStatus(Utils.getDataAtualFormatoMysql());
+            poupanca.setAvocado(null);
+            poupanca.setDataAvocacao(null);
+            poupanca.setFunciAvocado(null);
+            poupanca.setDataAvocacao(null);
+            salvar();
+
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void avocar() {
+      
+        try{
+         FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+
+        
+        poupanca = listaPoupanca.get(0);
+        poupanca.setAvocado("SIM");
+        poupanca.setFunciAvocado(usuario.getChave());
+        poupanca.setDataAvocacao(new Date());
+
+        salvarAvocado();
+            
+        } catch(Exception e ){
+          
+            Util.mensagemErro(Util.getMensagemErro(e));
+          
+        }
+        
+       
+    }
+
+    private void salvarAvocado() {
+
+        if (poupanca.getAvocado().equals("SIM")) {
+            getDaoPoupanca().salvarAvocado(poupanca);
+        }
+
+    }
+
+    public void complementar() {
+
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+            Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+            complementoPoupanca.setDataExecucao(Utils.getDataAtualFormatoMysql());
+            complementoPoupanca.setFunci(usuario.getChave());
+            mudarParaEditar();
+        } catch (Exception e) {
+
+            Util.mensagemErro(Util.getMensagemErro(e));
+        }
+
+    }
 }
