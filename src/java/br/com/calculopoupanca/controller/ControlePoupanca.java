@@ -16,6 +16,7 @@ import endidades.Plano;
 import endidades.Poupanca;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,19 +78,24 @@ public class ControlePoupanca implements Serializable {
 
             if ((complementoPoupanca.getDataBase().before(data2) || complementoPoupanca.getDataBase().equals(data2)) && (complementoPoupanca.getDataBase().after(data1) || complementoPoupanca.getDataBase().equals(data1))) {
                 complementoPoupanca.setPlano("BRESSER");
+                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
                 complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data4) || complementoPoupanca.getDataBase().equals(data4)) && (complementoPoupanca.getDataBase().after(data3) || complementoPoupanca.getDataBase().equals(data3))) {
                 complementoPoupanca.setPlano("VERAO");
+                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
                 complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data6) || complementoPoupanca.getDataBase().equals(data6)) && (complementoPoupanca.getDataBase().after(data5) || complementoPoupanca.getDataBase().equals(data5))) {
                 complementoPoupanca.setPlano("COLOR II");
+                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
                 complementoPoupanca.setFazJus("SIM");
             } else {
                 complementoPoupanca.setFazJus("NAO");
             }
 
-            this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("3")));
         } catch (Exception e) {
+            
+           
+            Util.mensagemErro( Util.getMensagemErro(e));
 
         }
 
@@ -343,7 +349,7 @@ public class ControlePoupanca implements Serializable {
 
                 if ( complemento.getObservacao() == null) {
 
-                    Util.mensagemErro("Não é possÍvel salvar, item sem calcular");
+                    Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
                     break;
                     
