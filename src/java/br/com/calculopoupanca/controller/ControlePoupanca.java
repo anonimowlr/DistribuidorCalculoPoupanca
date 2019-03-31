@@ -334,6 +334,54 @@ public class ControlePoupanca implements Serializable {
     }
 
     public void avaliarParaSalvar() {
+   
+        boolean podeSalvar = true;
+        
+        try {
+
+            for (ComplementoPoupanca complemento : poupanca.getListaComplementoPoupanca()) {
+
+                if ( complemento.getObservacao() == null) {
+
+                    Util.mensagemErro("Não é possÍvel salvar, item sem calcular");
+                    podeSalvar = false;
+                    break;
+                    
+                } 
+            }
+            
+            if(podeSalvar){
+                   FacesContext fc = FacesContext.getCurrentInstance();
+                    HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+                    Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+
+                    poupanca.setStatus("TRATADO");
+                    poupanca.setDataStatus(Utils.getDataAtualFormatoMysql());
+                    poupanca.setAvocado(null);
+                    poupanca.setDataAvocacao(null);
+                    poupanca.setFunciAvocado(null);
+                    poupanca.setDataAvocacao(null);
+
+                    salvar();
+
+            }
+            
+                    
+                
+                  
+
+            
+
+        } catch (Exception e) {
+
+            Util.mensagemErro(Util.getMensagemErro(e));
+
+        }
+
+    }
+
+    public void avocar() {
 
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -341,42 +389,19 @@ public class ControlePoupanca implements Serializable {
 
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
 
-            poupanca.setStatus("REGULARIZADO");
-            poupanca.setDataStatus(Utils.getDataAtualFormatoMysql());
-            poupanca.setAvocado(null);
-            poupanca.setDataAvocacao(null);
-            poupanca.setFunciAvocado(null);
-            poupanca.setDataAvocacao(null);
-            salvar();
+            poupanca = listaPoupanca.get(0);
+            poupanca.setAvocado("SIM");
+            poupanca.setFunciAvocado(usuario.getChave());
+            poupanca.setDataAvocacao(new Date());
+
+            salvarAvocado();
 
         } catch (Exception e) {
-        }
 
-    }
-
-    public void avocar() {
-      
-        try{
-         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-
-        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
-
-        
-        poupanca = listaPoupanca.get(0);
-        poupanca.setAvocado("SIM");
-        poupanca.setFunciAvocado(usuario.getChave());
-        poupanca.setDataAvocacao(new Date());
-
-        salvarAvocado();
-            
-        } catch(Exception e ){
-          
             Util.mensagemErro(Util.getMensagemErro(e));
-          
+
         }
-        
-       
+
     }
 
     private void salvarAvocado() {
