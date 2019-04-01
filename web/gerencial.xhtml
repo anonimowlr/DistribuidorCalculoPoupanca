@@ -23,25 +23,38 @@
 
 
 
-            <h:form id="fomIndex">
+            <h:form id="fomIndex" >
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
-               
-                
-             
-                
-                
-                
+
+
+
+
+
+
 
                 <div class="table-responsive">
 
+                    <p:toolbar  >
+                        <p:toolbarGroup>
+
+                            <h:commandLink>
+                                <h:graphicImage  width="20px" library="img" name="excel.png" title="Exportar para Excel" ></h:graphicImage>
+
+                                <p:dataExporter type="xls" target="listagem" fileName="TabelaGerencialCalcPoup" />
+                            </h:commandLink>
+
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
 
 
-                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt"  id="listagem">
+
+                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial()}">
                         <f:facet name="header">
-                            
-                        
+
+
                             <p:commandButton value="Primeiro" actionListener="#{controleComplemento.daoComplementoPoupanca.primeiraPagina()}" icon="ui-icon-seek-first" update="listagem"></p:commandButton>
 
                             <p:commandButton value="Anterior" actionListener="#{controleComplemento.daoComplementoPoupanca.paginaAnterior()}" icon="ui-icon-seek-prev" update="listagem"></p:commandButton>
@@ -49,52 +62,79 @@
                             <p:commandButton value="Próximo" actionListener="#{controleComplemento.daoComplementoPoupanca.proximaPagina()}" icon="ui-icon-seek-next" update="listagem"></p:commandButton>
 
                             <p:commandButton value="Ultima pagina" actionListener="#{controleComplemento.daoComplementoPoupanca.ultimaPagina()}" icon="ui-icon-seek-end" update="listagem"></p:commandButton>
-                            
+
                         </f:facet>
 
 
 
 
-                        <p:column filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
-                            <f:facet name="header">NPJ</f:facet>
-                                #{p.poupanca.idPoupanca.npj}
+                        <p:column headerText="NPJ" filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
+
+                            <h:outputText value="#{p.poupanca.idPoupanca.npj}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
-                            <f:facet name="header">CNJ</f:facet>
-                                #{p.poupanca.idPoupanca.cnj}
+                       <p:column headerText="CNJ" filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
+
+                            <h:outputText value="#{p.poupanca.idPoupanca.cnj}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
-                            <f:facet name="header">AGENCIA</f:facet>
-                                #{p.agencia}
+                        <p:column headerText="AGENCIA" filterBy="#{p.agencia}" filterMatchMode="contains" sortBy="#{p.agencia}">
+
+                            <h:outputText value="#{p.agencia}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}">
-                            <f:facet name="header">CONTA</f:facet>
-                                #{p.conta}
+                        <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}">
+
+                            <h:outputText value="#{p.conta}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}">
-                            <f:facet name="header">POUPADOR</f:facet>
-                                #{p.poupador}
+                        <p:column headerText="POUPADOR" filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}">
+
+                            <h:outputText value="#{p.poupador}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}">
-                            <f:facet name="header">CPF</f:facet>
-                                #{p.cpf}
+                        <p:column headerText="CPF" filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}">
+
+                            <h:outputText value="#{p.cpf}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}">
-                            <f:facet name="header">OBSERVACAO</f:facet>
-                                #{p.observacao}
+                       <p:column headerText="OBSERVAÇÃO" filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}">
+
+                            <h:outputText value="#{p.observacao}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  >
-                            <f:facet name="header">COMPLEMENTO</f:facet>
-                                #{p.complementoObs}
+                       <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}">
+
+                            <h:outputText value="#{p.conta}" >
+
+                            </h:outputText>
+
                         </p:column>
 
-                        <p:column  filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}">
-                            <f:facet name="header">PLANO</f:facet>
-                                #{p.plano}
+                        <p:column headerText="PLANO" filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}">
+
+                            <h:outputText value="#{p.plano}" >
+
+                            </h:outputText>
+
                         </p:column>
                         <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" >
                             <h:outputText value="#{p.valorBase}" >
-                                <f:convertNumber  type="currency" />
+                                
                             </h:outputText>
                         </p:column>
 
@@ -106,19 +146,25 @@
 
                         <p:column headerText="VALOR ACORDO" filterBy="#{p.valorAcordo}" filterMatchMode="contains"  sortBy="#{p.valorAcordo}" >
                             <h:outputText value="#{p.valorAcordo}" >
-                                <f:convertNumber  type="currency" />
+                               
                             </h:outputText>
                         </p:column>
 
 
 
-                        <p:column  filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}">
-                            <f:facet name="header">FAZ JUS?</f:facet>
-                                #{p.fazJus}
+                        <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}">
+
+                            <h:outputText value="#{p.fazJus}" >
+
+                            </h:outputText>
+
                         </p:column>
-                        <p:column  filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}">
-                            <f:facet name="header">FUNCI</f:facet>
-                                #{p.funci}
+                        <p:column headerText="FUNCI" filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}">
+
+                            <h:outputText value="#{p.funci}" >
+
+                            </h:outputText>
+
                         </p:column>
                         <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"   >
                             <h:outputText value="#{p.dataExecucao}" >

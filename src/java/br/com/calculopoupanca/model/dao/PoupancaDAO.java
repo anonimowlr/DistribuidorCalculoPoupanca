@@ -5,38 +5,44 @@
  */
 package br.com.calculopoupanca.model.dao;
 
+import endidades.Funcionario;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import util.Util;
 
 /**
  *
  * @author f5078775
  */
-public class PoupancaDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
+public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
 
-      private List<T> listaPoupanca;
-    
+    private List<T> listaPoupanca;
+
     public PoupancaDAO() {
-       super();
-       classePersistente = Poupanca.class;
-       ordem = "npj";
-       maximoObjeto = 1;
-       chaveComposta = IdPoupanca.class;
-       em.clear();
-       
-        
+        super();
+        classePersistente = Poupanca.class;
+        ordem = "npj";
+        maximoObjeto = 1;
+        chaveComposta = IdPoupanca.class;
+        em.clear();
+
     }
 
     /**
      * @return the listaPoupanca
      */
     public List<T> getListaPoupanca() {
-       String jpql = "From  " + classePersistente.getSimpleName() + " c " +  " where " + " (c.status = null and c.avocado = null)  or (c.avocado = 'SIM'  and c.funciAvocado = 'F5078775')"  +   "  order by "  + ordem;
-        
-       
-      return   em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(maximoObjeto).getResultList();
+
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+        String jpql = "From  " + classePersistente.getSimpleName() + " c " + " where " + " (c.status = null and c.avocado = null)  or (c.avocado = 'SIM'  and c.funciAvocado = '" + usuario.getChave() + "')" + "  order by " + ordem;
+
+        return em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(maximoObjeto).getResultList();
     }
 
     /**
@@ -45,22 +51,20 @@ public class PoupancaDAO<T,D> extends DAOGenerico<Poupanca, IdPoupanca>{
     public void setListaPoupanca(List<T> listaPoupanca) {
         this.listaPoupanca = listaPoupanca;
     }
-   
-     public void salvarAvocado(T objeto){
-        try{
+
+    public void salvarAvocado(T objeto) {
+        try {
             em.getTransaction().begin();
             em.persist(objeto);
             em.getTransaction().commit();
-           
-          
-        }catch(Exception e ){
+
+        } catch (Exception e) {
             rollback();
-           
-            mensagem ="Erro ao avocar - "  + Util.getMensagemErro(e);
-          
+
+            mensagem = "Erro ao avocar - " + Util.getMensagemErro(e);
+
         }
-        
+
     }
-    
-    
+
 }
