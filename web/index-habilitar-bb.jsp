@@ -1,5 +1,6 @@
-<%@page import="br.com.calculopoupanca.model.dao.FuncionarioDAO"%>
 
+
+<%@page import="br.com.calculopoupanca.model.dao.FuncionarioDAO"%>
 <%
     boolean precisaAutenticar = false;
     if (session.getAttribute("usuarioLogado") == null) {
@@ -7,8 +8,8 @@
             precisaAutenticar = true;
         } else {
             //session.setAttribute("usuarioLogado", new FuncionarioDAO().getFuncionario(request.getParameter("cd-idgl-usu")));
-            session.setAttribute("usuarioLogado", new FuncionarioDAO().getFuncionario(request.getParameter("ibm-nativeid"),request.getParameter("cd-eqp")));
-
+            session.setAttribute("usuarioLogado", new FuncionarioDAO().getFuncionario(request.getParameter("ibm-nativeid"),request.getParameter("cd-eqp"),request.getParameter("nm-idgl")));
+                
             if (session.getAttribute("usuarioLogado") != null) {
                 String uri = request.getScheme() + "://"
                         + request.getServerName()

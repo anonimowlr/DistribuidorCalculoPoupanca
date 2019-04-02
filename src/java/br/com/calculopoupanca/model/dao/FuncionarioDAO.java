@@ -17,54 +17,54 @@ public class FuncionarioDAO implements  CrudDAO<Funcionario>{
     
     
 
-   public Funcionario getFuncionario(String chave, String uor, String nomeFuncionario, String nomeGuerra , String funcao) throws ClassNotFoundException, SQLException, ErroSistema {
+   public Funcionario getFuncionario(String chave, String uor, String nomeFuncionario) throws ClassNotFoundException, SQLException, ErroSistema {
        
         
         
-        
-        Connection con = ConnectionFactory.conectar("rejud");
-        Statement busca = con.createStatement();
-        String sql = "SELECT A.*,B.cd_area,C.Quadro, spf_dados.nm_gerente_funci(A.matriculaF, '4750') AS gerente FROM arh.v_funcionarios A " +
-                        "LEFT JOIN gestao_equipes.tb_uor_area B " +
-                        "ON A.UOR_Posicao=B.uor " +
-                        "LEFT JOIN spf_dados.tb_arh_base C " +
-                        "ON A.matriculaF = C.tx_mtc_fun " +
-                        "WHERE A.matriculaF=TRIM('" + chave + "')";
+//        
+//        Connection con = ConnectionFactory.conectar("rejud");
+//        Statement busca = con.createStatement();
+//        String sql = "SELECT A.*,B.cd_area,C.Quadro, spf_dados.nm_gerente_funci(A.matriculaF, '4750') AS gerente FROM arh.v_funcionarios A " +
+//                        "LEFT JOIN gestao_equipes.tb_uor_area B " +
+//                        "ON A.UOR_Posicao=B.uor " +
+//                        "LEFT JOIN spf_dados.tb_arh_base C " +
+//                        "ON A.matriculaF = C.tx_mtc_fun " +
+//                        "WHERE A.matriculaF=TRIM('" + chave + "')";
+//
+//        ResultSet tabela = busca.executeQuery(sql);
+//
+              Funcionario funci = new Funcionario();
+//
+//        try {
+//            if (tabela.next()) {
+//                funci.setChave(chave);
+//                funci.setNome(nomeFuncionario.toUpperCase());
+//                funci.setNomeGuerra(tabela.getString("nomeGuerra"));
+//                funci.setFuncao(Integer.parseInt(tabela.getString("funcao")));
+//                funci.setNomeFuncao(tabela.getString("nomeFuncao"));
+//                funci.setUORHabitual(Integer.parseInt(uor));
+//                funci.setUORPosicao(Integer.parseInt(uor));
+//                funci.setGerente(tabela.getString("gerente"));
+//                funci.setSecao(tabela.getString("secao"));
+//                funci.setQuadro(tabela.getString("Quadro"));
+//            }
+//            tabela.close();
+//        } catch (SQLException e) {
+//        } finally{
+//            try{tabela.close();} catch(SQLException e){}
+//            try{busca.close();} catch(SQLException e){}
+//            try{con.close();} catch(SQLException e){}
+//        }
+//        
+//        
+//              
+//    
 
-        ResultSet tabela = busca.executeQuery(sql);
-
-               Funcionario funci = new Funcionario();
-
-        try {
-            if (tabela.next()) {
-                funci.setChave(chave);
-                funci.setNome(nomeFuncionario.toUpperCase());
-                funci.setNomeGuerra(nomeGuerra.toUpperCase());
-                funci.setFuncao(Integer.parseInt(tabela.getString("funcao")));
-                funci.setNomeFuncao(funcao.toUpperCase());
-                funci.setUORHabitual(Integer.parseInt(uor));
-                funci.setUORPosicao(Integer.parseInt(uor));
-                funci.setGerente(tabela.getString("gerente"));
-                funci.setSecao(tabela.getString("secao"));
-                funci.setQuadro(tabela.getString("Quadro"));
-            }
-            tabela.close();
-        } catch (SQLException e) {
-        } finally{
-            try{tabela.close();} catch(SQLException e){}
-            try{busca.close();} catch(SQLException e){}
-            try{con.close();} catch(SQLException e){}
-        }
-        
-        
-              
-    
-
-//    funci.setChave("F5078775");
-//    funci.setNome("JOCIMAR WALTER");
-//    funci.setFuncao(4750);
-//    funci.setUORHabitual(286409);
-//    funci.setUORPosicao(286409);
+    funci.setChave("F5078775");
+    funci.setNome("JOCIMAR WALTER");
+    funci.setFuncao(4750);
+    funci.setUORHabitual(286409);
+    funci.setUORPosicao(286409);
 
     return funci;
     }

@@ -51,19 +51,7 @@
 
 
 
-                    <p:dataTable value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 6pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial()}">
-                        <f:facet name="header">
-
-
-                            <p:commandButton value="Primeiro" actionListener="#{controleComplemento.daoComplementoPoupanca.primeiraPagina()}" icon="ui-icon-seek-first" update="listagem"></p:commandButton>
-
-                            <p:commandButton value="Anterior" actionListener="#{controleComplemento.daoComplementoPoupanca.paginaAnterior()}" icon="ui-icon-seek-prev" update="listagem"></p:commandButton>
-
-                            <p:commandButton value="Próximo" actionListener="#{controleComplemento.daoComplementoPoupanca.proximaPagina()}" icon="ui-icon-seek-next" update="listagem"></p:commandButton>
-
-                            <p:commandButton value="Ultima pagina" actionListener="#{controleComplemento.daoComplementoPoupanca.ultimaPagina()}" icon="ui-icon-seek-end" update="listagem"></p:commandButton>
-
-                        </f:facet>
+                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="({totalRecords} registros )" scrollWidth="auto" scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="250"  paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaTodos}" var="p" class="table" style="font-size: 6pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial()}">
 
 
 
@@ -117,9 +105,9 @@
                             </h:outputText>
 
                         </p:column>
-                       <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}">
+                       <p:column headerText="COMPLEMENTO" filterBy="#{p.complementoObs}" filterMatchMode="contains" sortBy="#{p.complementoObs}">
 
-                            <h:outputText value="#{p.conta}" >
+                            <h:outputText value="#{p.complementoObs}" >
 
                             </h:outputText>
 
