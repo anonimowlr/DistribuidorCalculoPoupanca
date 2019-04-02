@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
@@ -40,6 +41,8 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "poupador")
     private String poupador;
     @Column(name = "cpf")
+    
+   
     private String cpf;
     @Column(name = "observacao")
     private String observacao;
@@ -65,6 +68,18 @@ public class ComplementoPoupanca implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "data_uop")       
     private Date dataUop;
+    
+    @Column(name = "valor_direito")
+    private BigDecimal valorDireito;
+    @Column(name = "id_arquivo")
+    private String idArquivo;
+    @Column(name = "valor_honorario")
+    private BigDecimal valorHonorario;
+    @Column(name = "valor_despendido_bb")
+    private BigDecimal valorDespendidoBB;
+    
+    
+    
 
     
     
@@ -316,6 +331,62 @@ public class ComplementoPoupanca implements Serializable {
      */
     public String getObservacao() {
         return observacao;
+    }
+
+    /**
+     * @return the valorDireito
+     */
+    public BigDecimal getValorDireito() {
+        return valorDireito;
+    }
+
+    /**
+     * @param valorDireito the valorDireito to set
+     */
+    public void setValorDireito(BigDecimal valorDireito) {
+        this.valorDireito = valorDireito;
+    }
+
+    /**
+     * @return the idArquivo
+     */
+    public String getIdArquivo() {
+        return idArquivo;
+    }
+
+    /**
+     * @param idArquivo the idArquivo to set
+     */
+    public void setIdArquivo(String idArquivo) {
+        this.idArquivo = idArquivo;
+    }
+
+    /**
+     * @return the valorHonorario
+     */
+    public BigDecimal getValorHonorario() {
+        return valorHonorario;
+    }
+
+    /**
+     * @param valorHonorario the valorHonorario to set
+     */
+    public void setValorHonorario(BigDecimal valorHonorario) {
+        this.valorHonorario = valorHonorario;
+    }
+
+    /**
+     * @return the valorDespendidoBB
+     */
+    public BigDecimal getValorDespendidoBB() {
+        return valorDespendidoBB;
+    }
+
+    /**
+     * @param valorDespendidoBB the valorDespendidoBB to set
+     */
+    public void setValorDespendidoBB(BigDecimal valorDespendidoBB) {
+        this.valorDespendidoBB = valorDespendidoBB;
     }
 
     

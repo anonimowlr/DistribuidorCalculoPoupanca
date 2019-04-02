@@ -188,7 +188,7 @@
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
                     
                     <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px" required="true" requiredMessage="Informe o valor base">
-                  
+                        <f:converter converterId="converterMoney"></f:converter>
                     </h:inputText>
                     
                     <h:outputLabel value="Data base:"></h:outputLabel>
@@ -225,6 +225,9 @@
                     
                     <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controlePoupanca.editarComplemento}">
                     <f:ajax   listener="#{controlePoupanca.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
+                </h:commandButton>
+                    <h:commandButton   value="Cancelar" class="btn btn-info" rendered="#{controlePoupanca.editarComplemento}">
+                        <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
                 </h:commandButton>
                 </h:panelGrid>
                

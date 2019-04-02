@@ -4,9 +4,6 @@ package br.com.calculopoupanca.controller;
 import br.com.calculopoupanca.model.dao.FuncionarioDAO;
 import endidades.Funcionario;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
@@ -39,9 +36,8 @@ public class FuncionarioBean extends CrudBean<Funcionario, FuncionarioDAO>{
     @PostConstruct // teste para executar instrução ao iniciar ete bean
     public void init(){
         
-            if(usuario.getFuncao()== 4750 || usuario.getFuncao()== 4438 || usuario.getFuncao()== 4750 || 
-                    usuario.getFuncao()== 4665 || usuario.getFuncao()== 4072 || usuario.getChave().equals("F5078775") || 
-                    usuario.getChave().equals("F0423403") || usuario.getChave().equals("F4281065")){
+            if(usuario.getFuncao()== 4438 || usuario.getFuncao()== 4750 
+                    || usuario.getFuncao()== 7001){
                 
                 mudarParaCargoGerencial();
                 
@@ -50,23 +46,7 @@ public class FuncionarioBean extends CrudBean<Funcionario, FuncionarioDAO>{
             
             
             
-            if(usuario.getUORPosicao() !=  286409 && usuario.getUORPosicao() !=  287339  && usuario.getUORPosicao() !=  286399 && usuario.getUORPosicao() !=  284646   && usuario.getUORPosicao() !=  454062  && usuario.getUORPosicao() !=  10544 && usuario.getUORPosicao() !=  79771 && usuario.getUORPosicao() !=  286369  && usuario.getUORPosicao() !=  286378   ){
-                
-                mudarParaNegar();
-                
-            }
-         
-           
-           if(usuario.getChave()==null){
-               try {
-                   FacesContext.getCurrentInstance().getExternalContext().redirect("sem-acesso.jsf");
-                   mudarParaNegar();
-               } catch (IOException ex) {
-                   Logger.getLogger(FuncionarioBean.class.getName()).log(Level.SEVERE, null, ex);
-               }
-               
-           }
-           
+                 
     }
     
     
