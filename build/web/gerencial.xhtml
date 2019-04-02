@@ -36,24 +36,28 @@
 
                 <div class="table-responsive">
 
-                    <p:toolbar  >
-                        <p:toolbarGroup>
+                    
+
+
+
+                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " currentPageReportTemplate="({totalRecords} registros )"   scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="350"  scrollWidth="3000" paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 8pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial()}">
+
+                        <f:facet name="header">
+                            
+                            <p:toolbar  >
+                        <p:toolbarGroup >
 
                             <h:commandLink>
                                 <h:graphicImage  width="20px" library="img" name="excel.png" title="Exportar para Excel" ></h:graphicImage>
 
                                 <p:dataExporter type="xls" target="listagem" fileName="TabelaGerencialCalcPoup" />
                             </h:commandLink>
+                          
 
                         </p:toolbarGroup>
 
                     </p:toolbar>
-
-
-
-                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="({totalRecords} registros )" scrollWidth="auto" scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="250"  paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaTodos}" var="p" class="table" style="font-size: 6pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial()}">
-
-
+                        </f:facet>
 
 
                         <p:column headerText="NPJ" filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}">
