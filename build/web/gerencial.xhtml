@@ -158,9 +158,30 @@
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"   >
+                        <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"  filterStyle="width:60%; height:20px"  >
                             <h:outputText value="#{p.dataExecucao}" >
                                 <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.valorHonorario}" >
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="VALOR DIREITO" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.valorDireito}" >
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="VALOR DESPENDIDO BB" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:60%; height:20px"   >
+                            <h:outputText value="#{p.valorDespendidoBB}" >
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="ARQUIVO ORIGEM" filterBy="#{p.idArquivo}" filterMatchMode="contains"  sortBy="#{p.idArquivo}" resizable="true"  filterStyle="width:60%; height:20px"  >
+                            <h:outputText value="#{p.idArquivo}" >
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="DATA ARQUIVO" filterBy="#{p.dataImportacaoArquivo}" filterMatchMode="contains"  sortBy="#{p.dataImportacaoArquivo}" resizable="true"  filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.dataImportacaoArquivo}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss"></f:convertDateTime>
                             </h:outputText>
                         </p:column>
 

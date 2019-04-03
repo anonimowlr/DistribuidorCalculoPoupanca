@@ -189,6 +189,7 @@ public class FormProgressoUpload extends javax.swing.JFrame {
 
         //String nomeArquivo = "C:\\Users\\suporte\\Desktop\\Pasta1.xlsx";
         File file = new File(arq);
+        
 
         try {
             FileInputStream fisPlanilha = new FileInputStream(file);
@@ -334,8 +335,8 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 i++;
                 if (numeroLinha > 0) {
                     
-                    
-                  
+                    complementoPoupanca.setDataImportacaoArquivo(Utils.getDataHoraAtualMysqlDate());
+                   complementoPoupanca.setIdArquivo(file.getName());
                     poupanca.adicionarComplementoPoupanca(complementoPoupanca);
                      poupancaDAO.salvar(poupanca);
                    

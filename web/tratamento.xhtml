@@ -217,6 +217,7 @@
 
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
                         <f:selectItems value="#{controlePlano.daoPlano.listaTodos}" var="o" itemLabel="#{o.plano}" itemValue="#{o.plano}"  ></f:selectItems>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
 
                     </h:selectOneMenu>
 

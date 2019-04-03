@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import org.hibernate.validator.constraints.br.CPF;
 
 /**
@@ -40,9 +42,10 @@ public class ComplementoPoupanca implements Serializable {
     private BigInteger conta;
     @Column(name = "poupador")
     private String poupador;
-    @Column(name = "cpf")
+    @Column(name = "cpf" ,nullable = true)
     
-   
+  
+    
     private String cpf;
     @Column(name = "observacao")
     private String observacao;
@@ -71,14 +74,15 @@ public class ComplementoPoupanca implements Serializable {
     
     @Column(name = "valor_direito")
     private BigDecimal valorDireito;
-    @Column(name = "id_arquivo")
+    @Column(name = "id_arquivo", length = 450)
     private String idArquivo;
     @Column(name = "valor_honorario")
     private BigDecimal valorHonorario;
     @Column(name = "valor_despendido_bb")
     private BigDecimal valorDespendidoBB;
-    
-    
+    @Column(name = "data_importacao_arquivo")
+     @Temporal(TemporalType.TIMESTAMP)       
+    private Date dataImportacaoArquivo;
     
 
     
@@ -387,6 +391,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setValorDespendidoBB(BigDecimal valorDespendidoBB) {
         this.valorDespendidoBB = valorDespendidoBB;
+    }
+
+    /**
+     * @return the dataImportacaoArquivo
+     */
+    public Date getDataImportacaoArquivo() {
+        return dataImportacaoArquivo;
+    }
+
+    /**
+     * @param dataImportacaoArquivo the dataImportacaoArquivo to set
+     */
+    public void setDataImportacaoArquivo(Date dataImportacaoArquivo) {
+        this.dataImportacaoArquivo = dataImportacaoArquivo;
     }
 
     
