@@ -124,24 +124,34 @@
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" filterStyle="width:60%; height:20px" >
-                            <h:outputText value="#{p.valorBase}" >
-                                
-                            </h:outputText>
-                        </p:column>
+                       
 
                         <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" filterStyle="width:60%; height:20px" >
                             <h:outputText value="#{p.dataBase}" >
                                 <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
                         </p:column>
+                         <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.valorBase}" >
+                                
+                            </h:outputText>
+                        </p:column>
 
+                         <p:column headerText="CORRECAO ESPERADA" filterBy="#{p.correcaoEsperada}" filterMatchMode="contains"  sortBy="#{p.correcaoEsperada}" resizable="true"  filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.correcaoEsperada}" >
+                            </h:outputText>
+                        </p:column>
                         <p:column headerText="VALOR ACORDO" filterBy="#{p.valorAcordo}" filterMatchMode="contains"  sortBy="#{p.valorAcordo}" filterStyle="width:60%; height:20px">
                             <h:outputText value="#{p.valorAcordo}" >
                               
                             </h:outputText>
                         </p:column>
 
+                        
+                        <p:column headerText="SOMATORIO POUPADOR" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.valorDireito}" >
+                            </h:outputText>
+                        </p:column>
 
 
                         <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}" filterStyle="width:60%; height:20px">
@@ -167,10 +177,7 @@
                             <h:outputText value="#{p.valorHonorario}" >
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="SOMATORIO POUPADOR" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
-                            <h:outputText value="#{p.valorDireito}" >
-                            </h:outputText>
-                        </p:column>
+                        
                         <p:column headerText="VALOR DESPENDIDO BB" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:60%; height:20px"   >
                             <h:outputText value="#{p.valorDespendidoBB}" >
                             </h:outputText>
@@ -184,10 +191,12 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss"></f:convertDateTime>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="CORRECAO ESPERADA" filterBy="#{p.correcaoEsperada}" filterMatchMode="contains"  sortBy="#{p.correcaoEsperada}" resizable="true"  filterStyle="width:60%; height:20px" >
-                            <h:outputText value="#{p.correcaoEsperada}" >
-                            </h:outputText>
+                        <p:column headerText="AÇOES"  >
+                            <h:commandButton value="Excluir" class="btn btn-link"  onclick="if (!confirm('Deseja realmente excluir?')) return false">
+                                 <f:ajax   listener="#{controleComplemento.excluirBaseGerencial(p.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
                         </p:column>
+                       
 
 
 

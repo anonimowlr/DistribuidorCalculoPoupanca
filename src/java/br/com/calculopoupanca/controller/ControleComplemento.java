@@ -108,7 +108,17 @@ public class ControleComplemento implements Serializable {
         
         
        complementoPoupanca.getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
+       
         
+    }
+    public void excluirBaseGerencial(Integer id){
+       
+        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
+        
+       getDaoComplementoPoupanca().getListaObjetos().remove(complementoPoupanca);
+       daoComplementoPoupanca.deletar(complementoPoupanca);
+       
+       
         
     }
     

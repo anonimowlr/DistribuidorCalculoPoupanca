@@ -76,7 +76,8 @@
 
                         <h:column>
                             <f:facet name="header">POUPADOR</f:facet>
-                            <h:outputText value="#{c.poupador}"></h:outputText>
+                            <h:outputText  value="#{c.poupador}"></h:outputText>
+                            
 
                         </h:column>
                         <h:column>
@@ -145,7 +146,7 @@
 
                                 <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt"   >
+                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?')) return false"   >
 
                                 <f:ajax   listener="#{controleComplemento.excluir(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
@@ -187,10 +188,12 @@
                     <h:inputText value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px" ></h:inputText>
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px"></h:inputText>
+                    <h:inputText value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" >
+                        
+                    </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <h:inputText value="#{controlePoupanca.complementoPoupanca.conta}" style="width: 150px" ></h:inputText>
+                    <h:inputText id="txtConta" value="#{controlePoupanca.complementoPoupanca.conta}" style="width: 150px" ></h:inputText>
 
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px" >
@@ -242,7 +245,7 @@
                         <f:ajax   listener="#{controlePoupanca.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
                     </h:commandButton>
                     <h:commandButton   value="Voltar" class="btn btn-info" rendered="#{controlePoupanca.editarComplemento}">
-                        <f:ajax   listener="#{controlePoupanca.mudarParaEditar()}" execute="@all" render="@all" event="click"></f:ajax>
+                        <f:ajax   listener="#{controlePoupanca.voltar()}" execute="@all" render="@all" event="click"></f:ajax>
                     </h:commandButton>
                     <h:commandButton   value="Limpar" class="btn btn-danger" rendered="#{controlePoupanca.editarComplemento}">
                         <f:ajax   listener="#{controlePoupanca.limpar()}" execute="@all" render="@all" event="click"></f:ajax>

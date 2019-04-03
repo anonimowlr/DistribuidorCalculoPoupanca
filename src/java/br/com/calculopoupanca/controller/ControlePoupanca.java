@@ -75,22 +75,32 @@ public class ControlePoupanca implements Serializable {
             Date data4 = Utils.formataData("15/01/1989");
             Date data5 = Utils.formataData("03/01/1991");
             Date data6 = Utils.formataData("31/01/1991");
+            Date data7 = Utils.formataData("01/03/1990");
+            Date data8 = Utils.formataData("15/03/1990");
 
             if ((complementoPoupanca.getDataBase().before(data2) || complementoPoupanca.getDataBase().equals(data2)) && (complementoPoupanca.getDataBase().after(data1) || complementoPoupanca.getDataBase().equals(data1))) {
                 complementoPoupanca.setPlano("BRESSER");
-                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-               complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                 complementoPoupanca.setFazJus("SIM");
+                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data4) || complementoPoupanca.getDataBase().equals(data4)) && (complementoPoupanca.getDataBase().after(data3) || complementoPoupanca.getDataBase().equals(data3))) {
                 complementoPoupanca.setPlano("VERAO");
-                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
-              complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                 complementoPoupanca.setFazJus("SIM");
+                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data6) || complementoPoupanca.getDataBase().equals(data6)) && (complementoPoupanca.getDataBase().after(data5) || complementoPoupanca.getDataBase().equals(data5))) {
                 complementoPoupanca.setPlano("COLOR II");
-                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-               complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                 complementoPoupanca.setFazJus("SIM");
+                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                complementoPoupanca.setFazJus("SIM");
+            } else if ((complementoPoupanca.getDataBase().before(data8) || complementoPoupanca.getDataBase().equals(data8)) && (complementoPoupanca.getDataBase().after(data7) || complementoPoupanca.getDataBase().equals(data7))) {
+                complementoPoupanca.setPlano("COLOR I");
+                complementoPoupanca.setFazJus("NAO");
+                complementoPoupanca.setValorAcordo(null);
+                complementoPoupanca.setObservacao(null);
+                
+                complementoPoupanca.setComplementoObs(null);
+                complementoPoupanca.setValorBase(null);
             } else {
                 complementoPoupanca.setFazJus("NAO");
                 complementoPoupanca.setValorAcordo(null);
@@ -101,9 +111,8 @@ public class ControlePoupanca implements Serializable {
             }
 
         } catch (Exception e) {
-            
-           
-            Util.mensagemErro( Util.getMensagemErro(e));
+
+            Util.mensagemErro(Util.getMensagemErro(e));
 
         }
 
@@ -348,44 +357,38 @@ public class ControlePoupanca implements Serializable {
     }
 
     public void avaliarParaSalvar() {
-   
+
         boolean podeSalvar = true;
-        
+
         try {
 
             for (ComplementoPoupanca complemento : poupanca.getListaComplementoPoupanca()) {
 
-                if ( complemento.getObservacao() == null) {
+                if (complemento.getPlano()== null || complemento.getPlano().equals("")) {
 
                     Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
                     break;
-                    
-                } 
+
+                }
             }
-            
-            if(podeSalvar){
-                   FacesContext fc = FacesContext.getCurrentInstance();
-                    HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
-                    Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+            if (podeSalvar) {
+                FacesContext fc = FacesContext.getCurrentInstance();
+                HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
-                    poupanca.setStatus("TRATADO");
-                    poupanca.setDataStatus(Utils.getDataAtualFormatoMysql());
-                    poupanca.setAvocado(null);
-                    poupanca.setDataAvocacao(null);
-                    poupanca.setFunciAvocado(null);
-                    poupanca.setDataAvocacao(null);
+                Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
 
-                    salvar();
+                poupanca.setStatus("TRATADO");
+                poupanca.setDataStatus(Utils.getDataAtualFormatoMysql());
+                poupanca.setAvocado(null);
+                poupanca.setDataAvocacao(null);
+                poupanca.setFunciAvocado(null);
+                poupanca.setDataAvocacao(null);
+
+                salvar();
 
             }
-            
-                    
-                
-                  
-
-            
 
         } catch (Exception e) {
 
@@ -429,26 +432,28 @@ public class ControlePoupanca implements Serializable {
     public void complementar() {
 
         try {
+            
+            if(complementoPoupanca.getAgencia() == null || complementoPoupanca.getAgencia().equals("") || complementoPoupanca.getConta()==null || complementoPoupanca.getConta().equals("")){
+               Util.mensagemErro("Conta ou agência inválidos");
+               return;
+            }
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
             complementoPoupanca.setDataExecucao(Utils.getDataAtualFormatoMysql());
             complementoPoupanca.setFunci(usuario.getChave());
+           
+            calcularValorAcordo();
             mudarParaEditar();
         } catch (Exception e) {
 
             Util.mensagemErro(Util.getMensagemErro(e));
         }
 
-        
-        
-        
-        
-        
     }
-    
-    public void limpar(){
+
+    public void limpar() {
         complementoPoupanca.setAgencia(null);
         complementoPoupanca.setConta(null);
         complementoPoupanca.setDataBase(null);
@@ -458,7 +463,12 @@ public class ControlePoupanca implements Serializable {
         complementoPoupanca.setPlano(null);
         complementoPoupanca.setComplementoObs(null);
     }
+
     
     
-  
+    
+    public void voltar(){
+        mudarParaEditar();
+        limpar();
+    }
 }

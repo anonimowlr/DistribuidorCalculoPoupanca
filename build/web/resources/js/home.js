@@ -6,6 +6,7 @@ $(document).ready(function () {
     
     function alerta(){
         alert("teste de alert");
+        return true;
     }
     
     
