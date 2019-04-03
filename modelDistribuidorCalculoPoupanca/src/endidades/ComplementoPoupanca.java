@@ -84,7 +84,9 @@ public class ComplementoPoupanca implements Serializable {
      @Temporal(TemporalType.TIMESTAMP)       
     private Date dataImportacaoArquivo;
     
-
+    
+    @Column(name = "correcao_esperada")
+   private BigDecimal correcaoEsperada;
     
     
     
@@ -405,6 +407,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setDataImportacaoArquivo(Date dataImportacaoArquivo) {
         this.dataImportacaoArquivo = dataImportacaoArquivo;
+    }
+
+    /**
+     * @return the correcaoEsperada
+     */
+    public BigDecimal getCorrecaoEsperada() {
+        return correcaoEsperada;
+    }
+
+    /**
+     * @param correcaoEsperada the correcaoEsperada to set
+     */
+    public void setCorrecaoEsperada(BigDecimal correcaoEsperada) {
+        this.correcaoEsperada = correcaoEsperada;
     }
 
     

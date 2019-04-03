@@ -167,7 +167,7 @@
                             <h:outputText value="#{p.valorHonorario}" >
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="VALOR DIREITO" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
+                        <p:column headerText="SOMATORIO POUPADOR" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
                             <h:outputText value="#{p.valorDireito}" >
                             </h:outputText>
                         </p:column>
@@ -182,6 +182,10 @@
                         <p:column headerText="DATA ARQUIVO" filterBy="#{p.dataImportacaoArquivo}" filterMatchMode="contains"  sortBy="#{p.dataImportacaoArquivo}" resizable="true"  filterStyle="width:60%; height:20px" >
                             <h:outputText value="#{p.dataImportacaoArquivo}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss"></f:convertDateTime>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="CORRECAO ESPERADA" filterBy="#{p.correcaoEsperada}" filterMatchMode="contains"  sortBy="#{p.correcaoEsperada}" resizable="true"  filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.correcaoEsperada}" >
                             </h:outputText>
                         </p:column>
 

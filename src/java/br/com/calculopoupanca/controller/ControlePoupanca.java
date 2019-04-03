@@ -79,15 +79,18 @@ public class ControlePoupanca implements Serializable {
             if ((complementoPoupanca.getDataBase().before(data2) || complementoPoupanca.getDataBase().equals(data2)) && (complementoPoupanca.getDataBase().after(data1) || complementoPoupanca.getDataBase().equals(data1))) {
                 complementoPoupanca.setPlano("BRESSER");
                  this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-                complementoPoupanca.setFazJus("SIM");
+               complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                 complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data4) || complementoPoupanca.getDataBase().equals(data4)) && (complementoPoupanca.getDataBase().after(data3) || complementoPoupanca.getDataBase().equals(data3))) {
                 complementoPoupanca.setPlano("VERAO");
                  this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
-                complementoPoupanca.setFazJus("SIM");
+              complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                 complementoPoupanca.setFazJus("SIM");
             } else if ((complementoPoupanca.getDataBase().before(data6) || complementoPoupanca.getDataBase().equals(data6)) && (complementoPoupanca.getDataBase().after(data5) || complementoPoupanca.getDataBase().equals(data5))) {
                 complementoPoupanca.setPlano("COLOR II");
                  this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-                complementoPoupanca.setFazJus("SIM");
+               complementoPoupanca.setCorrecaoEsperada(complementoPoupanca.getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                 complementoPoupanca.setFazJus("SIM");
             } else {
                 complementoPoupanca.setFazJus("NAO");
                 complementoPoupanca.setValorAcordo(null);
