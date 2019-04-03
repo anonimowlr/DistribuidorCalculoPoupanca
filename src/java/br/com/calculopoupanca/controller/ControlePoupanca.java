@@ -90,6 +90,11 @@ public class ControlePoupanca implements Serializable {
                 complementoPoupanca.setFazJus("SIM");
             } else {
                 complementoPoupanca.setFazJus("NAO");
+                complementoPoupanca.setValorAcordo(null);
+                complementoPoupanca.setObservacao(null);
+                complementoPoupanca.setPlano("NAO FAZ JUS");
+                complementoPoupanca.setComplementoObs(null);
+                complementoPoupanca.setValorBase(null);
             }
 
         } catch (Exception e) {
@@ -433,5 +438,24 @@ public class ControlePoupanca implements Serializable {
             Util.mensagemErro(Util.getMensagemErro(e));
         }
 
+        
+        
+        
+        
+        
     }
+    
+    public void limpar(){
+        complementoPoupanca.setAgencia(null);
+        complementoPoupanca.setConta(null);
+        complementoPoupanca.setDataBase(null);
+        complementoPoupanca.setValorAcordo(null);
+        complementoPoupanca.setValorBase(null);
+        complementoPoupanca.setObservacao(null);
+        complementoPoupanca.setPlano(null);
+        complementoPoupanca.setComplementoObs(null);
+    }
+    
+    
+  
 }

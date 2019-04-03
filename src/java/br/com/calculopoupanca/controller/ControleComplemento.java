@@ -97,10 +97,20 @@ public class ControleComplemento implements Serializable {
     
    
     public void buscar(){
-        getDaoComplementoPoupanca().getEm().clear();
+       // getDaoComplementoPoupanca().getEm().clear();
         setListaComplemento(getDaoComplementoPoupanca().getListaObjetos());
     }
     
+    
+    public void excluir(Integer id){
+       
+        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
+        
+        
+       complementoPoupanca.getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
+        
+        
+    }
     
     
    
