@@ -135,6 +135,11 @@ public class ControlePoupanca implements Serializable {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
+    public void novoGerencial() {
+        setEstadoTela("");
+        setPoupanca(new Poupanca());
+        setComplementoPoupanca(new ComplementoPoupanca());
+    }
 
     public void novoComplemento() {
         setEstadoTela("editarComplemento");
@@ -173,6 +178,11 @@ public class ControlePoupanca implements Serializable {
         setEstadoTela("editar");
     }
 
+     public void mudarParaEditarGerencial() {
+        setEstadoTela("editarGerencial");
+    }
+    
+    
     public void mudarParaEditarComplemento() {
         setEstadoTela("editarComplemento");
     }
@@ -189,6 +199,11 @@ public class ControlePoupanca implements Serializable {
     public boolean isEditarComplemento() {
 
         return "editarComplemento".equals(getEstadoTela());
+
+    }
+    public boolean isEditarGerencial() {
+
+        return "editarGerencial".equals(getEstadoTela());
 
     }
 
