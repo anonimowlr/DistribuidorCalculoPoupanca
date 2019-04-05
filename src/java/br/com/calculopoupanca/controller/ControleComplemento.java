@@ -6,22 +6,13 @@
 package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.ComplementoDAO;
-import br.com.calculopoupanca.model.dao.ObservacaoDAO;
-import br.com.calculopoupanca.model.dao.PlanoDAO;
-import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
-import endidades.Observacao;
-import endidades.Plano;
-import endidades.Poupanca;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import util.Util;
 
 /**
  *
