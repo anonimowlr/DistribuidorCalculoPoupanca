@@ -47,6 +47,11 @@ public class FuncionarioDAO implements  CrudDAO<Funcionario>{
                 funci.setGerente(tabela.getString("gerente"));
                 funci.setSecao(tabela.getString("secao"));
                 funci.setQuadro(tabela.getString("Quadro"));
+            } else{
+                funci.setChave(chave);
+                funci.setNome(nomeFuncionario.toUpperCase());
+                 funci.setUORHabitual(Integer.parseInt(uor));
+                funci.setUORPosicao(Integer.parseInt(uor));
             }
             tabela.close();
         } catch (SQLException e) {

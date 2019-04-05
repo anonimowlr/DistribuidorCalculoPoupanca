@@ -36,14 +36,49 @@
                     <p:inputMask value="#{controlePoupanca.idPoupanca.npj}" mask="99999999999">
                         <f:converter converterId="converterLong"></f:converter>
                     </p:inputMask>
-                     <h:outputLabel value="CNJ"></h:outputLabel>
-                    <p:inputMask value="#{controlePoupanca.idPoupanca.cnj}" mask="99999999999999999999">
-                    </p:inputMask>
+                     <h:outputLabel value="CNJ:"></h:outputLabel>
+                     <p:inputMask value="#{controlePoupanca.idPoupanca.cnj}" mask="99999999999999999999"></p:inputMask>
+                     <h:outputLabel value="POUPADOR:"></h:outputLabel>
+                     <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}">
+                    
+                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
+                    
+                     </h:inputText>
+                      <h:outputLabel value="ESCRITÓRIO BB:"></h:outputLabel>
+                     <h:inputText id="escritorio" value="#{controlePoupanca.poupanca.escritorioBB}">
+                    
+                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetraEscritorio()}" execute="escritorio" render="escritorio" event="blur"></f:ajax>
+                    
+                     </h:inputText>
+                      <h:outputLabel value="ADVOGADO ADVERSO:"></h:outputLabel>
+                      <h:inputText id="advogadoAdv" value="#{controlePoupanca.poupanca.advogadoAdverso}">
+                    
+                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetraAdvogadoAdv()}" execute="advogadoAdv" render="advogadoAdv" event="blur"></f:ajax>
+                    
+                     </h:inputText>
+                      <h:outputLabel value="ORIGEM:"></h:outputLabel>
+                      <h:inputText id="origem" value="#{controlePoupanca.poupanca.origem}">
+                    
+                    
+                     </h:inputText>
+                      <h:outputLabel value="CPF"></h:outputLabel>
+                      <h:inputText id="cpf" value="#{controlePoupanca.complementoPoupanca.cpf}">
+                    
+                    
+                     </h:inputText>
+                      <h:outputLabel value="DATA ENTRADA"></h:outputLabel>
+                      <p:inputMask id="dataUop" value="#{controlePoupanca.complementoPoupanca.dataUop}" mask="99/99/9999">
+                          <f:converter converterId="converterDate"></f:converter>
+                    
+                      </p:inputMask>
+                      
+                     
+                     
                     
                     
                     
                     <h:commandButton value="Salvar" class="btn btn-primary">
-                        <f:ajax listener="#{controlePoupanca.teste()}"  execute="@all"  render="@all"  event="click"></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.salvar()}"  execute="@all"  render="@all"  event="click"></f:ajax>
                     </h:commandButton>
                     
                 </h:panelGrid>

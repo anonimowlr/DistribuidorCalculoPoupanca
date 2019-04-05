@@ -66,6 +66,14 @@ public class ControlePoupanca implements Serializable {
 
         getComplementoPoupanca().setPoupador(getComplementoPoupanca().getPoupador().toUpperCase());
     }
+    public void alterarTamanhoLetraEscritorio() {
+
+       getPoupanca().setEscritorioBB(getPoupanca().getEscritorioBB().toUpperCase());
+    }
+    public void alterarTamanhoLetraAdvogadoAdv() {
+
+       getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
+    }
 
     public void calcularValorAcordo() {
 
