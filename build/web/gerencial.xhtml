@@ -28,6 +28,26 @@
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
 
+                 <h:panelGrid columns="2" rendered="#{controlePoupanca.isEditarGerencial()}">
+                  <f:facet name="header">
+                        <h:outputLabel  value="Inclusão de nova demanda" style="color: blue"></h:outputLabel>
+                    </f:facet>
+                    <h:outputLabel value="NPJ:"></h:outputLabel>
+                    <p:inputMask value="#{controlePoupanca.idPoupanca.npj}" mask="99999999999">
+                        <f:converter converterId="converterLong"></f:converter>
+                    </p:inputMask>
+                     <h:outputLabel value="CNJ"></h:outputLabel>
+                    <p:inputMask value="#{controlePoupanca.idPoupanca.cnj}" mask="99999999999999999999">
+                    </p:inputMask>
+                    
+                    
+                    
+                    <h:commandButton value="Salvar" class="btn btn-primary">
+                        <f:ajax listener="#{controlePoupanca.teste()}"  execute="@all"  render="@all"  event="click"></f:ajax>
+                    </h:commandButton>
+                    
+                </h:panelGrid>
+
 
 
 
@@ -53,7 +73,7 @@
                                 <p:dataExporter type="xls" target="listagem" fileName="TabelaGerencialCalcPoup" />
                             </h:commandLink>
                           
-                            <h:commandButton value="Incluir nova demanda" class="btn btn-link" actionListener="#{controlePoupanca.mudarParaEditarGerencial()}">
+                            <h:commandButton value="Incluir nova demanda" class="btn btn-link" >
                                 <f:ajax listener="#{controlePoupanca.novoGerencial()}" execute="@all"  render="@all"></f:ajax>
                             </h:commandButton>
                            
@@ -209,43 +229,12 @@
                     </p:dataTable>
                 </div>
 
-                <h:panelGrid columns="2" rendered="#{controlePoupanca.isEditarGerencial()}">
-                  <f:facet name="header">
-                        <h:outputLabel  value="Inclusão de nova demanda" style="color: blue"></h:outputLabel>
-                    </f:facet>
-                    <h:outputLabel value="NPJ:"></h:outputLabel>
-                    <p:inputMask value="#{controlePoupanca.poupanca.idPoupanca.npj}" mask="99999999999" placeholder="digite o npj com 11 digitos"></p:inputMask>
-                    <h:outputLabel value="CNJ:"></h:outputLabel>
-                    <p:inputMask value="#{controlePoupanca.poupanca.idPoupanca.cnj}" mask="99999999999999999999" placeholder="digite o cnj com 20 digitos"></p:inputMask>
-                    <h:outputLabel value="POUPADOR:"></h:outputLabel>
-                    <p:inputText value="#{controleComplemento.complementoPoupanca.poupador}" style="width: 400px" ></p:inputText>
-                    <h:outputLabel value="ESCRITÓRIO BB:"></h:outputLabel>
-                    <p:inputText value="#{controlePoupanca.poupanca.escritorioBB}" style="width: 400px" ></p:inputText>
-                    <h:outputLabel value="ADVOGADO ADVERSO:"></h:outputLabel>
-                    <p:inputText value="#{controlePoupanca.poupanca.advogadoAdverso}" style="width: 400px" ></p:inputText>
-                    <h:outputLabel value="ORIGEM:"></h:outputLabel>
-                    <p:inputText value="#{controlePoupanca.poupanca.origem}" style="width: 150px" ></p:inputText>
-                    <h:outputLabel value="CPF:"></h:outputLabel>
-                    <p:inputText value="#{controleComplemento.complementoPoupanca.cpf}" style="width: 150px" ></p:inputText>
-                    <h:outputLabel value="DATA UOP"></h:outputLabel>
-                    <p:inputMask value="#{controleComplemento.complementoPoupanca.dataUop}"  mask="99/99/9999" style="width: 150px" >
-                        <f:converter converterId="converterDate"></f:converter>    
-                    </p:inputMask>
-                    
-                    <h:outputLabel value="ID LISTA:"></h:outputLabel>
-                    <p:inputText value="#{controleComplemento.complementoPoupanca.idArquivo}"  style="width: 300px" placeholder=" digite um identificador da demanda" >
-                    </p:inputText>
-                    
-                    <h:commandButton value="Salvar" class="btn btn-primary">
-                        <f:ajax listener="#{controlePoupanca.salvar()}"></f:ajax>
-                    </h:commandButton>
-                    
-                </h:panelGrid>
+               
 
             </h:form>
 
 
-
+           
 
 
 
