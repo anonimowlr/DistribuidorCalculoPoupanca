@@ -33,12 +33,12 @@ import util.Util;
  */
 @ManagedBean
 @ViewScoped
-public class ControlePoupanca implements Serializable {
+public class ControleListaCompleta implements Serializable {
 
     /**
      * @return the daoObservacao
      */
-    private String estadoTela = "";
+    private String estadoTela = "buscar";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private Plano plano;
@@ -51,12 +51,7 @@ public class ControlePoupanca implements Serializable {
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 
-    @PostConstruct
-    public void init() {
-
-        buscar();
-
-    }
+    
 
     public void mostrarConteudo() {
         System.out.println(getObservacao());
@@ -131,7 +126,7 @@ public class ControlePoupanca implements Serializable {
 
     }
 
-    public ControlePoupanca() {
+    public ControleListaCompleta() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
     }
@@ -202,11 +197,7 @@ public class ControlePoupanca implements Serializable {
         }
 
         mudarParaBuscar();
-        getDaoPoupanca().getEm().clear();
-        novo();
-        buscar();
-
-        listar();
+      
     }
     
     

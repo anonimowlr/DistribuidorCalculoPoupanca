@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+
+    <ui:composition template="header.xhtml" >
+
+        <ui:define name="titulo">
+           Lista completa de tratamento 
+        </ui:define>
+
+
+        <ui:define name="conteudo">
+
+
+
+
+
+            <h:form id="fomIndex">
+
+                <p:messages autoUpdate="true" closable="true"></p:messages>
+
+                <h:panelGrid columns="11" id="painelFiltro" rendered="#{controleListaCompleta.isBuscar()}" >
+                    <h:outputLabel value="Ordenar:"></h:outputLabel>
+                    <h:selectOneMenu value="#{controleListaCompleta.daoPoupanca.ordem}" style="width: 200px;height: 30px">
+                        <f:selectItem itemValue="idPoupanca.npj" itemLabel="NPJ"></f:selectItem>
+                        <f:selectItem itemValue="idPoupanca.cnj" itemLabel="CNJ"></f:selectItem>
+                        <f:selectItem itemValue="escritorioBB" itemLabel="ADVOGADO BB"></f:selectItem>
+                        <f:selectItem itemValue="avocado" itemLabel="EM TRATAMENTO"></f:selectItem>
+                        <f:selectItem itemValue="dataAvocacao" itemLabel="DATA INICIO TRATAMENTO"></f:selectItem>
+                        <f:selectItem itemValue="status" itemLabel="SITUACAO NPJ"></f:selectItem>
+                        <f:selectItem itemValue="identificacaoDemanda" itemLabel="IDENTIFICACAO DA DEMANDA"></f:selectItem>
+                        <f:ajax     execute="@this" render="listagem" event="change" ></f:ajax>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="Filtro"></h:outputLabel>
+                    <h:inputText value="#{controleListaCompleta.daoPoupanca.filtro}" style="width: 200px; height: 30px">
+                        <f:ajax  execute="painelFiltro" render="listagem" event="keyup"   ></f:ajax>    
+                    </h:inputText>
+                    <h:outputLabel value="QUANDIDADE REGISTROS"></h:outputLabel>
+                    <h:inputText value="#{controleListaCompleta.daoPoupanca.maximoObjeto}" style="width: 60px; height: 30px">
+                        <f:ajax  execute="painelFiltro" render="listagem" event="change"   ></f:ajax>    
+                    </h:inputText>
+                </h:panelGrid>
+
+
+                <div class="table-responsive">
+
+                    
+
+                    <h:dataTable value="#{controleListaCompleta.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controleListaCompleta.isBuscar()}"  id="listagem">
+
+                        <f:facet name="header">
+                            #{controleListaCompleta.daoPoupanca.mensagemNavegacao()}
+                        </f:facet>
+
+
+                        <h:column>
+                            <f:facet name="header">NPJ</f:facet>
+                                #{p.idPoupanca.npj}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CNJ</f:facet>
+                                #{p.idPoupanca.cnj}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">EM TRATAMENTO?</f:facet>
+                                #{p.avocado}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">RESPONSÁVEL ATUAL</f:facet>
+                                #{p.funciAvocado}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">IDENTIFICACAO DEMANDA</f:facet>
+                                #{p.identificacaoDemanda}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">SITUAÇÃO NPJ</f:facet>
+                                #{p.status}
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header" >AÇÃO</f:facet>
+                            <h:commandButton  value="Acessar"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"   >
+
+                                <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
+
+
+
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+
+
+                <div class="table-responsive">
+
+
+                    <h:dataTable value="#{controleListaCompleta.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controleListaCompleta.isEditar()}">
+                        <div align="center">
+                            <f:facet name="header" >
+
+                                <h:outputLabel value="DADOS DO NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj}"></h:outputLabel>
+                            </f:facet> 
+                        </div>>
+
+
+
+                        <h:column>
+                            <f:facet name="header">POUPADOR</f:facet>
+                            <h:outputText  value="#{c.poupador}"></h:outputText>
+                            
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CPF</f:facet>
+                            <h:outputText value="#{c.cpf}"></h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">DATA UOP</f:facet>
+                            <h:outputText value="#{c.dataUop}">
+                                <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">AGENCIA</f:facet>
+                            <h:outputText value="#{c.agencia}">
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CONTA</f:facet>
+                            <h:outputText value="#{c.conta}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">VALOR BASE</f:facet>
+                            <h:outputText value="#{c.valorBase}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">DATA BASE</f:facet>
+                            <h:outputText value="#{c.dataBase}">
+                                <f:converter converterId="converterDate"></f:converter>
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">VALOR ACORDO</f:facet>
+                            <h:outputText value="#{c.valorAcordo}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">OBSERVACAO</f:facet>
+                            <h:outputText value="#{c.observacao}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Plano</f:facet>
+                            <h:outputText value="#{c.plano}">
+
+                            </h:outputText>
+
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header" >AÇÃO</f:facet>
+                            <h:commandButton  value="Calcular"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"   >
+
+                                <f:ajax   listener="#{controleListaCompleta.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
+                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?')) return false"   >
+
+                                <f:ajax   listener="#{controleComplemento.excluir(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
+
+
+
+                        </h:column>
+
+
+
+
+
+                    </h:dataTable>
+
+                </div>
+
+                <h:commandButton   value="Salvar Npj" class="btn btn-primary" rendered="#{controleListaCompleta.isEditar()}">
+                    <f:ajax listener="#{controleListaCompleta.avaliarParaSalvar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
+                <h:commandButton       value="Novo Poupador" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
+                    <f:ajax   listener="#{controleListaCompleta.novoComplemento()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
+                <h:commandButton       value="Voltar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
+                    <f:ajax   listener="#{controleListaCompleta.mudarParaBuscar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
+
+                <h:panelGrid columns="2" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
+                    <f:facet name="header">
+                        <h:outputLabel  value=" NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj} " style="color: blue"></h:outputLabel>
+                    </f:facet>
+
+
+                    <h:outputLabel value="Poupador:"></h:outputLabel>
+                    <h:inputText id="poupador" value="#{controleListaCompleta.complementoPoupanca.poupador}" style="width: 400px" >
+                        <f:ajax listener="#{controleListaCompleta.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
+                    </h:inputText>
+
+                    <h:outputLabel value="CPF:"></h:outputLabel>
+                    <h:inputText value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px" ></h:inputText>
+
+                    <h:outputLabel value="Agencia:"></h:outputLabel>
+                    <h:inputText value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" >
+                        
+                    </h:inputText>
+
+                    <h:outputLabel value="Conta"></h:outputLabel>
+                    <h:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" style="width: 150px" ></h:inputText>
+
+                    <h:outputLabel value="Data base:"></h:outputLabel>
+                    <p:inputMask mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
+                        <f:converter converterId="converterDate"></f:converter>
+                          <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
+                    </p:inputMask>
+
+                    <h:outputLabel value="Valor Base:"></h:outputLabel>
+                    <h:inputText id="valorBase" value="#{controleListaCompleta.complementoPoupanca.valorBase}" style="width: 100px">
+                        
+                        <f:converter converterId="converterMoney"></f:converter>
+                         <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                    </h:inputText>
+
+
+
+                    <h:outputLabel value="Valor Acordo:"></h:outputLabel>
+                    <h:inputText id="valorAcordo" value="#{controleListaCompleta.complementoPoupanca.valorAcordo}" style="width: 150px;color: blue"  disabled="true">
+                             <f:converter converterId="converterMoney"></f:converter>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano selectObs" event="focus" ></f:ajax>
+                    </h:inputText>
+                    <h:outputLabel value="Plano:"></h:outputLabel>
+                    <h:selectOneMenu  style="width: 200px" id="selectPlano" value="#{controleListaCompleta.complementoPoupanca.plano}" >
+
+                        <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
+                        <f:selectItems value="#{controlePlano.daoPlano.listaTodos}" var="o" itemLabel="#{o.plano}" itemValue="#{o.plano}"  ></f:selectItems>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Observacao:"></h:outputLabel>
+                    <h:selectOneMenu id="selectObs" value="#{controleListaCompleta.complementoPoupanca.observacao}" >
+
+                        <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
+                        <f:selectItems value="#{controleListaCompleta.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" itemValue="#{o.obs}" ></f:selectItems>
+                          <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                    </h:selectOneMenu>
+
+
+
+                    <h:outputLabel value="Complemento obs:" ></h:outputLabel>
+                    <h:inputTextarea value="#{controleListaCompleta.complementoPoupanca.complementoObs}"></h:inputTextarea>
+
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="11" >
+                    <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
+                        <f:ajax   listener="#{controleListaCompleta.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
+                    </h:commandButton>
+                    <h:commandButton   value="Voltar" class="btn btn-info" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
+                        <f:ajax   listener="#{controleListaCompleta.voltar()}" execute="@all" render="@all" event="click"></f:ajax>
+                    </h:commandButton>
+                    <h:commandButton   value="Limpar" class="btn btn-danger" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
+                        <f:ajax   listener="#{controleListaCompleta.limpar()}" execute="@all" render="@all" event="click"></f:ajax>
+                    </h:commandButton>
+
+                </h:panelGrid>
+
+
+
+
+
+
+
+
+
+            </h:form>
+
+
+
+
+
+            <form id="formCalculo">
+
+            </form>
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+
+</html>

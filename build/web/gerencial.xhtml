@@ -28,49 +28,53 @@
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
 
-                 <h:panelGrid columns="2" rendered="#{controlePoupanca.isEditarGerencial()}">
+                <h:panelGrid columns="2" rendered="#{controleGerencial.isEditarGerencial()}" id="painelNovaDemanda">
                   <f:facet name="header">
                         <h:outputLabel  value="Inclusão de nova demanda" style="color: blue"></h:outputLabel>
                     </f:facet>
                     <h:outputLabel value="NPJ:"></h:outputLabel>
-                    <p:inputMask value="#{controlePoupanca.idPoupanca.npj}" mask="99999999999">
+                    <p:inputMask value="#{controleGerencial.idPoupanca.npj}" mask="99999999999" style="width: 150px; height: 30px">
                         <f:converter converterId="converterLong"></f:converter>
                     </p:inputMask>
                      <h:outputLabel value="CNJ:"></h:outputLabel>
-                     <p:inputMask value="#{controlePoupanca.idPoupanca.cnj}" mask="99999999999999999999"></p:inputMask>
+                     <p:inputMask value="#{controleGerencial.idPoupanca.cnj}" mask="99999999999999999999" style="width: 200px; height: 30px"></p:inputMask>
                      <h:outputLabel value="POUPADOR:"></h:outputLabel>
-                     <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}">
+                     <h:inputText id="poupador" value="#{controleGerencial.complementoPoupanca.poupador}"  style="width: 300px; height: 30px">
                     
-                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleGerencial.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
                     
                      </h:inputText>
                       <h:outputLabel value="ESCRITÓRIO BB:"></h:outputLabel>
-                     <h:inputText id="escritorio" value="#{controlePoupanca.poupanca.escritorioBB}">
+                     <h:inputText id="escritorio" value="#{controleGerencial.poupanca.escritorioBB}" style="width: 300px; height: 30px">
                     
-                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetraEscritorio()}" execute="escritorio" render="escritorio" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleGerencial.alterarTamanhoLetraEscritorio()}" execute="escritorio" render="escritorio" event="blur"></f:ajax>
                     
                      </h:inputText>
                       <h:outputLabel value="ADVOGADO ADVERSO:"></h:outputLabel>
-                      <h:inputText id="advogadoAdv" value="#{controlePoupanca.poupanca.advogadoAdverso}">
+                      <h:inputText id="advogadoAdv" value="#{controleGerencial.poupanca.advogadoAdverso}" style="width: 300px; height: 30px">
                     
-                        <f:ajax listener="#{controlePoupanca.alterarTamanhoLetraAdvogadoAdv()}" execute="advogadoAdv" render="advogadoAdv" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleGerencial.alterarTamanhoLetraAdvogadoAdv()}" execute="advogadoAdv" render="advogadoAdv" event="blur"></f:ajax>
                     
                      </h:inputText>
                       <h:outputLabel value="ORIGEM:"></h:outputLabel>
-                      <h:inputText id="origem" value="#{controlePoupanca.poupanca.origem}">
+                      <h:inputText id="origem" value="#{controleGerencial.poupanca.origem}" style="width: 200px; height: 30px">
                     
                     
                      </h:inputText>
-                      <h:outputLabel value="CPF"></h:outputLabel>
-                      <h:inputText id="cpf" value="#{controlePoupanca.complementoPoupanca.cpf}">
+                      <h:outputLabel value="CPF/CNPJ:"></h:outputLabel>
+                      <h:inputText id="cpf" value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px">
                     
                     
                      </h:inputText>
-                      <h:outputLabel value="DATA ENTRADA"></h:outputLabel>
-                      <p:inputMask id="dataUop" value="#{controlePoupanca.complementoPoupanca.dataUop}" mask="99/99/9999">
-                          <f:converter converterId="converterDate"></f:converter>
+                     
+                  
+                     
+                      <h:outputLabel value="IDENTIFICAÇÃO DEMANDA:"></h:outputLabel>
+                      <h:inputText id="idArquivo" value="#{controleGerencial.poupanca.identificacaoDemanda}" style="width: 150px; height: 30px">
                     
-                      </p:inputMask>
+                    
+                     </h:inputText>
+                     
                       
                      
                      
@@ -78,7 +82,7 @@
                     
                     
                     <h:commandButton value="Salvar" class="btn btn-primary">
-                        <f:ajax listener="#{controlePoupanca.salvar()}"  execute="@all"  render="@all"  event="click"></f:ajax>
+                        <f:ajax listener="#{controleGerencial.validarParaSalvar()}"  execute="painelNovaDemanda"  render=":fomIndex"  event="click"></f:ajax>
                     </h:commandButton>
                     
                 </h:panelGrid>
@@ -95,7 +99,7 @@
 
 
 
-                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " currentPageReportTemplate="({totalRecords} registros )"   scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="350"  scrollWidth="3000" paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 8pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial(); controlePoupanca.isBuscar()}">
+                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " currentPageReportTemplate="({totalRecords} registros )"   scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="350"  scrollWidth="3000" paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 8pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial(); controleGerencial.isBuscar()}">
 
                         <f:facet name="header">
                             
@@ -108,8 +112,8 @@
                                 <p:dataExporter type="xls" target="listagem" fileName="TabelaGerencialCalcPoup" />
                             </h:commandLink>
                           
-                            <h:commandButton value="Incluir nova demanda" class="btn btn-link" >
-                                <f:ajax listener="#{controlePoupanca.novoGerencial()}" execute="@all"  render="@all"></f:ajax>
+                            <h:commandButton value="Incluir nova demanda" class="btn btn-link" style="font-size: 12pt" >
+                                <f:ajax listener="#{controleGerencial.novoGerencial()}" execute="@this"  render=":fomIndex"></f:ajax>
                             </h:commandButton>
                            
 
@@ -250,9 +254,21 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss"></f:convertDateTime>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="AÇOES"  >
+                        <p:column headerText="EM TRATAMENTO?" filterBy="#{p.poupanca.avocado}" filterMatchMode="contains"  sortBy="#{p.poupanca.avocado}" resizable="true"  filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.poupanca.avocado}" >
+                            </h:outputText>
+                        </p:column>
+                        
+                          <p:column headerText="DATA INICIO TRATAMENTO" filterBy="#{p.poupanca.dataAvocacao}" filterMatchMode="contains"  sortBy="#{p.poupanca.dataAvocacao}" resizable="true"  filterStyle="width:60%; height:20px" >
+                            <h:outputText value="#{p.poupanca.dataAvocacao}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss"></f:convertDateTime>
+                            </h:outputText>
+                        </p:column>
+                        
+                        
+                        <p:column headerText="AÇOES" exportable="false"  >
                             <h:commandButton value="Excluir" class="btn btn-link"  onclick="if (!confirm('Deseja realmente excluir?')) return false">
-                                 <f:ajax   listener="#{controleComplemento.excluirBaseGerencial(p.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                                 <f:ajax   listener="#{controleComplemento.excluirBaseGerencial(p.id)}"  execute="@this" render="listagem" event="click" ></f:ajax>
                             </h:commandButton>
                         </p:column>
                        

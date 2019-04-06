@@ -33,12 +33,12 @@ import util.Util;
  */
 @ManagedBean
 @ViewScoped
-public class ControlePoupanca implements Serializable {
+public class ControleGerencial implements Serializable {
 
     /**
      * @return the daoObservacao
      */
-    private String estadoTela = "";
+    private String estadoTela = "buscar";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private Plano plano;
@@ -51,12 +51,7 @@ public class ControlePoupanca implements Serializable {
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 
-    @PostConstruct
-    public void init() {
-
-        buscar();
-
-    }
+   
 
     public void mostrarConteudo() {
         System.out.println(getObservacao());
@@ -92,25 +87,21 @@ public class ControlePoupanca implements Serializable {
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                getComplementoPoupanca().setObservacao("BRESSER");
             } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
                 getComplementoPoupanca().setPlano("VERAO");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("VERAO");
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
                 getComplementoPoupanca().setPlano("COLOR II");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("COLOR II");
             } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
                 getComplementoPoupanca().setPlano("COLOR I");
                 getComplementoPoupanca().setFazJus("NAO");
                 getComplementoPoupanca().setValorAcordo(null);
                 getComplementoPoupanca().setObservacao(null);
-                  getComplementoPoupanca().setObservacao("COLOR I");
                 
                 getComplementoPoupanca().setComplementoObs(null);
                 getComplementoPoupanca().setValorBase(null);
@@ -131,7 +122,7 @@ public class ControlePoupanca implements Serializable {
 
     }
 
-    public ControlePoupanca() {
+    public ControleGerencial() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
     }
@@ -173,7 +164,7 @@ public class ControlePoupanca implements Serializable {
     }
 
     public void novoComplemento() {
-        setEstadoTela("editarComplementoNovo");
+        setEstadoTela("editarComplemento");
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
@@ -182,14 +173,23 @@ public class ControlePoupanca implements Serializable {
         return "tratamento?faces-redirect=true";
     }
 
+    public void validarParaSalvar(){
+        complementarDados();
+        salvar();
+    }
     
-    
+    public void complementarDados(){
+        
+        getPoupanca().setStatus(null);
+        getPoupanca().setDataStatus(null);
+        
+    }
     
     
     public void salvar() {
         boolean persistiu = false;
 
-        if (isEditar()) {
+        if (isEditarGerencial()) {
             persistiu = getDaoPoupanca().atualizar(getPoupanca());
         } else {
             persistiu = getDaoPoupanca().salvar(getPoupanca());
@@ -202,33 +202,8 @@ public class ControlePoupanca implements Serializable {
         }
 
         mudarParaBuscar();
-        getDaoPoupanca().getEm().clear();
-        novo();
-        buscar();
-
-        listar();
+      
     }
-    
-    
-    
-    public void salvarParcial() {
-        boolean persistiu = false;
-
-        if (isEditarGerencial()) {
-            persistiu = getDaoPoupanca().atualizar(getPoupanca());
-        } else {
-            persistiu = getDaoPoupanca().salvar(getPoupanca());
-        }
-
-
-     
-    }
-    
-    
-    
-    
-    
-    
 
     public void mudarParaEditar() {
         setEstadoTela("editar");
@@ -241,9 +216,6 @@ public class ControlePoupanca implements Serializable {
     
     public void mudarParaEditarComplemento() {
         setEstadoTela("editarComplemento");
-    }
-    public void mudarParaEditarComplementoNovo() {
-        setEstadoTela("editarComplementoNovo");
     }
 
     public void mudarParaBuscar() {
@@ -260,12 +232,6 @@ public class ControlePoupanca implements Serializable {
         return "editarComplemento".equals(getEstadoTela());
 
     }
-    public boolean isEditarComplementoNovo() {
-
-        return "editarComplementoNovo".equals(getEstadoTela());
-
-    }
-    
     public boolean isEditarGerencial() {
 
         return "editarGerencial".equals(getEstadoTela());
@@ -525,7 +491,6 @@ public class ControlePoupanca implements Serializable {
             getComplementoPoupanca().setFunci(usuario.getChave());
            
             calcularValorAcordo();
-            salvarParcial();
             mudarParaEditar();
         } catch (Exception e) {
 
@@ -549,14 +514,8 @@ public class ControlePoupanca implements Serializable {
     
     
     public void voltar(){
-        if(isEditarComplementoNovo()){
-         getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
-             mudarParaEditar();
-             return;
-        }
-        
         mudarParaEditar();
-        
+        limpar();
     }
 
     /**
@@ -572,4 +531,7 @@ public class ControlePoupanca implements Serializable {
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
+    
+    
+   
 }
