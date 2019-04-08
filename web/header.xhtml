@@ -71,8 +71,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><h:link outcome="tratamento.jsf" value="Nova análise" ></h:link></li>
-                                <li><h:link outcome="gerencial.jsf" value="Gerenciar" ></h:link></li>
+                                <li><h:link outcome="gerencial.jsf" value="Gerenciar" rendered="#{funcionarioBean.isCargoGerencial()}" ></h:link></li>
                                 <li><h:link outcome="listaCompleta.jsf" value="Lista Completa" ></h:link></li>
+                                <li><h:link   value="Relatórios Spotfire" rendered="#{funcionarioBean.isCargoGerencial()}"   onclick="window.open('https://bam.bb.com.br/spotfire/wp/OpenAnalysis?file=/[P%C3%BAblica]/VISIN/UOP/Cenop/Cenop%20Servi%C3%A7os%20Curitiba/AcordoPoupanca/FATO.distribuidor_calc_poup.tb_complemento_poupanca/AN_distribuidor_calc_poup.tb_complemento_poupanca')"></h:link></li>
+                                <li><h:link hreflang="#" value="Conceder Acessos" rendered="#{funcionarioBean.isCargoGerencial()}" ></h:link></li>
                             </ul>
                         </li>
                     </ul>

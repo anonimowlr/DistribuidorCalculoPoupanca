@@ -34,7 +34,9 @@
 
                     <h:dataTable value="#{controlePoupanca.listaPoupanca}" var="p" class="table" style="font-size: 7pt" rendered="#{controlePoupanca.isBuscar()}" >
 
-
+                        <f:facet name="header">
+                            <p>Quantidade npj sem  tratamento: #{controlePoupanca.daoPoupanca.listaPoupancaPendencias.size()}</p>
+                        </f:facet>
 
                         <h:column>
                             <f:facet name="header">NPJ</f:facet>

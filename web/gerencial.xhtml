@@ -99,7 +99,7 @@
 
 
 
-                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " currentPageReportTemplate="({totalRecords} registros )"   scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="350"  scrollWidth="3000" paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 8pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial(); controleGerencial.isBuscar()}">
+                    <p:dataTable   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} " currentPageReportTemplate="({totalRecords} registros )"   scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="350"  scrollWidth="3500" paginator="true" rows="65000" paginatorPosition="top"   value="#{controleComplemento.daoComplementoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 8pt"  id="listagem" rendered="#{funcionarioBean.isCargoGerencial(); controleGerencial.isBuscar()}">
 
                         <f:facet name="header">
                             
@@ -115,6 +115,8 @@
                             <h:commandButton value="Incluir nova demanda" class="btn btn-link" style="font-size: 12pt" >
                                 <f:ajax listener="#{controleGerencial.novoGerencial()}" execute="@this"  render=":fomIndex"></f:ajax>
                             </h:commandButton>
+                          
+                            <h:outputLabel value="Pendente: #{controleComplemento.daoComplementoPoupanca.listaComplementoPendencias.size()} , Total: #{controleComplemento.daoComplementoPoupanca.listaTodos.size()}"></h:outputLabel>
                            
 
                         </p:toolbarGroup>
@@ -123,56 +125,56 @@
                         </f:facet>
 
 
-                        <p:column headerText="NPJ" filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="NPJ" filterBy="#{p.poupanca.idPoupanca.npj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.npj}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.poupanca.idPoupanca.npj}" >
 
                             </h:outputText>
 
                         </p:column>
-                       <p:column headerText="CNJ" filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}" filterStyle="width:60%; height:20px">
+                       <p:column headerText="CNJ" filterBy="#{p.poupanca.idPoupanca.cnj}" filterMatchMode="contains" sortBy="#{p.poupanca.idPoupanca.cnj}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.poupanca.idPoupanca.cnj}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="AGENCIA" filterBy="#{p.agencia}" filterMatchMode="contains" sortBy="#{p.agencia}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="AGENCIA" filterBy="#{p.agencia}" filterMatchMode="contains" sortBy="#{p.agencia}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.agencia}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.conta}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="POUPADOR" filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="POUPADOR" filterBy="#{p.poupador}" filterMatchMode="contains" sortBy="#{p.poupador}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.poupador}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="CPF" filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="CPF" filterBy="#{p.cpf}" filterMatchMode="contains" sortBy="#{p.cpf}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.cpf}" >
 
                             </h:outputText>
 
                         </p:column>
-                       <p:column headerText="OBSERVAÇÃO" filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}" filterStyle="width:60%; height:20px">
+                       <p:column headerText="OBSERVAÇÃO" filterBy="#{p.observacao}" filterMatchMode="contains" sortBy="#{p.observacao}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.observacao}" >
 
                             </h:outputText>
 
                         </p:column>
-                       <p:column headerText="COMPLEMENTO" filterBy="#{p.complementoObs}" filterMatchMode="contains" sortBy="#{p.complementoObs}" filterStyle="width:60%; height:20px">
+                       <p:column headerText="COMPLEMENTO" filterBy="#{p.complementoObs}" filterMatchMode="contains" sortBy="#{p.complementoObs}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.complementoObs}" >
 
@@ -180,7 +182,7 @@
 
                         </p:column>
 
-                        <p:column headerText="PLANO" filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="PLANO" filterBy="#{p.plano}" filterMatchMode="contains" sortBy="#{p.plano}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.plano}" >
 
@@ -189,23 +191,23 @@
                         </p:column>
                        
 
-                        <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" filterStyle="width:60%; height:20px" >
+                        <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.dataBase}" >
                                 <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
                         </p:column>
-                         <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" filterStyle="width:60%; height:20px" >
+                         <p:column headerText="VALOR BASE" filterBy="#{p.valorBase}" filterMatchMode="contains"  sortBy="#{p.valorBase}" filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorBase}" >
                                    <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
 
-                         <p:column headerText="CORRECAO ESPERADA" filterBy="#{p.correcaoEsperada}" filterMatchMode="contains"  sortBy="#{p.correcaoEsperada}" resizable="true"  filterStyle="width:60%; height:20px" >
+                         <p:column headerText="CORRECAO ESPERADA" filterBy="#{p.correcaoEsperada}" filterMatchMode="contains"  sortBy="#{p.correcaoEsperada}" resizable="true"  filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.correcaoEsperada}" >
                                    <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="VALOR ACORDO" filterBy="#{p.valorAcordo}" filterMatchMode="contains"  sortBy="#{p.valorAcordo}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="VALOR ACORDO" filterBy="#{p.valorAcordo}" filterMatchMode="contains"  sortBy="#{p.valorAcordo}" filterStyle="width:90%; height:30px">
                             <h:outputText value="#{p.valorAcordo}" >
                                    <f:converter converterId="converterMoney"></f:converter>
                               
@@ -213,58 +215,73 @@
                         </p:column>
 
                         
-                        <p:column headerText="SOMATORIO POUPADOR" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:60%; height:20px" >
+                        <p:column headerText="SOMATORIO POUPADOR" filterBy="#{p.valorDireito}" filterMatchMode="contains"  sortBy="#{p.valorDireito}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorDireito}" >
+                                   <f:converter converterId="converterMoney"></f:converter>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="FAIXA DESCONTO" filterBy="#{p.faixaDesconto}" filterMatchMode="contains"  sortBy="#{p.faixaDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
+                            <h:outputText value="#{p.faixaDesconto}" >
+                                   <f:converter converterId="converterMoney"></f:converter>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="PERCENTUAL DESCONTO" filterBy="#{p.percentualDesconto}" filterMatchMode="contains"  sortBy="#{p.percentualDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
+                            <h:outputText value="#{p.percentualDesconto}" >
+                                   <f:converter converterId="converterMoney"></f:converter>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="VALOR DESCONTO" filterBy="#{p.valorDesconto}" filterMatchMode="contains"  sortBy="#{p.valorDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
+                            <h:outputText value="#{p.valorDesconto}" >
                                    <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
 
 
-                        <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.fazJus}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="FUNCI" filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}" filterStyle="width:60%; height:20px">
+                        <p:column headerText="FUNCI" filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.funci}" >
 
                             </h:outputText>
 
                         </p:column>
-                        <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"  filterStyle="width:60%; height:20px"  >
+                        <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"  filterStyle="width:90%; height:30px"  >
                             <h:outputText value="#{p.dataExecucao}" >
                                 <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:60%; height:20px" >
+                        <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorHonorario}" >
                             </h:outputText>
                         </p:column>
                         
-                        <p:column headerText="VALOR DISPENDIDO BB" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:60%; height:20px"   >
+                        <p:column headerText="VALOR DISPENDIDO BB" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:90%; height:30px"   >
                             <h:outputText value="#{p.valorDespendidoBB}" >
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="ARQUIVO ORIGEM" filterBy="#{p.idArquivo}" filterMatchMode="contains"  sortBy="#{p.idArquivo}" resizable="true"  filterStyle="width:60%; height:20px" exportable="false"  >
+                        <p:column headerText="IDENTIFICACAO DEMANDA" filterBy="#{p.idArquivo}" filterMatchMode="contains"  sortBy="#{p.idArquivo}" resizable="true"  filterStyle="width:90%; height:30px" exportable="false"  >
                             <h:outputText value="#{p.idArquivo}" >
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="DATA ARQUIVO" filterBy="#{p.dataImportacaoArquivo}" filterMatchMode="contains"  sortBy="#{p.dataImportacaoArquivo}" resizable="true"  filterStyle="width:60%; height:20px" exportable="false"  >
+                        <p:column headerText="DATA ARQUIVO" filterBy="#{p.dataImportacaoArquivo}" filterMatchMode="contains"  sortBy="#{p.dataImportacaoArquivo}" resizable="true"  filterStyle="width:90%; height:30px" exportable="false"  >
                             <h:outputText value="#{p.dataImportacaoArquivo}" >
                                 <f:converter converterId="converterDate"></f:converter>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="EM TRATAMENTO?" filterBy="#{p.poupanca.avocado}" filterMatchMode="contains"  sortBy="#{p.poupanca.avocado}" resizable="true"  filterStyle="width:60%; height:20px" exportable="false"  >
+                        <p:column headerText="EM TRATAMENTO?" filterBy="#{p.poupanca.avocado}" filterMatchMode="contains"  sortBy="#{p.poupanca.avocado}" resizable="true"  filterStyle="width:90%; height:30px" exportable="false"  >
                             <h:outputText value="#{p.poupanca.avocado}" >
                             </h:outputText>
                         </p:column>
                         
-                          <p:column headerText="DATA INICIO TRATAMENTO" filterBy="#{p.poupanca.dataAvocacao}" filterMatchMode="contains"  sortBy="#{p.poupanca.dataAvocacao}" resizable="true"  filterStyle="width:60%; height:20px"  exportable="false" >
+                          <p:column headerText="DATA INICIO TRATAMENTO" filterBy="#{p.poupanca.dataAvocacao}" filterMatchMode="contains"  sortBy="#{p.poupanca.dataAvocacao}" resizable="true"  filterStyle="width:90%; height:30px"  exportable="false" >
                             <h:outputText value="#{p.poupanca.dataAvocacao}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss"></f:convertDateTime>
+                                
                             </h:outputText>
                         </p:column>
                         

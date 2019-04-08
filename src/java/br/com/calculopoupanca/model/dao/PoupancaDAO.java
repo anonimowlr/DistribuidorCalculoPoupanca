@@ -20,6 +20,7 @@ import util.Util;
 public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
 
     private List<T> listaPoupanca;
+    private List<T> listaPoupancaPendencias;
 
     public PoupancaDAO() {
         super();
@@ -65,6 +66,26 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
 
         }
 
+    }
+
+    /**
+     * @return the listaPoupancaPendencias
+     */
+    public List<T> getListaPoupancaPendencias() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+        String jpql = "From  " + classePersistente.getSimpleName() + " c " + " where " + " (c.status = null and c.avocado = null)  or (c.avocado = 'SIM'  and c.funciAvocado = '" + usuario.getChave() + "')" + "  order by " + ordem;
+
+        return em.createQuery(jpql).getResultList();
+    }
+
+    /**
+     * @param listaPoupancaPendencias the listaPoupancaPendencias to set
+     */
+    public void setListaPoupancaPendencias(List<T> listaPoupancaPendencias) {
+        this.listaPoupancaPendencias = listaPoupancaPendencias;
     }
 
 }
