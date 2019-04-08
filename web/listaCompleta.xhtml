@@ -13,7 +13,7 @@
     <ui:composition template="header.xhtml" >
 
         <ui:define name="titulo">
-           Lista completa de tratamento 
+            Lista completa de tratamento 
         </ui:define>
 
 
@@ -39,13 +39,13 @@
                         <f:selectItem itemValue="identificacaoDemanda" itemLabel="IDENTIFICACAO DA DEMANDA"></f:selectItem>
                         <f:ajax     execute="@this" render="listagem" event="change" ></f:ajax>
                     </h:selectOneMenu>
-                    
+
                     <h:outputLabel value="Filtro"></h:outputLabel>
                     <h:inputText value="#{controleListaCompleta.daoPoupanca.filtro}" style="width: 200px; height: 30px">
                         <f:ajax  execute="painelFiltro" render="listagem" event="keyup"   ></f:ajax>    
                     </h:inputText>
-                    <h:outputLabel value="QUANDIDADE REGISTROS"></h:outputLabel>
-                    <h:inputText value="#{controleListaCompleta.daoPoupanca.maximoObjeto}" style="width: 60px; height: 30px">
+                    <h:outputLabel value="QUANDIDADE NA TELA"></h:outputLabel>
+                    <h:inputText value="#{controleListaCompleta.daoPoupanca.maximoObjeto}" style="width: 90px; height: 30px">
                         <f:ajax  execute="painelFiltro" render="listagem" event="change"   ></f:ajax>    
                     </h:inputText>
                 </h:panelGrid>
@@ -53,12 +53,27 @@
 
                 <div class="table-responsive">
 
-                    
+
 
                     <h:dataTable value="#{controleListaCompleta.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controleListaCompleta.isBuscar()}"  id="listagem">
 
                         <f:facet name="header">
                             #{controleListaCompleta.daoPoupanca.mensagemNavegacao()}
+                        </f:facet>
+
+
+
+
+                        <f:facet name="footer">
+                            <div align="center">
+                                <p:commandButton value="Primeiro" actionListener="#{controleListaCompleta.daoPoupanca.primeiraPagina()}" icon="ui-icon-seek-first" update="listagem"></p:commandButton>
+                                <p:commandButton value="Anterior" actionListener="#{controleListaCompleta.daoPoupanca.paginaAnterior()}" icon="ui-icon-seek-prev" update="listagem"></p:commandButton>
+
+                                <p:commandButton value="Próximo" actionListener="#{controleListaCompleta.daoPoupanca.proximaPagina()}" icon="ui-icon-seek-next" update="listagem"></p:commandButton>
+
+                                <p:commandButton value="Ultima pagina" actionListener="#{controleListaCompleta.daoPoupanca.ultimaPagina()}" icon="ui-icon-seek-end" update="listagem"></p:commandButton>
+                                <p style="color: blue"> #{controleListaCompleta.daoPoupanca.mensagemNavegacao()}</p>
+                            </div>
                         </f:facet>
 
 
@@ -71,12 +86,20 @@
                                 #{p.idPoupanca.cnj}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">EM TRATAMENTO?</f:facet>
-                                #{p.avocado}
+                            <f:facet name="header" >EM TRATAMENTO?</f:facet>
+                            <h:outputText value=" #{p.avocado}" style="color: red"></h:outputText>
+
                         </h:column>
                         <h:column>
                             <f:facet name="header">RESPONSÁVEL ATUAL</f:facet>
-                                #{p.funciAvocado}
+                            
+                            <p:outputLabel value=" #{p.funciAvocado}" onclick="window.open('https://humanograma.intranet.bb.com.br/#{p.funciAvocado}')" title="Verificar  a chave : #{p.funciAvocado}"  >
+                            </p:outputLabel>
+                               
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">DATA INICIO TRATAMENTO</f:facet>
+                                #{p.dataAvocacao}
                         </h:column>
                         <h:column>
                             <f:facet name="header">IDENTIFICACAO DEMANDA</f:facet>
@@ -118,7 +141,7 @@
                         <h:column>
                             <f:facet name="header">POUPADOR</f:facet>
                             <h:outputText  value="#{c.poupador}"></h:outputText>
-                            
+
 
                         </h:column>
                         <h:column>
@@ -187,7 +210,8 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?')) return false"   >
+                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?'))
+                                        return false"   >
 
                                 <f:ajax   listener="#{controleComplemento.excluir(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
@@ -230,7 +254,7 @@
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" >
-                        
+
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
@@ -239,21 +263,21 @@
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
                         <f:converter converterId="converterDate"></f:converter>
-                          <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
                     <h:inputText id="valorBase" value="#{controleListaCompleta.complementoPoupanca.valorBase}" style="width: 100px">
-                        
+
                         <f:converter converterId="converterMoney"></f:converter>
-                         <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
                     </h:inputText>
 
 
 
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
                     <h:inputText id="valorAcordo" value="#{controleListaCompleta.complementoPoupanca.valorAcordo}" style="width: 150px;color: blue"  disabled="true">
-                             <f:converter converterId="converterMoney"></f:converter>
+                        <f:converter converterId="converterMoney"></f:converter>
                         <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano selectObs" event="focus" ></f:ajax>
                     </h:inputText>
                     <h:outputLabel value="Plano:"></h:outputLabel>
@@ -270,7 +294,7 @@
 
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
                         <f:selectItems value="#{controleListaCompleta.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" itemValue="#{o.obs}" ></f:selectItems>
-                          <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
                     </h:selectOneMenu>
 
 

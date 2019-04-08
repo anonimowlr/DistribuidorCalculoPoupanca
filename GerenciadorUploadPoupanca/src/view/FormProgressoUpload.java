@@ -335,6 +335,10 @@ public class FormProgressoUpload extends javax.swing.JFrame {
                 i++;
                 if (numeroLinha > 0) {
                     
+                    poupanca.setStatus(null);
+                    poupanca.setDataStatus(null);
+                    poupanca.setIdentificacaoDemanda(file.getName());
+                    poupanca.setDataUltimaDemanda(Utils.getDataHoraAtualMysqlDate());
                     complementoPoupanca.setDataImportacaoArquivo(Utils.getDataHoraAtualMysqlDate());
                    complementoPoupanca.setIdArquivo(file.getName());
                     poupanca.adicionarComplementoPoupanca(complementoPoupanca);

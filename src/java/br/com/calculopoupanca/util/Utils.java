@@ -118,11 +118,16 @@ public class Utils {
         String numeroTratado = "";
 
         int tamanhoValorRecebido = v.length();
+        
+        
+        
 
         for (int i = 0; i < tamanhoValorRecebido; i++) {
+            double marcador = i/3;
             String num = v.subSequence(i, i + 1).toString();
-
-            if (num.equals(".") && i==tamanhoValorRecebido-3) {
+            
+         
+            if (num.equals(".") &&  i==tamanhoValorRecebido-3) {
                 num = ",";
                 numeroTratado = numeroTratado + num;
             }
@@ -132,9 +137,18 @@ public class Utils {
                 numeroTratado = numeroTratado + num;
 
             }
+            
+               if(tamanhoValorRecebido>4){
+                 if(i == tamanhoValorRecebido- 7 || i == tamanhoValorRecebido-10 || i == tamanhoValorRecebido-12|| i == tamanhoValorRecebido-14){
+                   numeroTratado = numeroTratado + ".";  
+                 }
+                   
+                     
+              
+            }
         }
 
-        return numeroTratado;
+        return  numeroTratado;
     }
     
     
@@ -382,5 +396,14 @@ public class Utils {
 }
     
     
+  
+   public static Date getDataHoraAtualMysqlDate() {
+        Calendar c = Calendar.getInstance();
+        Date d = c.getTime();
+        
+
+        return (d);
+    }
+   
 
 }

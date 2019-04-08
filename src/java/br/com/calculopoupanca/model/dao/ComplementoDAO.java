@@ -19,7 +19,7 @@ public class ComplementoDAO<T,D> extends DAOGenerico<ComplementoPoupanca, IdPoup
        super();
        classePersistente = ComplementoPoupanca.class;
        ordem = "npj";
-       maximoObjeto = 3000;
+       maximoObjeto = 300000000;
        
       
        

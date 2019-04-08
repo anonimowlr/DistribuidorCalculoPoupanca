@@ -25,7 +25,7 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
         super();
         classePersistente = Poupanca.class;
         ordem = "npj";
-        maximoObjeto = 1;
+        maximoObjeto = 3000000;
         chaveComposta = IdPoupanca.class;
         em.clear();
 
@@ -42,7 +42,7 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
         Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
         String jpql = "From  " + classePersistente.getSimpleName() + " c " + " where " + " (c.status = null and c.avocado = null)  or (c.avocado = 'SIM'  and c.funciAvocado = '" + usuario.getChave() + "')" + "  order by " + ordem;
 
-        return em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(maximoObjeto).getResultList();
+        return em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(1).getResultList();
     }
 
     /**

@@ -36,7 +36,7 @@ public class Poupanca implements Serializable{
     
    @Column(name = "escritorio_bb")
    private String escritorioBB;
-   @Column(name = "advogado_bb")
+   @Column(name = "advogado_adverso")
    private String advogadoAdverso;
    @Column(name = "origem")
    private String origem;
@@ -52,6 +52,11 @@ public class Poupanca implements Serializable{
    private Date dataStatus;
    @Column(name = "funci_avocado")
    private String funciAvocado;
+   @Column(name = "identificacao_demanda")
+   private String identificacaoDemanda;
+   @Column(name = "data_ultima_demanda")
+   @Temporal(TemporalType.TIMESTAMP)
+   private Date dataUltimaDemanda;
    
    
    @Column(name = "data_uop")
@@ -278,6 +283,35 @@ public class Poupanca implements Serializable{
         this.funciAvocado = funciAvocado;
     }
 
+    /**
+     * @return the identificacaoDemanda
+     */
+    public String getIdentificacaoDemanda() {
+        return identificacaoDemanda;
+    }
+
+    /**
+     * @param identificacaoDemanda the identificacaoDemanda to set
+     */
+    public void setIdentificacaoDemanda(String identificacaoDemanda) {
+        this.identificacaoDemanda = identificacaoDemanda;
+    }
+
+    /**
+     * @return the dataUltimaDemanda
+     */
+    public Date getDataUltimaDemanda() {
+        return dataUltimaDemanda;
+    }
+
+    /**
+     * @param dataUltimaDemanda the dataUltimaDemanda to set
+     */
+    public void setDataUltimaDemanda(Date dataUltimaDemanda) {
+        this.dataUltimaDemanda = dataUltimaDemanda;
+    }
+
+    
    
     
     

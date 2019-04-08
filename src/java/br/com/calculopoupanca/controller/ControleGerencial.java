@@ -174,12 +174,31 @@ public class ControleGerencial implements Serializable {
     }
 
     public void validarParaSalvar(){
+        
+       if(getPoupanca().getIdPoupanca().getNpj() == null || getPoupanca().getIdPoupanca().getNpj().toString().length()<11 ){
+           Util.mensagemErro("Npj com menos de 11 digitos");
+           return;
+       }
+       if(getPoupanca().getIdPoupanca().getCnj()== null || getPoupanca().getIdPoupanca().getCnj().toString().length()<20 ){
+           Util.mensagemErro("Cnj com menos de 20 digitos");
+           return;
+       }
+       if(getPoupanca().getIdentificacaoDemanda()== null || getPoupanca().getIdentificacaoDemanda().equals("")){
+           Util.mensagemErro("Identifique a demanda");
+           return;
+       }
+        
+        
+        
+       
         complementarDados();
         salvar();
     }
     
     public void complementarDados(){
         
+         getComplementoPoupanca().setIdArquivo(getPoupanca().getIdentificacaoDemanda());
+        getComplementoPoupanca().setDataImportacaoArquivo(Utils.getDataHoraAtualMysqlDate());
         getPoupanca().setStatus(null);
         getPoupanca().setDataStatus(null);
         

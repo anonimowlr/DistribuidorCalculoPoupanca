@@ -100,6 +100,8 @@ public class ControleComplemento implements Serializable {
         
        complementoPoupanca.getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
        
+       getDaoComplementoPoupanca().deletar(complementoPoupanca);
+       
         
     }
     public void excluirBaseGerencial(Integer id){

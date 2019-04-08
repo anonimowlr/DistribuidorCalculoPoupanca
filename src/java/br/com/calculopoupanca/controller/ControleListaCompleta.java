@@ -33,7 +33,7 @@ import util.Util;
  */
 @ManagedBean
 @ViewScoped
-public class ControleListaCompleta implements Serializable {
+public class ControleListaCompleta extends ControleGenerico implements Serializable  {
 
     /**
      * @return the daoObservacao
@@ -47,12 +47,20 @@ public class ControleListaCompleta implements Serializable {
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
-    private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
+    private List<ComplementoPoupanca> listaComplementoPoupanca = new ArrayList<>();
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 
     
-
+    
+    @PostConstruct
+    public void init(){
+        buscar();
+        
+    }
+    
+    
+    
     public void mostrarConteudo() {
         System.out.println(getObservacao());
     }
@@ -61,70 +69,18 @@ public class ControleListaCompleta implements Serializable {
 
         getComplementoPoupanca().setPoupador(getComplementoPoupanca().getPoupador().toUpperCase());
     }
+
     public void alterarTamanhoLetraEscritorio() {
 
-       getPoupanca().setEscritorioBB(getPoupanca().getEscritorioBB().toUpperCase());
+        getPoupanca().setEscritorioBB(getPoupanca().getEscritorioBB().toUpperCase());
     }
+
     public void alterarTamanhoLetraAdvogadoAdv() {
 
-       getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
+        getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
     }
 
-    public void calcularValorAcordo() {
-
-        try {
-            Date data1 = Utils.formataData("01/06/1987");
-            Date data2 = Utils.formataData("15/06/1987");
-            Date data3 = Utils.formataData("01/01/1989");
-            Date data4 = Utils.formataData("15/01/1989");
-            Date data5 = Utils.formataData("03/01/1991");
-            Date data6 = Utils.formataData("31/01/1991");
-            Date data7 = Utils.formataData("01/03/1990");
-            Date data8 = Utils.formataData("15/03/1990");
-
-            if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
-                getComplementoPoupanca().setPlano("BRESSER");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-                getComplementoPoupanca().setObservacao("BRESSER");
-            } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
-                getComplementoPoupanca().setPlano("VERAO");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("VERAO");
-            } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
-                getComplementoPoupanca().setPlano("COLOR II");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("COLOR II");
-            } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
-                getComplementoPoupanca().setPlano("COLOR I");
-                getComplementoPoupanca().setFazJus("NAO");
-                getComplementoPoupanca().setValorAcordo(null);
-                getComplementoPoupanca().setObservacao(null);
-                  getComplementoPoupanca().setObservacao("COLOR I");
-                
-                getComplementoPoupanca().setComplementoObs(null);
-                getComplementoPoupanca().setValorBase(null);
-            } else {
-                getComplementoPoupanca().setFazJus("NAO");
-                getComplementoPoupanca().setValorAcordo(null);
-                getComplementoPoupanca().setObservacao(null);
-                getComplementoPoupanca().setPlano("NAO FAZ JUS");
-                getComplementoPoupanca().setComplementoObs(null);
-                getComplementoPoupanca().setValorBase(null);
-            }
-
-        } catch (Exception e) {
-
-            Util.mensagemErro(Util.getMensagemErro(e));
-
-        }
-
-    }
+   
 
     public ControleListaCompleta() {
         daoPoupanca = new PoupancaDAO<>();
@@ -136,35 +92,33 @@ public class ControleListaCompleta implements Serializable {
         mudarParaBuscar();
         setListaPoupanca(getDaoPoupanca().getListaPoupanca());
         setListaPoupanca(getListaPoupanca());
-        avocar();
+       
     }
 
     public void novo() {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
+
     public void novoGerencial() {
-        
+
         setEstadoTela("editarGerencial");
         setPoupanca(new Poupanca());
         setIdPoupanca(new IdPoupanca());
         getPoupanca().setIdPoupanca(getIdPoupanca());
-      
+
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
-       
-      
-       
+
     }
-    
-    
-    public void teste(){
+
+    public void teste() {
         complementoPoupanca = getComplementoPoupanca();
         poupanca = getPoupanca();
         idPoupanca = getIdPoupanca();
         listaComplementoPoupanca = getListaComplementoPoupanca();
-        Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " +  getIdPoupanca().getNpj()+  getComplementoPoupanca().getPoupador());
-       
+        Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " + getIdPoupanca().getNpj() + getComplementoPoupanca().getPoupador());
+
     }
 
     public void novoComplemento() {
@@ -177,10 +131,6 @@ public class ControleListaCompleta implements Serializable {
         return "tratamento?faces-redirect=true";
     }
 
-    
-    
-    
-    
     public void salvar() {
         boolean persistiu = false;
 
@@ -197,11 +147,9 @@ public class ControleListaCompleta implements Serializable {
         }
 
         mudarParaBuscar();
-      
+
     }
-    
-    
-    
+
     public void salvarParcial() {
         boolean persistiu = false;
 
@@ -211,28 +159,20 @@ public class ControleListaCompleta implements Serializable {
             persistiu = getDaoPoupanca().salvar(getPoupanca());
         }
 
-
-     
     }
-    
-    
-    
-    
-    
-    
 
     public void mudarParaEditar() {
         setEstadoTela("editar");
     }
 
-     public void mudarParaEditarGerencial() {
+    public void mudarParaEditarGerencial() {
         setEstadoTela("editarGerencial");
     }
-    
-    
+
     public void mudarParaEditarComplemento() {
         setEstadoTela("editarComplemento");
     }
+
     public void mudarParaEditarComplementoNovo() {
         setEstadoTela("editarComplementoNovo");
     }
@@ -251,12 +191,13 @@ public class ControleListaCompleta implements Serializable {
         return "editarComplemento".equals(getEstadoTela());
 
     }
+
     public boolean isEditarComplementoNovo() {
 
         return "editarComplementoNovo".equals(getEstadoTela());
 
     }
-    
+
     public boolean isEditarGerencial() {
 
         return "editarGerencial".equals(getEstadoTela());
@@ -269,10 +210,53 @@ public class ControleListaCompleta implements Serializable {
     }
 
     public void editar(IdPoupanca idpoupanca) {
-        mudarParaEditar();
+
         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
+        if (!verAvocacao() && (!verDuplaAvocacao())) {
+           
+          
+            avocar();
+            mudarParaEditar();
+        }
+
     }
 
+    public boolean verAvocacao() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+        if (getPoupanca().getAvocado() != null && (! getPoupanca().getFunciAvocado().equals(usuario.getChave()))) {
+            Util.mensagemErro("Registro já está em tratamento!!");
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    
+    public boolean verDuplaAvocacao(){
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+        for (Poupanca poupanca1 :getDaoPoupanca().getListaTodos()) {
+            if(poupanca1.getFunciAvocado()!=null && poupanca1.getFunciAvocado().equals(usuario.getChave()) && (!poupanca1.equals(getPoupanca()) && getPoupanca().getFunciAvocado()==null) ){
+                
+             
+                
+                Util.mensagemErro("Você deve tratar o NPJ: " + poupanca1.getIdPoupanca().getNpj());
+                
+                return true;
+               
+            }
+            
+        }
+        return false;
+    }
+    
     public void editarComplemento(Integer index) {
 
         mudarParaEditarComplemento();
@@ -435,7 +419,7 @@ public class ControleListaCompleta implements Serializable {
 
             for (ComplementoPoupanca complemento : getPoupanca().getListaComplementoPoupanca()) {
 
-                if (complemento.getPlano()== null || complemento.getPlano().equals("")) {
+                if (complemento.getPlano() == null || complemento.getPlano().equals("")) {
 
                     Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
@@ -477,7 +461,6 @@ public class ControleListaCompleta implements Serializable {
 
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
 
-            setPoupanca(getListaPoupanca().get(0));
             getPoupanca().setAvocado("SIM");
             getPoupanca().setFunciAvocado(usuario.getChave());
             getPoupanca().setDataAvocacao(new Date());
@@ -503,10 +486,10 @@ public class ControleListaCompleta implements Serializable {
     public void complementar() {
 
         try {
-            
-            if(getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta()==null || getComplementoPoupanca().getConta().equals("")){
-               Util.mensagemErro("Conta ou agência inválidos");
-               return;
+
+            if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
+                Util.mensagemErro("Conta ou agência inválidos");
+                return;
             }
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
@@ -514,7 +497,7 @@ public class ControleListaCompleta implements Serializable {
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
-           
+
             calcularValorAcordo();
             salvarParcial();
             mudarParaEditar();
@@ -536,18 +519,15 @@ public class ControleListaCompleta implements Serializable {
         getComplementoPoupanca().setComplementoObs(null);
     }
 
-    
-    
-    
-    public void voltar(){
-        if(isEditarComplementoNovo()){
-         getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
-             mudarParaEditar();
-             return;
+    public void voltar() {
+        if (isEditarComplementoNovo()) {
+            getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
+            mudarParaEditar();
+            return;
         }
-        
+
         mudarParaEditar();
-        
+
     }
 
     /**
