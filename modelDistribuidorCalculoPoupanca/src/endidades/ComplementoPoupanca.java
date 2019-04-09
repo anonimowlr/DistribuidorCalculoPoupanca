@@ -84,6 +84,15 @@ public class ComplementoPoupanca implements Serializable {
      @Temporal(TemporalType.TIMESTAMP)       
     private Date dataImportacaoArquivo;
     
+    @Column(name = "faixa_desconto")
+    private String faixaDesconto;
+    @Column(name = "percentual_desconto")
+    private BigDecimal percentualDesconto;
+    @Column(name = "valor_desconto")
+    private BigDecimal valorDesconto;
+            
+            
+    
     
     @Column(name = "correcao_esperada")
    private BigDecimal correcaoEsperada;
@@ -421,6 +430,48 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setCorrecaoEsperada(BigDecimal correcaoEsperada) {
         this.correcaoEsperada = correcaoEsperada;
+    }
+
+    /**
+     * @return the faixaDesconto
+     */
+    public String getFaixaDesconto() {
+        return faixaDesconto;
+    }
+
+    /**
+     * @param faixaDesconto the faixaDesconto to set
+     */
+    public void setFaixaDesconto(String faixaDesconto) {
+        this.faixaDesconto = faixaDesconto;
+    }
+
+    /**
+     * @return the percentualDesconto
+     */
+    public BigDecimal getPercentualDesconto() {
+        return percentualDesconto;
+    }
+
+    /**
+     * @param percentualDesconto the percentualDesconto to set
+     */
+    public void setPercentualDesconto(BigDecimal percentualDesconto) {
+        this.percentualDesconto = percentualDesconto;
+    }
+
+    /**
+     * @return the valorDesconto
+     */
+    public BigDecimal getValorDesconto() {
+        return valorDesconto;
+    }
+
+    /**
+     * @param valorDesconto the valorDesconto to set
+     */
+    public void setValorDesconto(BigDecimal valorDesconto) {
+        this.valorDesconto = valorDesconto;
     }
 
     
