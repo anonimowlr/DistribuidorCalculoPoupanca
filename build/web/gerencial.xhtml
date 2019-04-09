@@ -222,17 +222,15 @@
                         </p:column>
                         <p:column headerText="FAIXA DESCONTO" filterBy="#{p.faixaDesconto}" filterMatchMode="contains"  sortBy="#{p.faixaDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.faixaDesconto}" >
-                                   <f:converter converterId="converterMoney"></f:converter>
+                                  
                             </h:outputText>
                         </p:column>
                         <p:column headerText="PERCENTUAL DESCONTO" filterBy="#{p.percentualDesconto}" filterMatchMode="contains"  sortBy="#{p.percentualDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.percentualDesconto}" >
-                                   <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
                         <p:column headerText="VALOR DESCONTO" filterBy="#{p.valorDesconto}" filterMatchMode="contains"  sortBy="#{p.valorDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorDesconto}" >
-                                   <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
 
