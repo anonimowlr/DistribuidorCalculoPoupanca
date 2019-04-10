@@ -227,6 +227,7 @@
                         </p:column>
                         <p:column headerText="PERCENTUAL DESCONTO" filterBy="#{p.percentualDesconto}" filterMatchMode="contains"  sortBy="#{p.percentualDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.percentualDesconto}" >
+                                <f:converter converterId="converterPercent"></f:converter>
                             </h:outputText>
                         </p:column>
                         <p:column headerText="VALOR DESCONTO" filterBy="#{p.valorDesconto}" filterMatchMode="contains"  sortBy="#{p.valorDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
@@ -243,6 +244,16 @@
                             </h:outputText>
 
                         </p:column>
+                        
+                        <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:90%; height:30px" >
+                            <h:outputText value="#{p.valorHonorario}" >
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="VALOR FINAL" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:90%; height:30px"   >
+                            <h:outputText value="#{p.valorDespendidoBB}" >
+                            </h:outputText>
+                        </p:column>
                         <p:column headerText="FUNCI" filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.funci}" >
@@ -253,15 +264,6 @@
                         <p:column headerText="DATA EXECUÇÃO" filterBy="#{p.dataExecucao}" filterMatchMode="contains"  sortBy="#{p.dataExecucao}" resizable="true"  filterStyle="width:90%; height:30px"  >
                             <h:outputText value="#{p.dataExecucao}" >
                                 <f:converter converterId="converterDate"></f:converter>
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:90%; height:30px" >
-                            <h:outputText value="#{p.valorHonorario}" >
-                            </h:outputText>
-                        </p:column>
-                        
-                        <p:column headerText="VALOR DISPENDIDO BB" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:90%; height:30px"   >
-                            <h:outputText value="#{p.valorDespendidoBB}" >
                             </h:outputText>
                         </p:column>
                         <p:column headerText="IDENTIFICACAO DEMANDA" filterBy="#{p.idArquivo}" filterMatchMode="contains"  sortBy="#{p.idArquivo}" resizable="true"  filterStyle="width:90%; height:30px" exportable="false"  >
