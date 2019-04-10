@@ -5,6 +5,7 @@
  */
 package br.com.calculopoupanca.model.dao;
 
+import endidades.ComplementoPoupanca;
 import endidades.Funcionario;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
@@ -86,6 +87,44 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
      */
     public void setListaPoupancaPendencias(List<T> listaPoupancaPendencias) {
         this.listaPoupancaPendencias = listaPoupancaPendencias;
+    }
+
+    public void somarValorPoupador(Poupanca poupanca) {
+       
+
+        if(poupanca.getListaComplementoPoupanca().size()<=1){
+            poupanca.getListaComplementoPoupanca().get(0).setValorDireito(poupanca.getListaComplementoPoupanca().get(0).getValorAcordo());
+            return ;
+        } 
+        
+      
+            int i = 0;
+            
+            while(i< poupanca.getListaComplementoPoupanca().size()){
+                poupanca.getListaComplementoPoupanca().get(i).setValorDireito(poupanca.getListaComplementoPoupanca().get(i).getValorBase());
+                        
+                        int j =1;
+                        while(j<poupanca.getListaComplementoPoupanca().size()){
+                            if(poupanca.getListaComplementoPoupanca().get(i).getCpf().equals(poupanca.getListaComplementoPoupanca().get(j).getCpf()) && poupanca.getListaComplementoPoupanca().get(i).getValorBase()!=null && poupanca.getListaComplementoPoupanca().get(j).getValorBase() != null){
+                                 poupanca.getListaComplementoPoupanca().get(i).setValorDireito(poupanca.getListaComplementoPoupanca().get(i).getValorDireito().add(poupanca.getListaComplementoPoupanca().get(j).getValorBase()));
+                            }
+                            j++;
+                        }
+                
+                
+                i++;
+            }
+       
+            
+        
+        
+        
+        
+       
+        
+
+
+
     }
 
 }

@@ -159,6 +159,8 @@ public class ControleGenerico implements Serializable {
                 getComplementoPoupanca().setValorBase(null);
             }
 
+            getDaoPoupanca().somarValorPoupador(getPoupanca());
+            
         } catch (Exception e) {
 
             Util.mensagemErro(Util.getMensagemErro(e));
