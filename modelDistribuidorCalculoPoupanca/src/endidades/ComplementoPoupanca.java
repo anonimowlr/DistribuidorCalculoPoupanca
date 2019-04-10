@@ -78,7 +78,7 @@ public class ComplementoPoupanca implements Serializable {
     private String idArquivo;
     @Column(name = "valor_honorario")
     private BigDecimal valorHonorario;
-    @Column(name = "valor_despendido_bb")
+    @Column(name = "valor_final")
     private BigDecimal valorDespendidoBB;
     @Column(name = "data_importacao_arquivo")
      @Temporal(TemporalType.TIMESTAMP)       
@@ -90,7 +90,11 @@ public class ComplementoPoupanca implements Serializable {
     private BigDecimal percentualDesconto;
     @Column(name = "valor_desconto")
     private BigDecimal valorDesconto;
-            
+      
+    @Column(name = "valor_apurado")
+    private BigDecimal valorApurado;
+    
+   
             
     
     
@@ -472,6 +476,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setValorDesconto(BigDecimal valorDesconto) {
         this.valorDesconto = valorDesconto;
+    }
+
+    /**
+     * @return the valorApurado
+     */
+    public BigDecimal getValorApurado() {
+        return valorApurado;
+    }
+
+    /**
+     * @param valorApurado the valorApurado to set
+     */
+    public void setValorApurado(BigDecimal valorApurado) {
+        this.valorApurado = valorApurado;
     }
 
     

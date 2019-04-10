@@ -89,7 +89,7 @@ public class ControleGenerico implements Serializable {
                     getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
                     getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
                 }
-                
+                getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
             } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
                 getComplementoPoupanca().setPlano("VERAO");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
@@ -113,7 +113,7 @@ public class ControleGenerico implements Serializable {
                     getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
                     getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
                 }
-                
+                   getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
                  
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
@@ -139,7 +139,7 @@ public class ControleGenerico implements Serializable {
                     getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
                     getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
                 }
-                
+                   getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
                 getComplementoPoupanca().setPlano("COLOR I");

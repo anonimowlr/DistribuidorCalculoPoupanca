@@ -231,6 +231,7 @@
                         </p:column>
                         <p:column headerText="VALOR DESCONTO" filterBy="#{p.valorDesconto}" filterMatchMode="contains"  sortBy="#{p.valorDesconto}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorDesconto}" >
+                                 <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
 
