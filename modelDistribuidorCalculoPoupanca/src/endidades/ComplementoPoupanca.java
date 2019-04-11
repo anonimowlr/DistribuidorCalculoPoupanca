@@ -72,8 +72,8 @@ public class ComplementoPoupanca implements Serializable {
     @Column(name = "data_uop")       
     private Date dataUop;
     
-    @Column(name = "valor_direito")
-    private BigDecimal valorDireito;
+    @Column(name = "somatorio_poupador")
+    private BigDecimal somatorioPoupador;
     @Column(name = "id_arquivo", length = 450)
     private String idArquivo;
     @Column(name = "valor_honorario")
@@ -352,19 +352,7 @@ public class ComplementoPoupanca implements Serializable {
         return observacao;
     }
 
-    /**
-     * @return the valorDireito
-     */
-    public BigDecimal getValorDireito() {
-        return valorDireito;
-    }
-
-    /**
-     * @param valorDireito the valorDireito to set
-     */
-    public void setValorDireito(BigDecimal valorDireito) {
-        this.valorDireito = valorDireito;
-    }
+   
 
     /**
      * @return the idArquivo
@@ -490,6 +478,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setValorApurado(BigDecimal valorApurado) {
         this.valorApurado = valorApurado;
+    }
+
+    /**
+     * @return the somatorioPoupador
+     */
+    public BigDecimal getSomatorioPoupador() {
+        return somatorioPoupador;
+    }
+
+    /**
+     * @param somatorioPoupador the somatorioPoupador to set
+     */
+    public void setSomatorioPoupador(BigDecimal somatorioPoupador) {
+        this.somatorioPoupador = somatorioPoupador;
     }
 
     

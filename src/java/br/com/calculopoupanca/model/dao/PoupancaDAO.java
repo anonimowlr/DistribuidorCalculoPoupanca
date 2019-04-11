@@ -9,6 +9,7 @@ import endidades.ComplementoPoupanca;
 import endidades.Funcionario;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -93,21 +94,46 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
        
 
         if(poupanca.getListaComplementoPoupanca().size()<=1){
-            poupanca.getListaComplementoPoupanca().get(0).setValorDireito(poupanca.getListaComplementoPoupanca().get(0).getValorAcordo());
+            poupanca.getListaComplementoPoupanca().get(0).setSomatorioPoupador(poupanca.getListaComplementoPoupanca().get(0).getValorAcordo());
             return ;
         } 
         
+//           for (ComplementoPoupanca complementoPoupanca : poupanca.getListaComplementoPoupanca()) {//limpar todos os  somatoriosPoupador
+//                    complementoPoupanca.setValorDireito(null);
+//                    
+//                }
+        
       
             int i = 0;
-            
+          
             while(i< poupanca.getListaComplementoPoupanca().size()){
-                poupanca.getListaComplementoPoupanca().get(i).setValorDireito(poupanca.getListaComplementoPoupanca().get(i).getValorBase());
+                 BigDecimal somatorio = new BigDecimal("0.00");
+                
+                    poupanca.getListaComplementoPoupanca().get(i).setSomatorioPoupador(poupanca.getListaComplementoPoupanca().get(i).getValorAcordo());
                         
-                        int j =1;
+                        int j =0;
                         while(j<poupanca.getListaComplementoPoupanca().size()){
-                            if(poupanca.getListaComplementoPoupanca().get(i).getCpf().equals(poupanca.getListaComplementoPoupanca().get(j).getCpf()) && poupanca.getListaComplementoPoupanca().get(i).getValorBase()!=null && poupanca.getListaComplementoPoupanca().get(j).getValorBase() != null){
-                                 poupanca.getListaComplementoPoupanca().get(i).setValorDireito(poupanca.getListaComplementoPoupanca().get(i).getValorDireito().add(poupanca.getListaComplementoPoupanca().get(j).getValorBase()));
-                            }
+                            
+                            
+                            
+                          
+                          
+                            if(poupanca.getListaComplementoPoupanca().get(i).getCpf().equals(poupanca.getListaComplementoPoupanca().get(j).getCpf()) && poupanca.getListaComplementoPoupanca().get(i).getValorAcordo()!=null && poupanca.getListaComplementoPoupanca().get(j).getValorAcordo()!= null && i!=j){
+                              
+                                 somatorio =somatorio.add( poupanca.getListaComplementoPoupanca().get(j).getValorAcordo());
+                                
+                                
+                               if(i!=j) {
+                                    poupanca.getListaComplementoPoupanca().get(j).setSomatorioPoupador(null);
+                               }
+                               
+                               
+                               // somatorio = somatorio.add(poupanca.getListaComplementoPoupanca().get(j).getValorAcordo());
+                            
+                                 poupanca.getListaComplementoPoupanca().get(i).setSomatorioPoupador(poupanca.getListaComplementoPoupanca().get(i).getValorAcordo().add(somatorio));
+                                 
+                                
+                            } 
                             j++;
                         }
                 

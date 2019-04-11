@@ -471,7 +471,9 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             getComplementoPoupanca().setFunci(usuario.getChave());
            
             calcularValorAcordo();
+            getDaoPoupanca().somarValorPoupador(getPoupanca());
             salvarParcial();
+          
             mudarParaEditar();
         } catch (Exception e) {
 

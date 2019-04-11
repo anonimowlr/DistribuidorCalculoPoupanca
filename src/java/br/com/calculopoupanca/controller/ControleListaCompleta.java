@@ -499,7 +499,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             getComplementoPoupanca().setFunci(usuario.getChave());
 
             calcularValorAcordo();
+            
+             getDaoPoupanca().somarValorPoupador(getPoupanca());
             salvarParcial();
+            
             mudarParaEditar();
         } catch (Exception e) {
 
