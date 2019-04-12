@@ -7,6 +7,7 @@ package br.com.calculopoupanca.model.dao;
 
 import endidades.IdPoupanca;
 import endidades.Observacao;
+import endidades.Poupanca;
 
 
 /**
@@ -24,6 +25,8 @@ public class ObservacaoDAO<T,D> extends DAOGenerico<Observacao, IdPoupanca>{
        
         
     }
+
+    
    
     
     

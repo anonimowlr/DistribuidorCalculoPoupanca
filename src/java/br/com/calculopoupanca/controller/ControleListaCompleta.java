@@ -500,7 +500,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             calcularValorAcordo();
             
-             getDaoPoupanca().somarValorPoupador(getPoupanca());
+            getDaoPoupanca().somarValorPoupador(getPoupanca());
+            
+          
+             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
             
             mudarParaEditar();

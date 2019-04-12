@@ -71,49 +71,15 @@ public class ControleGenerico implements Serializable {
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                getComplementoPoupanca().setObservacao("BRESSER");
+                //getComplementoPoupanca().setObservacao(null);
                 
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 1");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 2");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.08"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 3");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.14"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))>0 ){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
-                }
-                getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
             } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
                 getComplementoPoupanca().setPlano("VERAO");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("VERAO");
+                 //getComplementoPoupanca().setObservacao(null);
                  
-                 if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 1");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 2");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.08"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 3");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.14"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))>0 ){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
-                }
-                   getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
                  
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
@@ -121,25 +87,8 @@ public class ControleGenerico implements Serializable {
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
-                 getComplementoPoupanca().setObservacao("COLOR II");
+                 //getComplementoPoupanca().setObservacao(null);
                   
-                 if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 1");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("5000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 2");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.08"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("10000"))>0 && getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))<= 0){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 3");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.14"));
-                }
-                if(getComplementoPoupanca().getValorBase().compareTo( new BigDecimal("20000"))>0 ){
-                    getComplementoPoupanca().setFaixaDesconto("FAIXA 4");
-                    getComplementoPoupanca().setPercentualDesconto(new BigDecimal("0.19"));
-                }
-                   getComplementoPoupanca().setValorDesconto(getComplementoPoupanca().getPercentualDesconto().multiply(getComplementoPoupanca().getValorAcordo()));
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
                 getComplementoPoupanca().setPlano("COLOR I");
@@ -155,7 +104,7 @@ public class ControleGenerico implements Serializable {
                 getComplementoPoupanca().setValorAcordo(null);
                 getComplementoPoupanca().setObservacao(null);
                 getComplementoPoupanca().setPlano("NAO FAZ JUS");
-                getComplementoPoupanca().setComplementoObs(null);
+                //getComplementoPoupanca().setComplementoObs(null);
                 getComplementoPoupanca().setValorBase(null);
             }
 

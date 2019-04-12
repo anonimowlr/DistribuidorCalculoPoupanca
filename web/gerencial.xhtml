@@ -62,10 +62,9 @@
                     
                      </h:inputText>
                       <h:outputLabel value="CPF/CNPJ:"></h:outputLabel>
-                      <h:inputText id="cpf" value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px">
+                          <p:inputMask mask="999.999.999-99" id="cpf" value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px"></p:inputMask> 
                     
-                    
-                     </h:inputText>
+                     
                      
                   
                      
@@ -189,6 +188,13 @@
                             </h:outputText>
 
                         </p:column>
+                         <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}" filterStyle="width:90%; height:30px">
+
+                            <h:outputText value="#{p.fazJus}" >
+
+                            </h:outputText>
+
+                        </p:column>
                        
 
                         <p:column headerText="DATA BASE" filterBy="#{p.dataBase}" filterMatchMode="contains"  sortBy="#{p.dataBase}" filterStyle="width:90%; height:30px" >
@@ -235,23 +241,24 @@
                                  <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
-
-
-                        <p:column headerText="FAZ JUS?" filterBy="#{p.fazJus}" filterMatchMode="contains" sortBy="#{p.fazJus}" filterStyle="width:90%; height:30px">
-
-                            <h:outputText value="#{p.fazJus}" >
-
+                        <p:column headerText="VALOR APURADO" filterBy="#{p.valorApurado}" filterMatchMode="contains"  sortBy="#{p.valorApurado}" resizable="true"   filterStyle="width:90%; height:30px" >
+                            <h:outputText value="#{p.valorApurado}" >
+                                 <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
-
                         </p:column>
+
+
+                       
                         
                         <p:column headerText="VALOR HONORARIO" filterBy="#{p.valorHonorario}" filterMatchMode="contains"  sortBy="#{p.valorHonorario}" resizable="true"   filterStyle="width:90%; height:30px" >
                             <h:outputText value="#{p.valorHonorario}" >
+                                 <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
                         
                         <p:column headerText="VALOR FINAL" filterBy="#{p.valorDespendidoBB}" filterMatchMode="contains"  sortBy="#{p.valorDespendidoBB}" resizable="true" filterStyle="width:90%; height:30px"   >
                             <h:outputText value="#{p.valorDespendidoBB}" >
+                                 <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
                         </p:column>
                         <p:column headerText="FUNCI" filterBy="#{p.funci}" filterMatchMode="contains" sortBy="#{p.funci}" filterStyle="width:90%; height:30px">

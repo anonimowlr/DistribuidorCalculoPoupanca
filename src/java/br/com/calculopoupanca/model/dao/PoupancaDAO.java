@@ -153,4 +153,59 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
 
     }
 
+    public void atribuirFaixas(Poupanca poupanca) {
+   
+        for (ComplementoPoupanca complementoPoupanca : poupanca.getListaComplementoPoupanca()) {
+            
+            
+            if(complementoPoupanca.getSomatorioPoupador() == null){
+                complementoPoupanca.setFaixaDesconto(null);
+                complementoPoupanca.setPercentualDesconto(null);
+                complementoPoupanca.setValorApurado(null);
+                complementoPoupanca.setValorHonorario(null);
+                complementoPoupanca.setValorDespendidoBB(null);
+                complementoPoupanca.setValorDesconto(null);
+                
+                continue;
+            }
+            
+            
+            
+            
+            
+            
+            if(complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("5000"))<=0){
+               complementoPoupanca.setFaixaDesconto("FAIXA 1");
+               complementoPoupanca.setPercentualDesconto(new BigDecimal("0"));
+             
+                
+            }else if(complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("5000"))>0 && complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("10000"))<=0){
+                
+               complementoPoupanca.setFaixaDesconto("FAIXA 2");
+               complementoPoupanca.setPercentualDesconto(new BigDecimal("0.08"));
+                
+            } else if(complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("10000"))>0 && complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("20000"))<=0){
+                complementoPoupanca.setFaixaDesconto("FAIXA 3");
+               complementoPoupanca.setPercentualDesconto(new BigDecimal("0.14"));
+            } else if(complementoPoupanca.getSomatorioPoupador()!=null && complementoPoupanca.getSomatorioPoupador().compareTo(new BigDecimal("2000"))>0){
+                complementoPoupanca.setFaixaDesconto("FAIXA 4");
+                complementoPoupanca.setPercentualDesconto(new BigDecimal("0.19"));
+                
+            } else{
+               continue;
+            }
+            if(complementoPoupanca.getSomatorioPoupador() != null){
+                complementoPoupanca.setValorDesconto(complementoPoupanca.getPercentualDesconto().multiply(complementoPoupanca.getSomatorioPoupador()));
+                 complementoPoupanca.setValorApurado(complementoPoupanca.getSomatorioPoupador().subtract(complementoPoupanca.getValorDesconto()));
+                 complementoPoupanca.setValorHonorario(complementoPoupanca.getValorApurado().multiply(new BigDecimal("0.1")));
+                 complementoPoupanca.setValorDespendidoBB(complementoPoupanca.getValorApurado().add(complementoPoupanca.getValorHonorario()));
+            }
+            
+            
+        }
+    
+    }
+
+   
+
 }

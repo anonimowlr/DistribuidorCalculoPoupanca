@@ -23,7 +23,7 @@
 
 
 
-            <h:form id="fomIndex">
+            <h:form id="fomIndex" prependId="false">
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
@@ -250,16 +250,16 @@
                     </h:inputText>
 
                     <h:outputLabel value="CPF:"></h:outputLabel>
-                    <h:inputText value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px" ></h:inputText>
-
+                    <p:inputMask mask="999.999.999-99" value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  ></p:inputMask>
                     <h:outputLabel value="Agencia:"></h:outputLabel>
-                    <h:inputText value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" >
+                    <h:inputText id="txtAgencia" value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
 
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <h:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" style="width: 150px" ></h:inputText>
-
+                    <p:inputMask id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" mask="999.999.999-99"  >
+                        <f:converter converterId="converterConta"></f:converter>
+                    </p:inputMask>
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
                         <f:converter converterId="converterDate"></f:converter>

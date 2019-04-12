@@ -18,3 +18,14 @@ $(document).ready(function (){
 });
 
 
+function  saltarConta(param){
+    var parametro = param;
+    
+    if(parametro.length===3){
+        
+        $("#txtConta").focus();
+    }
+    
+   
+    
+}
