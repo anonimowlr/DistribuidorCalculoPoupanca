@@ -41,11 +41,11 @@ public class GeradorPdf {
         Document document = new Document();
         
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()));
+            PdfWriter.getInstance(document, new FileOutputStream("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
             
               document.open();
               
-                                        Image img = Image.getInstance("c:\\temp\\LogoRetangular.png");
+                                        Image img = Image.getInstance("\\\\172.20.0\\jsp$\\docsfiscal\\REJUD\\LogoRetangular.png");
                                         img.setAbsolutePosition(72, 775);
                                         document.add(img);
          
@@ -104,7 +104,7 @@ public class GeradorPdf {
             document.close();
         }
         try {
-            Desktop.getDesktop().open(new File("Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()));
+            Desktop.getDesktop().open(new File("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
         } catch (IOException ex) {
             Util.mensagemErro(Util.getMensagemErro(ex));
         }
