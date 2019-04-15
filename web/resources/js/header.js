@@ -26,6 +26,19 @@ function  saltarConta(param){
         $("#txtConta").focus();
     }
     
+    
+   
+    
    
     
 }
+
+ function informarValorAcima(param){
+         var parametro = param;
+         
+         
+     
+   swal(parametro);
+        
+        
+    }

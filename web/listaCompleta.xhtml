@@ -116,6 +116,10 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+                            <h:commandButton  value=" Pdf"  class="btn btn-link"  style="width: 60px; font-size: 8pt"   >
+
+                                <f:ajax   listener="#{controleListaCompleta.gerarPdf(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
 
 
 
@@ -270,7 +274,7 @@
                     <h:inputText id="valorBase" value="#{controleListaCompleta.complementoPoupanca.valorBase}" style="width: 100px">
 
                         <f:converter converterId="converterMoney"></f:converter>
-                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
                     </h:inputText>
 
 

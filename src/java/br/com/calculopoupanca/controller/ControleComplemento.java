@@ -9,10 +9,12 @@ import br.com.calculopoupanca.model.dao.ComplementoDAO;
 import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import util.Util;
 
 /**
  *
@@ -20,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ControleComplemento implements Serializable {
+public class ControleComplemento extends ControleGenerico implements Serializable {
 
     /**
      * @return the daoObservacao
@@ -113,6 +115,16 @@ public class ControleComplemento implements Serializable {
        
        
         
+    }
+    
+    
+    
+     public void informarValorAcima(){
+        calcularValorAcordo();
+        
+        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("5000.00"))>=1){
+            Util.mensagemErro("Favor gerar extrato para despacho");
+        }
     }
     
     

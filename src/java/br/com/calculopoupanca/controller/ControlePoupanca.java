@@ -521,4 +521,15 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
+    
+    
+    
+    public void informarValorAcima(){
+        calcularValorAcordo();
+        
+        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000"))>=0){
+            Util.mensagemErro("Favor gerar extrato para despacho");
+        }
+    }
+    
 }

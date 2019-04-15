@@ -7,6 +7,7 @@ package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
+import br.com.calculopoupanca.model.pdf.GeradorPdf;
 import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
 import endidades.Funcionario;
@@ -14,6 +15,7 @@ import endidades.IdPoupanca;
 import endidades.Observacao;
 import endidades.Plano;
 import endidades.Poupanca;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -549,4 +551,26 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
+    
+    
+    
+    
+     public void informarValorAcima(){
+        calcularValorAcordo();
+        
+        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000"))>=0){
+            Util.mensagemErro("Favor gerar extrato para despacho");
+        }
+    }
+     
+     
+     public void gerarPdf(IdPoupanca idpoupanca) throws IOException{
+         
+         GeradorPdf geradorPdf = new GeradorPdf();
+        setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
+        
+       geradorPdf.gerarDocumento(getPoupanca());
+         
+     }
+     
 }
