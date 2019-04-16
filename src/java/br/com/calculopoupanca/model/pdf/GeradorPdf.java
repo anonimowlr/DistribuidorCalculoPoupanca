@@ -6,14 +6,12 @@
 package br.com.calculopoupanca.model.pdf;
 
 import br.com.calculopoupanca.util.Utils;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -41,11 +39,12 @@ public class GeradorPdf {
         Document document = new Document();
         
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
             
               document.open();
               
-                                        Image img = Image.getInstance("\\\\172.20.0\\jsp$\\docsfiscal\\REJUD\\LogoRetangular.png");
+                                        Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/LogoRetangular.png");
+                                        //Image img = Image.getInstance("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\LogoRetangular.png");
                                         img.setAbsolutePosition(72, 775);
                                         document.add(img);
          
@@ -104,7 +103,16 @@ public class GeradorPdf {
             document.close();
         }
         try {
-            Desktop.getDesktop().open(new File("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
+            if(Desktop.isDesktopSupported()){
+                
+            Desktop.getDesktop().open(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf"));
+            } else{
+             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler" + "/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString()+ ".pdf");   
+            }
+            
+           
+            
+            
         } catch (IOException ex) {
             Util.mensagemErro(Util.getMensagemErro(ex));
         }
