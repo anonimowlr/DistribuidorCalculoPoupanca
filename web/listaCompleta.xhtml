@@ -132,7 +132,7 @@
                 <div class="table-responsive">
 
 
-                    <h:dataTable value="#{controleListaCompleta.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controleListaCompleta.isEditar()}">
+                    <h:dataTable id="listaComplemento" value="#{controleListaCompleta.poupanca.listaComplementoPoupanca}" var="c"    class="table table-hover" style="font-size: 7pt"   rendered="#{controleListaCompleta.isEditar()}">
                         <div align="center">
                             <f:facet name="header" >
 
@@ -217,7 +217,7 @@
                             <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?'))
                                         return false"   >
 
-                                <f:ajax   listener="#{controleComplemento.excluir(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                                <f:ajax   listener="#{controleComplemento.excluir(c.id)}"   execute="@this" render="fomIndex" event="click" ></f:ajax>
                             </h:commandButton>
 
 
