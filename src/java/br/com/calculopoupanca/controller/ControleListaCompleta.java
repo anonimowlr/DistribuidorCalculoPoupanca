@@ -18,7 +18,6 @@ import endidades.Poupanca;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -564,12 +563,14 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     }
      
      
-     public void gerarPdf(IdPoupanca idpoupanca) throws IOException{
+     public void gerarPdf(IdPoupanca idpoupanca) throws IOException, InterruptedException {
          
          GeradorPdf geradorPdf = new GeradorPdf();
         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
         
        geradorPdf.gerarDocumento(getPoupanca());
+       geradorPdf.download(getPoupanca());
+       
          
      }
      

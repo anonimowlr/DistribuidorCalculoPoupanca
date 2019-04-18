@@ -116,9 +116,8 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                            <h:commandButton  value=" Pdf"  class="btn btn-link"  style="width: 60px; font-size: 8pt"   >
+                            <h:commandButton  value=" Pdf"  class="btn btn-link"  style="width: 60px; font-size: 8pt"  action="#{controleListaCompleta.gerarPdf(p.idPoupanca)}" >
 
-                                <f:ajax   listener="#{controleListaCompleta.gerarPdf(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
 
 
