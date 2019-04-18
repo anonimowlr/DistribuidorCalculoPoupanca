@@ -24,6 +24,7 @@
 
 
             <h:form id="fomIndex" prependId="false">
+                <h:outputLabel value="#{controleListaCompleta.estadoTela}"></h:outputLabel>
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
@@ -112,7 +113,7 @@
 
                         <h:column >
                             <f:facet name="header" >AÇÃO</f:facet>
-                            <h:commandButton  value="Acessar"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"   >
+                            <h:commandButton  value="Acessar"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"  onclick="window.scroll(0,0)" >
 
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
@@ -239,6 +240,9 @@
                 </h:commandButton>
                 <h:commandButton       value="Voltar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
                     <f:ajax   listener="#{controleListaCompleta.mudarParaBuscar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
+                <h:commandButton       value="Desitir" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
+                    <f:ajax   listener="#{controleListaCompleta.desistir()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
                 <h:panelGrid columns="2" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">

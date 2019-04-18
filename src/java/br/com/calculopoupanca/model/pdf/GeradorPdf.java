@@ -45,28 +45,31 @@ public class GeradorPdf {
         Document document = new Document();
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
 
             document.open();
 
             //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/LogoRetangular.png");
             //Image img = Image.getInstance("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\LogoRetangular.png");
             //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
-            Image img = Image.getInstance("/opt/apache-tomcat-8.5.39/webapps/utilitario/LogoRetangular.png");
+            Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
             img.setAbsolutePosition(72, 775);
             document.add(img);
 
-            PdfPTable table = new PdfPTable(new float[]{15f, 8f, 7f});
-            PdfPCell celulaNome = new PdfPCell(new Phrase("Poupador"));
-            celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celulaDataNasc = new PdfPCell(new Phrase("CPF"));
-            celulaDataNasc.setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celulaSexo = new PdfPCell(new Phrase("Valor Direito"));
-            celulaSexo.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPTable table = new PdfPTable(new float[]{15f, 8f, 7f,7f});
+            PdfPCell celulaPoupador = new PdfPCell(new Phrase("Poupador"));
+            celulaPoupador.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaCpf = new PdfPCell(new Phrase("CPF"));
+            celulaCpf.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaValorBruto = new PdfPCell(new Phrase("Valor Direito Bruto"));
+            celulaValorBruto.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaValorApurado = new PdfPCell(new Phrase("Valor Apurado"));
+            celulaValorApurado.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-            table.addCell(celulaNome);
-            table.addCell(celulaDataNasc);
-            table.addCell(celulaSexo);
+            table.addCell(celulaPoupador);
+            table.addCell(celulaCpf);
+            table.addCell(celulaValorBruto);
+            table.addCell(celulaValorApurado);
 
             Paragraph p = new Paragraph();
             p.add(new Phrase("NPJ: " + poupanca.getIdPoupanca().getNpj().toString()));
@@ -86,10 +89,12 @@ public class GeradorPdf {
                 PdfPCell celula1 = new PdfPCell(new Phrase(complementoPoupanca.getPoupador()));
                 PdfPCell celula2 = new PdfPCell(new Phrase(complementoPoupanca.getCpf()));
                 PdfPCell celula3 = new PdfPCell(new Phrase(Utils.converterToMoney(complementoPoupanca.getSomatorioPoupador().toString())));
+                PdfPCell celula4 = new PdfPCell(new Phrase(Utils.converterToMoney(complementoPoupanca.getValorApurado().toString())));
 
                 table.addCell(celula1);
                 table.addCell(celula2);
                 table.addCell(celula3);
+                table.addCell(celula4);
 
             }
 
@@ -117,7 +122,7 @@ public class GeradorPdf {
         
         String nomeArquivo = "Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf";
         
-        FileInputStream inputStream = new FileInputStream(new File("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
         OutputStream out = externalContext.getResponseOutputStream();
         byte[] buffer = new byte[1024];
         int lenght;

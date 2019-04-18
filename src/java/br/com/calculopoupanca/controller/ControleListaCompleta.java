@@ -574,4 +574,15 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
          
      }
      
+     
+     
+     public void desistir(){
+         
+         getPoupanca().setFunciAvocado(null);
+         getPoupanca().setDataAvocacao(null);
+         getPoupanca().setAvocado(null);
+         salvar();
+         
+         
+     }
 }

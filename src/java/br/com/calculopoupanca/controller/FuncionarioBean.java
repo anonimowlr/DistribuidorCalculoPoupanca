@@ -36,7 +36,7 @@ public class FuncionarioBean extends CrudBean<Funcionario, FuncionarioDAO>{
     @PostConstruct // teste para executar instrução ao iniciar ete bean
     public void init(){
         
-            if(usuario.getFuncao()== 4438 || usuario.getFuncao()== 4750 
+            if(usuario.getFuncao()== 4438 || usuario.getFuncao()== 4750 || usuario.getFuncao()== 4438 || usuario.getFuncao()== 4665
                     || usuario.getFuncao()== 7001){
                 
                 mudarParaCargoGerencial();

@@ -38,7 +38,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     /**
      * @return the daoObservacao
      */
-    private String estadoTela = "";
+    private String estadoTela = "buscar";
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private Plano plano;

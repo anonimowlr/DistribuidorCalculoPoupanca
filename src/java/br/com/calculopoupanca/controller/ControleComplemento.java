@@ -27,20 +27,13 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
     /**
      * @return the daoObservacao
      */
-   
-    
-
-
     private ComplementoPoupanca complementoPoupanca;
-   
-    private List<ComplementoPoupanca> listaComplemento = new ArrayList<>();
-     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
-       
-       
-       
+    private List<ComplementoPoupanca> listaComplemento = new ArrayList<>();
+    private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
+
     public ControleComplemento() {
-   daoComplementoPoupanca = new ComplementoDAO<>();
+        daoComplementoPoupanca = new ComplementoDAO<>();
     }
 
     /**
@@ -84,49 +77,41 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
     public void setDaoComplementoPoupanca(ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca) {
         this.daoComplementoPoupanca = daoComplementoPoupanca;
     }
-  
-  
-    
-    
-   
-    public void buscar(){
-       // getDaoComplementoPoupanca().getEm().clear();
+
+    public void buscar() {
+        // getDaoComplementoPoupanca().getEm().clear();
         setListaComplemento(getDaoComplementoPoupanca().getListaObjetos());
     }
-    
-    
-    public void excluir(Integer id){
+
+    public void excluir(Integer id) {
+
+         complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
+
+        getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
+        daoComplementoPoupanca.deletar(complementoPoupanca);
+
        
-        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
-        
-        
-       complementoPoupanca.getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
-       
-       getDaoComplementoPoupanca().deletar(complementoPoupanca);
-       
-        
-    }
-    public void excluirBaseGerencial(Integer id){
-       
-        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
-        
-       getDaoComplementoPoupanca().getListaObjetos().remove(complementoPoupanca);
-       daoComplementoPoupanca.deletar(complementoPoupanca);
-       
-       
-        
+
     }
     
     
-    
-     public void informarValorAcima(){
+     
+
+    public void excluirBaseGerencial(Integer id) {
+
+        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
+
+        getDaoComplementoPoupanca().getListaObjetos().remove(complementoPoupanca);
+        daoComplementoPoupanca.deletar(complementoPoupanca);
+
+    }
+
+    public void informarValorAcima() {
         calcularValorAcordo();
-        
-        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("5000.00"))>=1){
+
+        if (getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("5000.00")) >= 1) {
             Util.mensagemErro("Favor gerar extrato para despacho");
         }
     }
-    
-    
-   
+
 }
