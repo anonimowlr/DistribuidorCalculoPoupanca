@@ -6,8 +6,10 @@
 package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.ComplementoDAO;
+import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import endidades.ComplementoPoupanca;
 import endidades.IdPoupanca;
+import endidades.Poupanca;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,12 +30,13 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
      * @return the daoObservacao
      */
     private ComplementoPoupanca complementoPoupanca;
-
+    private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private List<ComplementoPoupanca> listaComplemento = new ArrayList<>();
     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
     public ControleComplemento() {
         daoComplementoPoupanca = new ComplementoDAO<>();
+        daoPoupanca = new PoupancaDAO<>();
     }
 
     /**
@@ -85,24 +88,38 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
 
     public void excluir(Integer id) {
 
-         complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
-         getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(complementoPoupanca);
-         daoComplementoPoupanca.deletar(complementoPoupanca);
-      
+        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+       
+        getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
+        getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
 
        
+        if (getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().size() > 0) {
+            getDaoPoupanca().somarValorPoupador(getComplementoPoupanca().getPoupanca());
+
+            getDaoPoupanca().atribuirFaixas(getComplementoPoupanca().getPoupanca());
+
+            getDaoPoupanca().salvar(getComplementoPoupanca().getPoupanca());
+
+        }
 
     }
-    
-    
-     
 
     public void excluirBaseGerencial(Integer id) {
 
-        complementoPoupanca = getDaoComplementoPoupanca().localizar(id);
+        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+        Poupanca poupanca = getComplementoPoupanca().getPoupanca();
+        getDaoComplementoPoupanca().getListaObjetos().remove(getComplementoPoupanca());
+        getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
 
-        getDaoComplementoPoupanca().getListaObjetos().remove(complementoPoupanca);
-        daoComplementoPoupanca.deletar(complementoPoupanca);
+        if (poupanca.getListaComplementoPoupanca().size() > 0) {
+            getDaoPoupanca().somarValorPoupador(poupanca);
+
+            getDaoPoupanca().atribuirFaixas(getComplementoPoupanca().getPoupanca());
+
+            getDaoPoupanca().salvar(poupanca);
+
+        }
 
     }
 
@@ -112,6 +129,20 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
         if (getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("5000.00")) >= 1) {
             Util.mensagemErro("Favor gerar extrato para despacho");
         }
+    }
+
+    /**
+     * @return the daoPoupanca
+     */
+    public PoupancaDAO<Poupanca, IdPoupanca> getDaoPoupanca() {
+        return daoPoupanca;
+    }
+
+    /**
+     * @param daoPoupanca the daoPoupanca to set
+     */
+    public void setDaoPoupanca(PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca) {
+        this.daoPoupanca = daoPoupanca;
     }
 
 }

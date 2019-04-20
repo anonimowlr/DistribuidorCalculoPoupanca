@@ -155,10 +155,10 @@ public class ControleGerencial implements Serializable {
     
     
     public void teste(){
-        complementoPoupanca = getComplementoPoupanca();
-        poupanca = getPoupanca();
-        idPoupanca = getIdPoupanca();
-        listaComplementoPoupanca = getListaComplementoPoupanca();
+        setComplementoPoupanca(getComplementoPoupanca());
+        setPoupanca(getPoupanca());
+        setIdPoupanca(getIdPoupanca());
+        setListaComplementoPoupanca(getListaComplementoPoupanca());
         Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " +  getIdPoupanca().getNpj()+  getComplementoPoupanca().getPoupador());
        
     }

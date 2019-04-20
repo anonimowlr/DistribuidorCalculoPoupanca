@@ -5,6 +5,7 @@
  */
 package br.com.calculopoupanca.controller;
 
+import br.com.calculopoupanca.model.dao.ComplementoDAO;
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import br.com.calculopoupanca.model.pdf.GeradorPdf;
@@ -34,7 +35,7 @@ import util.Util;
  */
 @ManagedBean
 @ViewScoped
-public class ControleListaCompleta extends ControleGenerico implements Serializable  {
+public class ControleListaCompleta extends ControleGenerico implements Serializable {
 
     /**
      * @return the daoObservacao
@@ -52,16 +53,15 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 
-    
-    
+    private List<ComplementoPoupanca> listaComplemento = new ArrayList<>();
+    private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
+
     @PostConstruct
-    public void init(){
+    public void init() {
         buscar();
-        
+
     }
-    
-    
-    
+
     public void mostrarConteudo() {
         System.out.println(getObservacao());
     }
@@ -81,11 +81,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
     }
 
-   
-
     public ControleListaCompleta() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
+        daoComplementoPoupanca = new ComplementoDAO<>();
     }
 
     public void buscar() {
@@ -93,7 +92,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         mudarParaBuscar();
         setListaPoupanca(getDaoPoupanca().getListaPoupanca());
         setListaPoupanca(getListaPoupanca());
-       
+
     }
 
     public void novo() {
@@ -114,10 +113,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     }
 
     public void teste() {
-        complementoPoupanca = getComplementoPoupanca();
-        poupanca = getPoupanca();
-        idPoupanca = getIdPoupanca();
-        listaComplementoPoupanca = getListaComplementoPoupanca();
+        setComplementoPoupanca(getComplementoPoupanca());
+        setPoupanca(getPoupanca());
+        setIdPoupanca(getIdPoupanca());
+        setListaComplementoPoupanca(getListaComplementoPoupanca());
         Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " + getIdPoupanca().getNpj() + getComplementoPoupanca().getPoupador());
 
     }
@@ -214,8 +213,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
         if (!verAvocacao() && (!verDuplaAvocacao())) {
-           
-          
+
             avocar();
             mudarParaEditar();
         }
@@ -227,7 +225,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
         Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
-        if (getPoupanca().getAvocado() != null && (! getPoupanca().getFunciAvocado().equals(usuario.getChave()))) {
+        if (getPoupanca().getAvocado() != null && (!getPoupanca().getFunciAvocado().equals(usuario.getChave()))) {
             Util.mensagemErro("Registro já está em tratamento!!");
             return true;
         } else {
@@ -236,28 +234,25 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         }
     }
 
-    
-    public boolean verDuplaAvocacao(){
-        
+    public boolean verDuplaAvocacao() {
+
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
         Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
-        for (Poupanca poupanca1 :getDaoPoupanca().getListaTodos()) {
-            if(poupanca1.getFunciAvocado()!=null && poupanca1.getFunciAvocado().equals(usuario.getChave()) && (!poupanca1.equals(getPoupanca()) && getPoupanca().getFunciAvocado()==null) ){
-                
-             
-                
+        for (Poupanca poupanca1 : getDaoPoupanca().getListaTodos()) {
+            if (poupanca1.getFunciAvocado() != null && poupanca1.getFunciAvocado().equals(usuario.getChave()) && (!poupanca1.equals(getPoupanca()) && getPoupanca().getFunciAvocado() == null)) {
+
                 Util.mensagemErro("Você deve tratar o NPJ: " + poupanca1.getIdPoupanca().getNpj());
-                
+
                 return true;
-               
+
             }
-            
+
         }
         return false;
     }
-    
+
     public void editarComplemento(Integer index) {
 
         mudarParaEditarComplemento();
@@ -500,13 +495,12 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             getComplementoPoupanca().setFunci(usuario.getChave());
 
             calcularValorAcordo();
-            
+
             getDaoPoupanca().somarValorPoupador(getPoupanca());
-            
-          
-             getDaoPoupanca().atribuirFaixas(getPoupanca());
+
+            getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
-            
+
             mudarParaEditar();
         } catch (Exception e) {
 
@@ -550,39 +544,76 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
-    
-    
-    
-    
-     public void informarValorAcima(){
+
+    public void informarValorAcima() {
         calcularValorAcordo();
-        
-        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000"))>=0){
+
+        if (getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000")) >= 0) {
             Util.mensagemErro("Favor gerar extrato para despacho");
         }
     }
-     
-     
-     public void gerarPdf(IdPoupanca idpoupanca) throws IOException, InterruptedException {
-         
-         GeradorPdf geradorPdf = new GeradorPdf();
+
+    public void gerarPdf(IdPoupanca idpoupanca) throws IOException, InterruptedException {
+        getDaoPoupanca().getEm().clear();
+        GeradorPdf geradorPdf = new GeradorPdf();
         setPoupanca(getDaoPoupanca().localizarPorChaveComposta(idpoupanca));
+
+        geradorPdf.gerarDocumento(getPoupanca());
+        geradorPdf.download(getPoupanca());
+
+    }
+
+    public void desistir() {
+
+        getPoupanca().setFunciAvocado(null);
+        getPoupanca().setDataAvocacao(null);
+        getPoupanca().setAvocado(null);
+        salvar();
+
+    }
+
+    public void excluir(Integer id) {
+
+        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+        getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
+        getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
+
+        if(getPoupanca().getListaComplementoPoupanca().size()>0){
+        getDaoPoupanca().somarValorPoupador(getPoupanca());
+
+        getDaoPoupanca().atribuirFaixas(getPoupanca());
+        salvarParcial();  
+        }
         
-       geradorPdf.gerarDocumento(getPoupanca());
-       geradorPdf.download(getPoupanca());
-       
-         
-     }
-     
-     
-     
-     public void desistir(){
-         
-         getPoupanca().setFunciAvocado(null);
-         getPoupanca().setDataAvocacao(null);
-         getPoupanca().setAvocado(null);
-         salvar();
-         
-         
-     }
+
+    }
+
+    /**
+     * @return the listaComplemento
+     */
+    public List<ComplementoPoupanca> getListaComplemento() {
+        return listaComplemento;
+    }
+
+    /**
+     * @param listaComplemento the listaComplemento to set
+     */
+    public void setListaComplemento(List<ComplementoPoupanca> listaComplemento) {
+        this.listaComplemento = listaComplemento;
+    }
+
+    /**
+     * @return the daoComplementoPoupanca
+     */
+    public ComplementoDAO<ComplementoPoupanca, IdPoupanca> getDaoComplementoPoupanca() {
+        return daoComplementoPoupanca;
+    }
+
+    /**
+     * @param daoComplementoPoupanca the daoComplementoPoupanca to set
+     */
+    public void setDaoComplementoPoupanca(ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca) {
+        this.daoComplementoPoupanca = daoComplementoPoupanca;
+    }
+
 }

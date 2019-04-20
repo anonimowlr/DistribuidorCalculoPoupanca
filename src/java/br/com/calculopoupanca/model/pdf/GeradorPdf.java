@@ -45,14 +45,12 @@ public class GeradorPdf {
         Document document = new Document();
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
 
             document.open();
 
-            //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsfiscal/REJUD/LogoRetangular.png");
-            //Image img = Image.getInstance("\\\\172.20.0.33\\jsp$\\docsfiscal\\REJUD\\LogoRetangular.png");
             //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
-            Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
+            Image img = Image.getInstance("/opt/apache-tomcat-8.5.39/webapps/utilitario/LogoRetangular.png");
             img.setAbsolutePosition(72, 775);
             document.add(img);
 
@@ -99,7 +97,7 @@ public class GeradorPdf {
             }
 
             document.add(table);
-
+            
 
         } catch (FileNotFoundException | DocumentException ex) {
             Util.mensagemErro(Util.getMensagemErro(ex));
@@ -122,7 +120,7 @@ public class GeradorPdf {
         
         String nomeArquivo = "Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf";
         
-        FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        FileInputStream inputStream = new FileInputStream(new File("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
         OutputStream out = externalContext.getResponseOutputStream();
         byte[] buffer = new byte[1024];
         int lenght;

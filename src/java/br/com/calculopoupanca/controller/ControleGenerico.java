@@ -38,18 +38,14 @@ public class ControleGenerico implements Serializable {
     /**
      * @return the daoObservacao
      */
-    private String estadoTela = "buscar";
-    private Poupanca poupanca;
+   
+    
     private ComplementoPoupanca complementoPoupanca;
-    private Plano plano;
-    private Observacao observacao;
-    private IdPoupanca idPoupanca;
-    private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
-    private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
-    private List<Observacao> listaObservacao = new ArrayList<>();
+    
+   
     private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
 
-    private List<Poupanca> listaPoupanca = new ArrayList<>();
+    
 
   
 
@@ -118,39 +114,6 @@ public class ControleGenerico implements Serializable {
 
     }
 
-    public ControleGenerico() {
-        daoPoupanca = new PoupancaDAO<>();
-        daoObservacao = new ObservacaoDAO<>();
-    }
-
-    /**
-     * @return the estadoTela
-     */
-    public String getEstadoTela() {
-        return estadoTela;
-    }
-
-    /**
-     * @param estadoTela the estadoTela to set
-     */
-    public void setEstadoTela(String estadoTela) {
-        this.estadoTela = estadoTela;
-    }
-
-    /**
-     * @return the poupanca
-     */
-    public Poupanca getPoupanca() {
-        return poupanca;
-    }
-
-    /**
-     * @param poupanca the poupanca to set
-     */
-    public void setPoupanca(Poupanca poupanca) {
-        this.poupanca = poupanca;
-    }
-
     /**
      * @return the complementoPoupanca
      */
@@ -163,90 +126,6 @@ public class ControleGenerico implements Serializable {
      */
     public void setComplementoPoupanca(ComplementoPoupanca complementoPoupanca) {
         this.complementoPoupanca = complementoPoupanca;
-    }
-
-    /**
-     * @return the plano
-     */
-    public Plano getPlano() {
-        return plano;
-    }
-
-    /**
-     * @param plano the plano to set
-     */
-    public void setPlano(Plano plano) {
-        this.plano = plano;
-    }
-
-    /**
-     * @return the observacao
-     */
-    public Observacao getObservacao() {
-        return observacao;
-    }
-
-    /**
-     * @param observacao the observacao to set
-     */
-    public void setObservacao(Observacao observacao) {
-        this.observacao = observacao;
-    }
-
-    /**
-     * @return the idPoupanca
-     */
-    public IdPoupanca getIdPoupanca() {
-        return idPoupanca;
-    }
-
-    /**
-     * @param idPoupanca the idPoupanca to set
-     */
-    public void setIdPoupanca(IdPoupanca idPoupanca) {
-        this.idPoupanca = idPoupanca;
-    }
-
-    /**
-     * @return the daoPoupanca
-     */
-    public PoupancaDAO<Poupanca, IdPoupanca> getDaoPoupanca() {
-        return daoPoupanca;
-    }
-
-    /**
-     * @param daoPoupanca the daoPoupanca to set
-     */
-    public void setDaoPoupanca(PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca) {
-        this.daoPoupanca = daoPoupanca;
-    }
-
-    /**
-     * @return the daoObservacao
-     */
-    public ObservacaoDAO<Observacao, IdPoupanca> getDaoObservacao() {
-        return daoObservacao;
-    }
-
-    /**
-     * @param daoObservacao the daoObservacao to set
-     */
-    public void setDaoObservacao(ObservacaoDAO<Observacao, IdPoupanca> daoObservacao) {
-        this.daoObservacao = daoObservacao;
-    }
-
-    /**
-     * @return the listaObservacao
-     */
-    public List<Observacao> getListaObservacao() {
-        return listaObservacao;
-    }
-
-    /**
-     * @param listaObservacao the listaObservacao to set
-     */
-    public void setListaObservacao(List<Observacao> listaObservacao) {
-        this.listaObservacao = listaObservacao;
     }
 
     /**
@@ -263,19 +142,4 @@ public class ControleGenerico implements Serializable {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
 
-    /**
-     * @return the listaPoupanca
-     */
-    public List<Poupanca> getListaPoupanca() {
-        return listaPoupanca;
-    }
-
-    /**
-     * @param listaPoupanca the listaPoupanca to set
-     */
-    public void setListaPoupanca(List<Poupanca> listaPoupanca) {
-        this.listaPoupanca = listaPoupanca;
-    }
-
-   
 }

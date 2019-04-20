@@ -5,6 +5,7 @@
  */
 package br.com.calculopoupanca.controller;
 
+import br.com.calculopoupanca.model.dao.ComplementoDAO;
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import br.com.calculopoupanca.util.Utils;
@@ -48,6 +49,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
     private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
+     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 
@@ -80,6 +82,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
+        daoComplementoPoupanca = new ComplementoDAO<>();
     }
 
     public void buscar() {
@@ -110,10 +113,10 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     
     
     public void teste(){
-        complementoPoupanca = getComplementoPoupanca();
-        poupanca = getPoupanca();
-        idPoupanca = getIdPoupanca();
-        listaComplementoPoupanca = getListaComplementoPoupanca();
+        setComplementoPoupanca(getComplementoPoupanca());
+        setPoupanca(getPoupanca());
+        setIdPoupanca(getIdPoupanca());
+        setListaComplementoPoupanca(getListaComplementoPoupanca());
         Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " +  getIdPoupanca().getNpj()+  getComplementoPoupanca().getPoupador());
        
     }
@@ -531,5 +534,41 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             Util.mensagemErro("Favor gerar extrato para despacho");
         }
     }
+    
+    
+    
+    public void excluir(Integer id) {
+
+        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+       
+        getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
+        getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
+
+       
+        if (getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().size() > 0) {
+            getDaoPoupanca().somarValorPoupador(getComplementoPoupanca().getPoupanca());
+
+            getDaoPoupanca().atribuirFaixas(getComplementoPoupanca().getPoupanca());
+
+            getDaoPoupanca().salvar(getComplementoPoupanca().getPoupanca());
+
+        }
+
+    }
+
+    /**
+     * @return the daoComplementoPoupanca
+     */
+    public ComplementoDAO<ComplementoPoupanca, IdPoupanca> getDaoComplementoPoupanca() {
+        return daoComplementoPoupanca;
+    }
+
+    /**
+     * @param daoComplementoPoupanca the daoComplementoPoupanca to set
+     */
+    public void setDaoComplementoPoupanca(ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca) {
+        this.daoComplementoPoupanca = daoComplementoPoupanca;
+    }
+
     
 }
