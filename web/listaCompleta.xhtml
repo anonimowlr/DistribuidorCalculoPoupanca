@@ -25,7 +25,7 @@
 
             <h:form id="fomIndex" prependId="false">
 
-                <p:messages autoUpdate="true" closable="true"></p:messages>
+                <p:messages autoUpdate="true" showDetail="true" closable="true"></p:messages>
 
                 <h:panelGrid columns="11" id="painelFiltro" rendered="#{controleListaCompleta.isBuscar()}" >
                     <h:outputLabel value="Ordenar:"></h:outputLabel>
@@ -55,7 +55,7 @@
 
 
 
-                    <h:dataTable value="#{controleListaCompleta.daoPoupanca.listaObjetos}" var="p" class="table" style="font-size: 7pt" rendered="#{controleListaCompleta.isBuscar()}"  id="listagem">
+                    <h:dataTable value="#{controleListaCompleta.daoPoupanca.listaObjetos}" var="p" class="table table-hover" style="font-size: 7pt" rendered="#{controleListaCompleta.isBuscar()}"  id="listagem">
 
                         <f:facet name="header">
                             #{controleListaCompleta.daoPoupanca.mensagemNavegacao()}
@@ -148,7 +148,7 @@
 
                         </h:column>
                         <h:column>
-                            <f:facet name="header">CPF</f:facet>
+                            <f:facet name="header">CPF/CNPJ</f:facet>
                             <h:outputText value="#{c.cpf}"></h:outputText>
 
                         </h:column>
@@ -237,8 +237,8 @@
                 <h:commandButton       value="Novo Poupador" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
                     <f:ajax   listener="#{controleListaCompleta.novoComplemento()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
-                <h:commandButton       value="Voltar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
-                    <f:ajax   listener="#{controleListaCompleta.mudarParaBuscar()}" execute="@all" render="@all" event="click" ></f:ajax>
+                <h:commandButton       value="Voltar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" immediate="true" >
+                    <f:ajax   listener="#{controleListaCompleta.mudarParaBuscar()}" execute="@all" render="@all" event="click" immediate="true" ></f:ajax>
                 </h:commandButton>
                 <h:commandButton       value="Desitir" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
                     <f:ajax   listener="#{controleListaCompleta.desistir()}" execute="@all" render="@all" event="click" ></f:ajax>
@@ -254,9 +254,22 @@
                     <h:inputText id="poupador" value="#{controleListaCompleta.complementoPoupanca.poupador}" style="width: 400px" >
                         <f:ajax listener="#{controleListaCompleta.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
                     </h:inputText>
+                    <h:outputLabel value="Tipo Pessoa"></h:outputLabel>
+                    <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px">
+                        <f:selectItem itemLabel="Física" itemValue="fisica" ></f:selectItem> 
+                        <f:selectItem itemLabel="Jurídica" itemValue="juridica"></f:selectItem> 
+                        <f:ajax execute="@this"  render="@form"  event="change"  immediate="true"></f:ajax>
+                    </h:selectOneMenu>
 
-                    <h:outputLabel value="CPF:"></h:outputLabel>
-                    <p:inputMask mask="999.999.999-99" value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  ></p:inputMask>
+                   <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
+                   <p:inputMask id="cpfInput" validator="validaCpf" value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" ></p:inputMask>
+                    
+                    <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
+                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}"></p:inputMask>
+                    
+                    
+                    
+                    
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia" value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
 
@@ -315,11 +328,11 @@
                     <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
                         <f:ajax   listener="#{controleListaCompleta.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
                     </h:commandButton>
-                    <h:commandButton   value="Voltar" class="btn btn-info" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
-                        <f:ajax   listener="#{controleListaCompleta.voltar()}" execute="@all" render="@all" event="click"></f:ajax>
+                    <h:commandButton   value="Voltar" class="btn btn-info" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}" immediate="true">
+                        <f:ajax   listener="#{controleListaCompleta.voltar()}" execute="@all" render="@all" event="click" immediate="true"></f:ajax>
                     </h:commandButton>
                     <h:commandButton   value="Limpar" class="btn btn-danger" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
-                        <f:ajax   listener="#{controleListaCompleta.limpar()}" execute="@all" render="@all" event="click"></f:ajax>
+                        <f:ajax   listener="#{controleListaCompleta.limpar()}" execute="@all" render="@all" event="click" ></f:ajax>
                     </h:commandButton>
 
                 </h:panelGrid>

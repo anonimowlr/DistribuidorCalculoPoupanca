@@ -39,7 +39,7 @@ public class ControleGenerico implements Serializable {
      * @return the daoObservacao
      */
    
-    
+    private String tipoPessoa  = "fisica";
     private ComplementoPoupanca complementoPoupanca;
     
    
@@ -142,4 +142,27 @@ public class ControleGenerico implements Serializable {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
 
+    /**
+     * @return the tipoPessoa
+     */
+    public String getTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    /**
+     * @param tipoPessoa the tipoPessoa to set
+     */
+    public void setTipoPessoa(String tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
+    
+     public boolean isPessoaJuridica() {
+
+        return "juridica".equals(getTipoPessoa());
+    }
+
+     
+     public void mudarParaPessoaJuridica() {
+        setTipoPessoa("juridica");
+    }
 }

@@ -40,6 +40,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
      * @return the daoObservacao
      */
     private String estadoTela = "buscar";
+   
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private Plano plano;
@@ -49,7 +50,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
     private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
-     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
+    private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
 

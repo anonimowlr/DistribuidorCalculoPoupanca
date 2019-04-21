@@ -114,6 +114,28 @@ public class Utils {
         return numeroTratado;
     }
     
+    
+     public static String limparPontos(String v) {
+        String numeroTratado = "";
+
+        int tamanhoValorRecebido = v.length();
+
+        for (int i = 0; i < tamanhoValorRecebido; i++) {
+            String num = v.subSequence(i, i + 1).toString();
+
+           
+
+            if (num.equals("0") || num.equals("1") || num.equals("2") || num.equals("3") || num.equals("4") || num.equals("5") || num.equals("6") || num.equals("7") || num.equals("8") || num.equals("9")) {
+                numeroTratado = numeroTratado + num;
+
+            }
+        }
+
+        return numeroTratado;
+    }
+    
+    
+    
     public static String converterToMoney(String v) {
         String numeroTratado = "";
 

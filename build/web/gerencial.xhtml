@@ -23,12 +23,12 @@
 
 
 
-            <h:form id="fomIndex" >
+            <h:form id="fomIndex" prependId="false">
 
                 <p:messages autoUpdate="true" closable="true"></p:messages>
 
 
-                <h:panelGrid columns="2" rendered="#{controleGerencial.isEditarGerencial()}" id="painelNovaDemanda">
+                <h:panelGrid   columns="2" rendered="#{controleGerencial.isEditarGerencial()}" id="painelNovaDemanda">
                   <f:facet name="header">
                         <h:outputLabel  value="Inclusão de nova demanda" style="color: blue"></h:outputLabel>
                     </f:facet>
@@ -61,9 +61,21 @@
                     
                     
                      </h:inputText>
-                      <h:outputLabel value="CPF/CNPJ:"></h:outputLabel>
-                          <p:inputMask mask="999.999.999-99" id="cpf" value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px"></p:inputMask> 
+                      
+                      
+                    <h:outputLabel value="Tipo Pessoa"></h:outputLabel>
+                    <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px">
+                        <f:selectItem itemLabel="Física" itemValue="fisica" ></f:selectItem> 
+                        <f:selectItem itemLabel="Jurídica" itemValue="juridica"></f:selectItem> 
+                        <f:ajax execute="@this"  render="painelNovaDemanda"  event="change"  immediate="true"></f:ajax>
+                    </h:selectOneMenu>
+
+                   <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
+                   <p:inputMask id="cpfInput" validator="validaCpf" value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" ></p:inputMask>
                     
+                    <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
+                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controleGerencial.complementoPoupanca.cpf}" style="width: 150px; height: 30px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}"></p:inputMask>
+
                      
                      
                   
