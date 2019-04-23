@@ -45,19 +45,19 @@ public class GeradorPdf {
         Document document = new Document();
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf"));
 
             document.open();
 
             //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
-            Image img = Image.getInstance("/opt/apache-tomcat-8.5.39/webapps/utilitario/LogoRetangular.png");
+            Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
             img.setAbsolutePosition(72, 775);
             document.add(img);
 
             PdfPTable table = new PdfPTable(new float[]{15f, 8f, 7f,7f});
             PdfPCell celulaPoupador = new PdfPCell(new Phrase("Poupador"));
             celulaPoupador.setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celulaCpf = new PdfPCell(new Phrase("CPF"));
+            PdfPCell celulaCpf = new PdfPCell(new Phrase("CPF/CNPJ"));
             celulaCpf.setHorizontalAlignment(Element.ALIGN_CENTER);
             PdfPCell celulaValorBruto = new PdfPCell(new Phrase("Valor Direito Bruto"));
             celulaValorBruto.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -120,7 +120,7 @@ public class GeradorPdf {
         
         String nomeArquivo = "Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf";
         
-        FileInputStream inputStream = new FileInputStream(new File("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
         OutputStream out = externalContext.getResponseOutputStream();
         byte[] buffer = new byte[1024];
         int lenght;
