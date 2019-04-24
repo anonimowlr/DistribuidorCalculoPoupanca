@@ -265,6 +265,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         }
 
+        verificarLitispendencia();
+
     }
 
     /**
@@ -578,13 +580,12 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
         getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
 
-        if(getPoupanca().getListaComplementoPoupanca().size()>0){
-        getDaoPoupanca().somarValorPoupador(getPoupanca());
+        if (getPoupanca().getListaComplementoPoupanca().size() > 0) {
+            getDaoPoupanca().somarValorPoupador(getPoupanca());
 
-        getDaoPoupanca().atribuirFaixas(getPoupanca());
-        salvarParcial();  
+            getDaoPoupanca().atribuirFaixas(getPoupanca());
+            salvarParcial();
         }
-        
 
     }
 
@@ -614,6 +615,21 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
      */
     public void setDaoComplementoPoupanca(ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca) {
         this.daoComplementoPoupanca = daoComplementoPoupanca;
+    }
+
+    public void verificarLitispendencia() {
+
+        for (Poupanca p : getListaPoupanca()) {
+            int i = 0;
+            while (i < p.getListaComplementoPoupanca().size()) {
+                if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString()!= p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()) {
+                    Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj());
+                }
+                i++;
+            }
+
+        }
+
     }
 
 }
