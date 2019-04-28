@@ -618,12 +618,13 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     }
 
     public void verificarLitispendencia() {
-
-        for (Poupanca p : getListaPoupanca()) {
+        for (Poupanca p : getDaoPoupanca().getListaTodos()) {
             int i = 0;
             while (i < p.getListaComplementoPoupanca().size()) {
-                if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString()!= p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()) {
-                    Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj());
+                if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && (!getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString().equals(p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()))) {
+
+                    Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString());
+                    break;
                 }
                 i++;
             }
