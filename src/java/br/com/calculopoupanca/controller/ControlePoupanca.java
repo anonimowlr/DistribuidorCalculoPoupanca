@@ -244,6 +244,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
 
         }
 
+        verificarLitispendencia();
     }
 
     /**
@@ -571,5 +572,20 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         this.daoComplementoPoupanca = daoComplementoPoupanca;
     }
 
-    
+     public void verificarLitispendencia() {
+        for (Poupanca p : getDaoPoupanca().getListaTodos()) {
+            int i = 0;
+            while (i < p.getListaComplementoPoupanca().size()) {
+                if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && (!getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString().equals(p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()))) {
+
+                    Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString());
+                    break;
+                }
+                i++;
+            }
+
+        }
+
+    }
+
 }

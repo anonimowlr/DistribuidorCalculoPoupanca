@@ -195,10 +195,14 @@
                        
 
                     <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
-                    <p:inputMask id="cpfInput" validator="validaCpf" value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" ></p:inputMask>
+                    <p:inputMask id="cpfInput" validator="validaCpf" value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
+                        <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
+                    </p:inputMask>
                     
                     <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
-                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}"></p:inputMask>
+                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}">
+                        <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
+                    </p:inputMask>
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia"   value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" size="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
