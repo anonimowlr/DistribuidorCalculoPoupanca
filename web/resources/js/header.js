@@ -32,6 +32,29 @@ function  saltarConta(param){
    
     
 }
+function  formataConta(param){
+        var valor = param;
+        var num;
+        var numero;
+        var i;
+        for(i=0;i<valor.length;i++){
+           num = valor.substring(i,i+1);
+         
+          numero+=num;
+       
+       alert(numero);
+            
+        }
+       
+        
+       
+       
+        $("#txtConta").focus();
+        $("#txtConta").val((numero));
+        
+        
+}
+
 
  function informarValorAcima(param){
          var parametro = param;

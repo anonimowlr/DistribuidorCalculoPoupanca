@@ -427,5 +427,39 @@ public class Utils {
         return (d);
     }
    
+public static String tratarConta(String v) {
+        String numeroTratado = "";
 
+        int tamanhoValorRecebido = v.length();
+        
+        
+        
+
+        for (int i = 0; i < tamanhoValorRecebido; i++) {
+            String num = v.subSequence(i, i + 1).toString();
+            
+         
+            if ( i==tamanhoValorRecebido-2) {
+                num = num + "-";
+                numeroTratado = numeroTratado + num;
+            }
+
+
+            if (num.equals("0") || num.equals("1") || num.equals("2") || num.equals("3") || num.equals("4") || num.equals("5") || num.equals("6") || num.equals("7") || num.equals("8") || num.equals("9")) {
+                numeroTratado = numeroTratado + num;
+
+            }
+            
+               if(tamanhoValorRecebido>4){
+                 if(i == tamanhoValorRecebido- 5 || i == tamanhoValorRecebido- 8 || i == tamanhoValorRecebido-11 || i == tamanhoValorRecebido-14){
+                   numeroTratado = numeroTratado + ".";  
+                 }
+                   
+                     
+              
+            }
+        }
+
+        return  numeroTratado;
+    }
 }

@@ -168,7 +168,7 @@
                         <h:column>
                             <f:facet name="header">CONTA</f:facet>
                             <h:outputText value="#{c.conta}">
-
+                              <f:converter converterId="converterConta"></f:converter>
                             </h:outputText>
 
                         </h:column>
@@ -281,9 +281,9 @@
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <p:inputMask id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" mask="999.999.999-9"  >
+                    <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onblur='formataConta(document.getElementById("txtConta").value)'   >
                         <f:converter converterId="converterConta"></f:converter>
-                    </p:inputMask>
+                    </p:inputText>
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
                         <f:converter converterId="converterDate"></f:converter>

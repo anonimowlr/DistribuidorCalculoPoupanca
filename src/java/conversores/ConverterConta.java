@@ -58,7 +58,7 @@ public class ConverterConta implements  Serializable,Converter{
              
              Long obj = (Long) o;
              
-             String retorno =(o.toString());
+             String retorno =Utils.tratarConta(o.toString());
              
              
              return  retorno;
