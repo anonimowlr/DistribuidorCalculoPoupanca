@@ -35,21 +35,34 @@ function  saltarConta(param){
 function  formataConta(param){
         var valor = param;
         var num;
-        var numero;
+        var numero = "";
         var i;
         for(i=0;i<valor.length;i++){
            num = valor.substring(i,i+1);
          
-          numero+=num;
+         
+         if(num === "0" || num === "1"||num === "2" ||num === "3" ||num === "4" ||num === "5" ||num === "6" ||num === "7" ||num === "8" ||num === "9"){
+             
+          numero = numero + num;
+        }
+        
+        if(i === valor.length - 6 || i === valor.length - 10 || i === valor.length - 14 || i === valor.length - 17){
+          numero = numero + "." ;
+        }
+        
+         
+         if(i === valor.length - 2){
+           numero = numero + "-";
+         }
+        
        
-       alert(numero);
+          
             
         }
        
         
        
        
-        $("#txtConta").focus();
         $("#txtConta").val((numero));
         
         

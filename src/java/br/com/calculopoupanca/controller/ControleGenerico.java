@@ -5,26 +5,16 @@
  */
 package br.com.calculopoupanca.controller;
 
-import br.com.calculopoupanca.model.dao.ObservacaoDAO;
-import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
-import endidades.Funcionario;
-import endidades.IdPoupanca;
-import endidades.Observacao;
-import endidades.Plano;
-import endidades.Poupanca;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import util.Util;
 
 /**

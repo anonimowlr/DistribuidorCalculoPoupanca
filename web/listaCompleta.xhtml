@@ -92,10 +92,10 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">RESPONSÁVEL ATUAL</f:facet>
-                            
+
                             <p:outputLabel value=" #{p.funciAvocado}" onclick="window.open('https://humanograma.intranet.bb.com.br/#{p.funciAvocado}')" title="Verificar  a chave : #{p.funciAvocado}"  >
                             </p:outputLabel>
-                               
+
                         </h:column>
                         <h:column>
                             <f:facet name="header">DATA INICIO TRATAMENTO</f:facet>
@@ -112,10 +112,14 @@
 
                         <h:column >
                             <f:facet name="header" >AÇÃO</f:facet>
-                            <h:commandButton  value="Acessar"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"  onclick="window.scroll(0,0)" >
+                            <h:commandButton  value="Acessar"  class="btn btn-primary"  style="width: 60px; font-size: 8pt"  onclick="window.scroll(0, 0)" >
 
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+
+                           
+
+
                             <h:commandButton  value=" Pdf"  class="btn btn-link"  style="width: 60px; font-size: 8pt"  action="#{controleListaCompleta.gerarPdf(p.idPoupanca)}" >
 
                             </h:commandButton>
@@ -168,7 +172,7 @@
                         <h:column>
                             <f:facet name="header">CONTA</f:facet>
                             <h:outputText value="#{c.conta}">
-                              <f:converter converterId="converterConta"></f:converter>
+                                <f:converter converterId="converterConta"></f:converter>
                             </h:outputText>
 
                         </h:column>
@@ -213,6 +217,11 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+                             
+                            <h:commandButton       value="Duplicar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" style="width: 60px; font-size: 8pt">
+                                <f:ajax   listener="#{controleListaCompleta.duplicar(c.id)}" execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
+                            
                             <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?'))
                                         return false"   >
 
@@ -261,27 +270,27 @@
                         <f:ajax execute="@this"  render="@form"  event="change"  immediate="true"></f:ajax>
                     </h:selectOneMenu>
 
-                   <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
-                   <p:inputMask id="cpfInput" validator="validaCpf" value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
-                       <f:ajax listener="#{controleListaCompleta.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
-                   </p:inputMask>
-                    
+                    <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
+                    <p:inputMask id="cpfInput" validator="validaCpf" value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
+                        <f:ajax listener="#{controleListaCompleta.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
+                    </p:inputMask>
+
                     <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
                     <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controleListaCompleta.complementoPoupanca.cpf}" style="width: 150px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}">
-                       <f:ajax listener="#{controleListaCompleta.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
-                    
+                        <f:ajax listener="#{controleListaCompleta.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
+
                     </p:inputMask>
-                    
-                    
-                    
-                    
+
+
+
+
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia" value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
 
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onblur='formataConta(document.getElementById("txtConta").value)'   >
+                    <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'   >
                         <f:converter converterId="converterConta"></f:converter>
                     </p:inputText>
                     <h:outputLabel value="Data base:"></h:outputLabel>

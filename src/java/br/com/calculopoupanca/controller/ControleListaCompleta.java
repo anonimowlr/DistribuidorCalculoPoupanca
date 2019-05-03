@@ -126,6 +126,36 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
+    public void duplicar(Integer index) {
+        
+        
+        // mudarParaEditarComplemento();
+
+        for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
+            if (c.getId().equals(index)) {
+                setComplementoPoupanca(c);
+                break;
+            }
+
+        }
+        
+        
+        
+        
+        
+        
+       
+        setEstadoTela("editarComplementoNovo");
+        
+         String nomeMemoria  = getComplementoPoupanca().getPoupador();
+         String cpfMemoria = getComplementoPoupanca().getCpf();
+        
+        setComplementoPoupanca(new ComplementoPoupanca());
+        getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
+        
+        getComplementoPoupanca().setPoupador(nomeMemoria);
+        getComplementoPoupanca().setCpf(cpfMemoria);
+    }
 
     public String listar() {
         return "tratamento?faces-redirect=true";

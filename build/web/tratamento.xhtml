@@ -210,7 +210,7 @@
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <p:inputText id="txtConta" value="#{controlePoupanca.complementoPoupanca.conta}"   >
+                    <p:inputText id="txtConta" value="#{controlePoupanca.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'   >
                         <f:converter converterId="converterConta"></f:converter>
                     </p:inputText>
 

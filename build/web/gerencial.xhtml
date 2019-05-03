@@ -160,6 +160,7 @@
                         <p:column headerText="CONTA" filterBy="#{p.conta}" filterMatchMode="contains" sortBy="#{p.conta}" filterStyle="width:90%; height:30px">
 
                             <h:outputText value="#{p.conta}" >
+                                <f:converter converterId="converterConta"></f:converter>
 
                             </h:outputText>
 
