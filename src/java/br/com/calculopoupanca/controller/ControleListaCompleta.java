@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -139,6 +140,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         }
         
+       
         
         
         
@@ -149,12 +151,14 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         
          String nomeMemoria  = getComplementoPoupanca().getPoupador();
          String cpfMemoria = getComplementoPoupanca().getCpf();
+         int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
         
         setComplementoPoupanca(new ComplementoPoupanca());
-        getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
+        getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
         
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
+       
     }
 
     public String listar() {
@@ -248,6 +252,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             mudarParaEditar();
         }
 
+        Collections.sort(getPoupanca().getListaComplementoPoupanca());
     }
 
     public boolean verAvocacao() {
