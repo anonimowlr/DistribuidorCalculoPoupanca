@@ -253,7 +253,7 @@
                     <f:ajax   listener="#{controleListaCompleta.desistir()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
-                <h:panelGrid columns="2" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
+                <h:panelGrid  id="panelEdicaoComplemento" columns="2" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
                     <f:facet name="header">
                         <h:outputLabel  value=" NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj} " style="color: blue"></h:outputLabel>
                     </f:facet>
@@ -267,7 +267,7 @@
                     <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px">
                         <f:selectItem itemLabel="Física" itemValue="fisica" ></f:selectItem> 
                         <f:selectItem itemLabel="Jurídica" itemValue="juridica"></f:selectItem> 
-                        <f:ajax execute="@this"  render="@form"  event="change"  immediate="true"></f:ajax>
+                        <f:ajax execute="tipoPessoa"  render=":fomIndex"  event="change"  immediate="true"></f:ajax>
                     </h:selectOneMenu>
 
                     <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
@@ -286,17 +286,19 @@
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia" value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
-
+                       <f:ajax  execute="txtAgencia"  event="blur"></f:ajax>
+   
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'   >
+                    <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'  >
                         <f:converter converterId="converterConta"></f:converter>
+                         <f:ajax  execute="txtConta"  event="blur"></f:ajax>
                     </p:inputText>
                     <h:outputLabel value="Data base:"></h:outputLabel>
-                    <p:inputMask mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
+                    <p:inputMask  mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >
                         <f:converter converterId="converterDate"></f:converter>
-                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase txtAgencia txtConta" render="valorAcordo selectPlano valorBase txtAgencia txtConta" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>

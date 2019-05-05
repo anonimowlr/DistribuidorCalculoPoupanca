@@ -155,9 +155,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
-        
+        getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
+        salvarParcial();
        
     }
 
