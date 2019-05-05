@@ -587,5 +587,42 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         }
 
     }
+     
+     
+     public void duplicar(Integer index) {
+        
+        
+        // mudarParaEditarComplemento();
+
+        for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
+            if (c.getId().equals(index)) {
+                setComplementoPoupanca(c);
+                break;
+            }
+
+        }
+        
+       
+        
+        
+        
+        
+        
+       
+        setEstadoTela("editarComplementoNovo");
+        
+         String nomeMemoria  = getComplementoPoupanca().getPoupador();
+         String cpfMemoria = getComplementoPoupanca().getCpf();
+         int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
+        
+        setComplementoPoupanca(new ComplementoPoupanca());
+        getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
+        getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
+        getComplementoPoupanca().setPoupador(nomeMemoria);
+        getComplementoPoupanca().setCpf(cpfMemoria);
+        salvarParcial();
+       
+    }
+
 
 }

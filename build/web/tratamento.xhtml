@@ -148,6 +148,9 @@
 
                                 <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+                             <h:commandButton       value="Duplicar" class="btn btn-link"  style="width: 60px; font-size: 8pt">
+                                <f:ajax   listener="#{controlePoupanca.duplicar(c.id)}" execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
                             <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?')) return false"   >
 
                                 <f:ajax   listener="#{controlePoupanca.excluir(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
