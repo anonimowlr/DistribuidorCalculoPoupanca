@@ -127,6 +127,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
+   
+    
     public void duplicar(Integer index) {
         
         
@@ -156,6 +158,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
+        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size()-1);
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();

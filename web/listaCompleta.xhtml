@@ -140,6 +140,8 @@
                             <f:facet name="header" >
 
                                 <h:outputLabel value="DADOS DO NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj}"></h:outputLabel>
+                               <br/>
+                                <h:outputLabel value="Total poupadores: #{controleListaCompleta.poupanca.listaComplementoPoupanca.size()}"></h:outputLabel>
                             </f:facet> 
                         </div>>
 
@@ -240,7 +242,7 @@
 
                 </div>
 
-                <h:commandButton   value="Salvar Npj" class="btn btn-primary" rendered="#{controleListaCompleta.isEditar()}">
+                <h:commandButton   value="Finalizar Npj" class="btn btn-primary" rendered="#{controleListaCompleta.isEditar()}">
                     <f:ajax listener="#{controleListaCompleta.avaliarParaSalvar()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
                 <h:commandButton       value="Novo Poupador" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
@@ -341,11 +343,8 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="11" >
-                    <h:commandButton   value="Ok" class="btn btn-success" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
+                    <h:commandButton   value="Salvar" class="btn btn-success" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}">
                         <f:ajax   listener="#{controleListaCompleta.complementar()}" execute="@all" render="@all" event="click"></f:ajax>
-                    </h:commandButton>
-                    <h:commandButton   value="Voltar" class="btn btn-info" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}" immediate="true">
-                        <f:ajax   listener="#{controleListaCompleta.voltar()}" execute="@this" render="@form" event="click" immediate="true"></f:ajax>
                     </h:commandButton>
                     <h:commandButton     value="Limpar" class="btn btn-danger" rendered="#{controleListaCompleta.editarComplemento  || controleListaCompleta.editarComplementoNovo}" immediate="true">
                         <f:ajax   listener="#{controleListaCompleta.limpar()}" execute="@this" render="@form" event="click" ></f:ajax>

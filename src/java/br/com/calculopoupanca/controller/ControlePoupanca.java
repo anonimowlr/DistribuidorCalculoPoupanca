@@ -618,6 +618,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
+        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size()-1);
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
