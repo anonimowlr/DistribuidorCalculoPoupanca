@@ -227,7 +227,7 @@
                     <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px">
                         
                         <f:converter converterId="converterMoney"></f:converter>
-                         <f:ajax listener="#{controlePoupanca.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                         <f:ajax listener="#{controlePoupanca.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="blur"></f:ajax>
                     </h:inputText>
 
 
@@ -256,7 +256,7 @@
 
 
 
-                    <h:outputLabel value="Complemento obs:" ></h:outputLabel>
+                    <h:outputLabel value="Complemento:" ></h:outputLabel>
                     <h:inputTextarea value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
 
 

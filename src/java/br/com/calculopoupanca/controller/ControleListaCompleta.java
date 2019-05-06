@@ -127,13 +127,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
-   
-    
-    public void duplicar(Integer index) {
-        
-        
-        // mudarParaEditarComplemento();
 
+    public void duplicar(Integer index) {
+
+        // mudarParaEditarComplemento();
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
             if (c.getId().equals(index)) {
                 setComplementoPoupanca(c);
@@ -141,28 +138,21 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             }
 
         }
-        
-       
-        
-        
-        
-        
-        
-       
+
         setEstadoTela("editarComplementoNovo");
-        
-         String nomeMemoria  = getComplementoPoupanca().getPoupador();
-         String cpfMemoria = getComplementoPoupanca().getCpf();
-         int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
-        
+
+        String nomeMemoria = getComplementoPoupanca().getPoupador();
+        String cpfMemoria = getComplementoPoupanca().getCpf();
+        int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
+
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
-        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size()-1);
+        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size() - 1);
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
-       
+
     }
 
     public String listar() {
@@ -456,7 +446,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             for (ComplementoPoupanca complemento : getPoupanca().getListaComplementoPoupanca()) {
 
-                if (complemento.getPlano() == null || complemento.getPlano().equals("")) {
+                if ((complemento.getPlano() == null || complemento.getPlano().equals("")) &&  (complemento.getObservacao()== null || complemento.getObservacao().equals(""))) {
 
                     Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
@@ -524,16 +514,32 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         try {
 
-            if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
-                Util.mensagemErro("Conta ou agência inválidos");
-                return;
-            }
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
+
+            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC")) {
+                if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
+                    Util.mensagemErro("Combinação de obervação e  complemento não permitida");
+                    return;
+                } else {
+
+                    salvarParcial();
+
+                    mudarParaEditar();
+                    return;
+
+                }
+
+            }
+
+            if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
+                Util.mensagemErro("Conta ou agência inválidos");
+                return;
+            }
 
             calcularValorAcordo();
 

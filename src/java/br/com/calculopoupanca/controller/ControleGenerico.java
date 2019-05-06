@@ -41,6 +41,7 @@ public class ControleGenerico implements Serializable {
 
     
     public void calcularValorAcordo() {
+        
 
         try {
             Date data1 = Utils.formataData("01/06/1987");
@@ -51,6 +52,8 @@ public class ControleGenerico implements Serializable {
             Date data6 = Utils.formataData("31/01/1991");
             Date data7 = Utils.formataData("01/03/1990");
             Date data8 = Utils.formataData("15/03/1990");
+            
+            
 
             if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
                 getComplementoPoupanca().setPlano("BRESSER");
@@ -69,7 +72,7 @@ public class ControleGenerico implements Serializable {
                  
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
-                getComplementoPoupanca().setPlano("COLOR II");
+                getComplementoPoupanca().setPlano("COLLOR II");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
@@ -77,18 +80,18 @@ public class ControleGenerico implements Serializable {
                   
                  
             } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
-                getComplementoPoupanca().setPlano("COLOR I");
+                getComplementoPoupanca().setPlano("COLLOR I");
                 getComplementoPoupanca().setFazJus("NAO");
                 getComplementoPoupanca().setValorAcordo(null);
                
-                  getComplementoPoupanca().setObservacao("COLOR I");
+                  getComplementoPoupanca().setObservacao("COLLOR I");
                 
                 getComplementoPoupanca().setComplementoObs(null);
                 getComplementoPoupanca().setValorBase(null);
             } else {
                 getComplementoPoupanca().setFazJus("NAO");
                 getComplementoPoupanca().setValorAcordo(null);
-                getComplementoPoupanca().setObservacao(null);
+                //getComplementoPoupanca().setObservacao(null);
                 getComplementoPoupanca().setPlano("NAO FAZ JUS");
                 //getComplementoPoupanca().setComplementoObs(null);
                 getComplementoPoupanca().setValorBase(null);

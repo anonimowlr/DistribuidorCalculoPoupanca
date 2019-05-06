@@ -26,6 +26,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.apache.poi.hssf.record.PageBreakRecord;
 import util.Util;
 
 /**
@@ -40,7 +41,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
      * @return the daoObservacao
      */
     private String estadoTela = "buscar";
-   
+
     private Poupanca poupanca;
     private ComplementoPoupanca complementoPoupanca;
     private Plano plano;
@@ -49,7 +50,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
     private List<Observacao> listaObservacao = new ArrayList<>();
-    private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
+    private List<ComplementoPoupanca> listaComplementoPoupanca = new ArrayList<>();
     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
     private List<Poupanca> listaPoupanca = new ArrayList<>();
@@ -69,16 +70,16 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
 
         getComplementoPoupanca().setPoupador(getComplementoPoupanca().getPoupador().toUpperCase());
     }
+
     public void alterarTamanhoLetraEscritorio() {
 
-       getPoupanca().setEscritorioBB(getPoupanca().getEscritorioBB().toUpperCase());
+        getPoupanca().setEscritorioBB(getPoupanca().getEscritorioBB().toUpperCase());
     }
+
     public void alterarTamanhoLetraAdvogadoAdv() {
 
-       getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
+        getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
     }
-
-   
 
     public ControlePoupanca() {
         daoPoupanca = new PoupancaDAO<>();
@@ -98,28 +99,26 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         setEstadoTela("");
         setPoupanca(new Poupanca());
     }
+
     public void novoGerencial() {
-        
+
         setEstadoTela("editarGerencial");
         setPoupanca(new Poupanca());
         setIdPoupanca(new IdPoupanca());
         getPoupanca().setIdPoupanca(getIdPoupanca());
-      
+
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
-       
-      
-       
+
     }
-    
-    
-    public void teste(){
+
+    public void teste() {
         setComplementoPoupanca(getComplementoPoupanca());
         setPoupanca(getPoupanca());
         setIdPoupanca(getIdPoupanca());
         setListaComplementoPoupanca(getListaComplementoPoupanca());
-        Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " +  getIdPoupanca().getNpj()+  getComplementoPoupanca().getPoupador());
-       
+        Util.mensagemInformacao(getIdPoupanca().getCnj() + " - " + getIdPoupanca().getNpj() + getComplementoPoupanca().getPoupador());
+
     }
 
     public void novoComplemento() {
@@ -132,10 +131,6 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         return "tratamento?faces-redirect=true";
     }
 
-    
-    
-    
-    
     public void salvar() {
         boolean persistiu = false;
 
@@ -158,9 +153,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
 
         listar();
     }
-    
-    
-    
+
     public void salvarParcial() {
         boolean persistiu = false;
 
@@ -170,28 +163,20 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             persistiu = getDaoPoupanca().salvar(getPoupanca());
         }
 
-
-     
     }
-    
-    
-    
-    
-    
-    
 
     public void mudarParaEditar() {
         setEstadoTela("editar");
     }
 
-     public void mudarParaEditarGerencial() {
+    public void mudarParaEditarGerencial() {
         setEstadoTela("editarGerencial");
     }
-    
-    
+
     public void mudarParaEditarComplemento() {
         setEstadoTela("editarComplemento");
     }
+
     public void mudarParaEditarComplementoNovo() {
         setEstadoTela("editarComplementoNovo");
     }
@@ -210,12 +195,13 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         return "editarComplemento".equals(getEstadoTela());
 
     }
+
     public boolean isEditarComplementoNovo() {
 
         return "editarComplementoNovo".equals(getEstadoTela());
 
     }
-    
+
     public boolean isEditarGerencial() {
 
         return "editarGerencial".equals(getEstadoTela());
@@ -395,7 +381,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
 
             for (ComplementoPoupanca complemento : getPoupanca().getListaComplementoPoupanca()) {
 
-                if (complemento.getPlano()== null || complemento.getPlano().equals("")) {
+                if ((complemento.getPlano() == null || complemento.getPlano().equals("")) && (complemento.getObservacao()== null || complemento.getObservacao().equals("")) ) {
 
                     Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
@@ -463,23 +449,39 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public void complementar() {
 
         try {
-            
-            if(getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta()==null || getComplementoPoupanca().getConta().equals("")){
-               Util.mensagemErro("Conta ou agência inválidos");
-               return;
-            }
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
             Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
-           
+
+            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC")) {
+
+                if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
+                    Util.mensagemErro("Combinação de obervação e  complemento não permitida");
+                    return;
+                } else {
+
+                    salvarParcial();
+
+                    mudarParaEditar();
+                    return;
+
+                }
+
+            }
+
+            if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
+                Util.mensagemErro("Conta ou agência inválidos");
+                return;
+            }
+
             calcularValorAcordo();
             getDaoPoupanca().somarValorPoupador(getPoupanca());
             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
-          
+
             mudarParaEditar();
         } catch (Exception e) {
 
@@ -499,18 +501,15 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         getComplementoPoupanca().setComplementoObs(null);
     }
 
-    
-    
-    
-    public void voltar(){
-        if(isEditarComplementoNovo()){
-         getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
-             mudarParaEditar();
-             return;
+    public void voltar() {
+        if (isEditarComplementoNovo()) {
+            getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
+            mudarParaEditar();
+            return;
         }
-        
+
         mudarParaEditar();
-        
+
     }
 
     /**
@@ -526,27 +525,22 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public void setListaComplementoPoupanca(List<ComplementoPoupanca> listaComplementoPoupanca) {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
-    
-    
-    
-    public void informarValorAcima(){
+
+    public void informarValorAcima() {
         calcularValorAcordo();
-        
-        if(getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000"))>=0){
+
+        if (getComplementoPoupanca().getValorAcordo().compareTo(new BigDecimal("50000")) >= 0) {
             Util.mensagemErro("Favor gerar extrato para despacho");
         }
     }
-    
-    
-    
+
     public void excluir(Integer id) {
 
         setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
-       
+
         getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
         getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
 
-       
         if (getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().size() > 0) {
             getDaoPoupanca().somarValorPoupador(getComplementoPoupanca().getPoupanca());
 
@@ -572,7 +566,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         this.daoComplementoPoupanca = daoComplementoPoupanca;
     }
 
-     public void verificarLitispendencia() {
+    public void verificarLitispendencia() {
         for (Poupanca p : getDaoPoupanca().getListaTodos()) {
             int i = 0;
             while (i < p.getListaComplementoPoupanca().size()) {
@@ -587,13 +581,10 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         }
 
     }
-     
-     
-     public void duplicar(Integer index) {
-        
-        
-        // mudarParaEditarComplemento();
 
+    public void duplicar(Integer index) {
+
+        // mudarParaEditarComplemento();
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
             if (c.getId().equals(index)) {
                 setComplementoPoupanca(c);
@@ -601,29 +592,21 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             }
 
         }
-        
-       
-        
-        
-        
-        
-        
-       
+
         setEstadoTela("editarComplementoNovo");
-        
-         String nomeMemoria  = getComplementoPoupanca().getPoupador();
-         String cpfMemoria = getComplementoPoupanca().getCpf();
-         int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
-        
+
+        String nomeMemoria = getComplementoPoupanca().getPoupador();
+        String cpfMemoria = getComplementoPoupanca().getCpf();
+        int posicaoObjeto = getPoupanca().getListaComplementoPoupanca().indexOf(getComplementoPoupanca());
+
         setComplementoPoupanca(new ComplementoPoupanca());
         getPoupanca().getListaComplementoPoupanca().add((posicaoObjeto + 1), getComplementoPoupanca());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
-        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size()-1);
+        getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size() - 1);
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
-       
-    }
 
+    }
 
 }
