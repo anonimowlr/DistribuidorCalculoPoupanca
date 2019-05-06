@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.br.CPF;
  */
 @Entity
 @Table(name = "tb_complemento_poupanca")
-public class ComplementoPoupanca implements Serializable {
+public class ComplementoPoupanca implements Serializable, Comparable<ComplementoPoupanca> {
 
     @Id
     @Column(name = "id")
@@ -493,6 +493,20 @@ public class ComplementoPoupanca implements Serializable {
      */
     public void setConta(Long conta) {
         this.conta = conta;
+    }
+
+    @Override
+    public int compareTo(ComplementoPoupanca o) {
+        if(!this.poupador.equals(o.getPoupador())){
+            return -1;
+        } 
+        if(this.poupador.equals(o.getPoupador())){
+            return 1;
+        }
+        
+        
+        
+        return 0;
     }
 
     
