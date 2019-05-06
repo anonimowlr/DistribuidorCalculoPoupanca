@@ -462,6 +462,16 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
                 Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
 
                 getPoupanca().setStatus("TRATADO");
+                 for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
+                    if(c.getObservacao().equals("REDOC")){
+                       getPoupanca().setStatus("PENDENTE REDOC"); 
+                       break;
+                    }
+                     
+                }
+                
+                
+                
                 getPoupanca().setDataStatus(Utils.getDataAtualFormatoMysql());
                 getPoupanca().setAvocado(null);
                 getPoupanca().setDataAvocacao(null);
