@@ -463,7 +463,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
 
-            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC")) {
+            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC") || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
 
                 if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
                     Util.mensagemErro("Combinação de obervação e  complemento não permitida");
