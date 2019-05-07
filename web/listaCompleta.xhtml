@@ -117,7 +117,7 @@
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
 
-                           
+
 
 
                             <h:commandButton  value=" Pdf"  class="btn btn-link"  style="width: 60px; font-size: 8pt"  action="#{controleListaCompleta.gerarPdf(p.idPoupanca)}" >
@@ -140,7 +140,7 @@
                             <f:facet name="header" >
 
                                 <h:outputLabel value="DADOS DO NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj}"></h:outputLabel>
-                               <br/>
+                                <br/>
                                 <h:outputLabel value="Total poupadores: #{controleListaCompleta.poupanca.listaComplementoPoupanca.size()}"></h:outputLabel>
                             </f:facet> 
                         </div>>
@@ -219,11 +219,15 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                             
+
                             <h:commandButton       value="Duplicar" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" style="width: 60px; font-size: 8pt">
                                 <f:ajax   listener="#{controleListaCompleta.duplicar(c.id)}" execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                            
+
+                            <h:commandButton  value="Pdf CPF"  class="btn btn-link"  style="width: 60px; font-size: 8pt"  action="#{controleListaCompleta.gerarPdfIndividual(c.id)}" rendered="#{controleListaCompleta.isEditar()}" >
+
+                            </h:commandButton>
+
                             <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?'))
                                         return false"   >
 
@@ -254,6 +258,9 @@
                 <h:commandButton       value="Desitir" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
                     <f:ajax   listener="#{controleListaCompleta.desistir()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
+
+
+
 
                 <h:panelGrid  id="panelEdicaoComplemento" columns="2" rendered="#{controleListaCompleta.editarComplemento || controleListaCompleta.editarComplementoNovo}">
                     <f:facet name="header">
@@ -288,14 +295,14 @@
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia" value="#{controleListaCompleta.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
-                       <f:ajax  execute="txtAgencia"  event="blur"></f:ajax>
-   
+                        <f:ajax  execute="txtAgencia"  event="blur"></f:ajax>
+
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
                     <p:inputText id="txtConta" value="#{controleListaCompleta.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'  >
                         <f:converter converterId="converterConta"></f:converter>
-                         <f:ajax  execute="txtConta"  event="blur"></f:ajax>
+                        <f:ajax  execute="txtConta"  event="blur"></f:ajax>
                     </p:inputText>
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask  mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px" >

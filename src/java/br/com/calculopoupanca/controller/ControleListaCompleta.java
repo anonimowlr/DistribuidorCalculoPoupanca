@@ -152,6 +152,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
+        getDaoPoupanca().getEm().clear();
 
     }
 
@@ -619,6 +620,17 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         geradorPdf.download(getPoupanca());
 
     }
+    
+     public void gerarPdfIndividual(Integer index) throws IOException, InterruptedException {
+        getDaoPoupanca().getEm().clear();
+        GeradorPdf geradorPdf = new GeradorPdf();
+        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(index));
+
+        geradorPdf.gerarDocumentoIndividual(getComplementoPoupanca());
+        geradorPdf.download(getPoupanca());
+
+    }
+    
 
     public void desistir() {
 
