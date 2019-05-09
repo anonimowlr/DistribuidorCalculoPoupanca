@@ -115,38 +115,55 @@ public class GeradorPdf {
         Font font14pt = new Font(FontFamily.TIMES_ROMAN, 14);
         Font font10pt = new Font(FontFamily.HELVETICA, 10);
         Font font7pt = new Font(FontFamily.HELVETICA, 7);
+        Font font5pt = new Font(FontFamily.HELVETICA, 5);
 
         try {
-            //PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString() + ".pdf"));
-            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString() + ".pdf"));
+            //PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString() + ".pdf"));
 
             document.open();
 
-            //Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
-            Image img = Image.getInstance("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\LogoRetangular.png");
+            Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
+           // Image img = Image.getInstance("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\LogoRetangular.png");
             img.setAbsolutePosition(72, 765);
             document.add(img);
 
-            PdfPTable table = new PdfPTable(new float[]{8f,8f,8f,7f,7f});
+            PdfPTable table = new PdfPTable(new float[]{6f,6f,6f,6f,6f,6f,6f,6f});
            
-            PdfPCell celulaAgencia = new PdfPCell(new Phrase("Agência"));
-            celulaAgencia.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaAgencia = new PdfPCell(new Phrase("Agência",font7pt));
+            celulaAgencia.setVerticalAlignment(Element.ALIGN_CENTER);
             
-            PdfPCell celulaConta = new PdfPCell(new Phrase("Conta"));
+            
+            PdfPCell celulaConta = new PdfPCell(new Phrase("Contas vinculadas ao CPF/CNPJ",font7pt));
             celulaConta.setHorizontalAlignment(Element.ALIGN_CENTER);
             
             
-            PdfPCell celulaCpf = new PdfPCell(new Phrase("CPF/CNPJ"));
-            celulaCpf.setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celulaValorBruto = new PdfPCell(new Phrase("Valor Direito Bruto"));
-            celulaValorBruto.setHorizontalAlignment(Element.ALIGN_CENTER);
-            PdfPCell celulaValorApurado = new PdfPCell(new Phrase("Valor Apurado"));
+            PdfPCell celulaDataSaldo = new PdfPCell(new Phrase("Data do Saldo",font7pt));
+            celulaDataSaldo.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            PdfPCell celulaDataBase = new PdfPCell(new Phrase("Data Base",font7pt));
+            celulaDataBase.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            
+            PdfPCell celulaSaldo = new PdfPCell(new Phrase("Saldo",font7pt));
+            celulaSaldo.setHorizontalAlignment(Element.ALIGN_CENTER);
+           
+            PdfPCell celulaPlano = new PdfPCell(new Phrase("PLANO ECONÔMICO",font7pt));
+            celulaPlano.setHorizontalAlignment(Element.ALIGN_CENTER);
+           
+            PdfPCell celulaIndice = new PdfPCell(new Phrase("ÍNDICE",font7pt));
+            celulaIndice.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            PdfPCell celulaValorApurado = new PdfPCell(new Phrase("VALOR BASE CALCULADO A PARTIR DO SALDO",font5pt));
             celulaValorApurado.setHorizontalAlignment(Element.ALIGN_CENTER);
 
             table.addCell(celulaAgencia);
             table.addCell(celulaConta);
-            table.addCell(celulaCpf);
-            table.addCell(celulaValorBruto);
+            table.addCell(celulaDataSaldo);
+            table.addCell(celulaDataBase);
+            table.addCell(celulaSaldo);
+            table.addCell(celulaPlano);
+            table.addCell(celulaIndice);
             table.addCell(celulaValorApurado);
 
             Paragraph p = new Paragraph();
@@ -163,7 +180,7 @@ public class GeradorPdf {
             p3.add(new Phrase("ATUALIZAÇÃO DAS DIFERENÇAS COM BASE NOS PARÂMETROS DO ACORDO DA FEBRABAN",font10pt));
             p3.setAlignment(Element.ALIGN_CENTER);
             
-            p2.add(new Phrase("TITULAR: " + complementoPoupanca.getPoupador(),font7pt));
+            p2.add(new Phrase("TITULAR: " + complementoPoupanca.getPoupador() + " - CPF: " + complementoPoupanca.getCpf(),font7pt));
             p.add(new Phrase("PROCESSO/NPJ: " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString(),font7pt));
             //p.setAlignment(Element.ALIGN_RIGHT);
 
@@ -184,17 +201,36 @@ public class GeradorPdf {
                     continue;
                 }
 
-                PdfPCell celula1 = new PdfPCell(new Phrase(c.getAgencia().toString()));
-                PdfPCell celula2 = new PdfPCell(new Phrase(Utils.tratarConta(c.getConta().toString())));
-                PdfPCell celula3 = new PdfPCell(new Phrase(c.getCpf()));
-                PdfPCell celula4 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorAcordo().toString())));
-                PdfPCell celula5 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorAcordo().toString())));
+                PdfPCell celula1 = new PdfPCell(new Phrase(c.getAgencia().toString(),font7pt));
+                PdfPCell celula2 = new PdfPCell(new Phrase(Utils.tratarConta(c.getConta().toString()),font7pt));
+                PdfPCell celula3 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()),font7pt));
+                PdfPCell celula4 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()).subSequence(0, 2).toString(),font7pt));
+                PdfPCell celula5 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorBase().toString()),font7pt));
+                PdfPCell celula6 = new PdfPCell(new Phrase(c.getPlano(),font7pt));
+               
+                PdfPCell celula7 = null;
+                if(c.getPlano().equals("BRESSER")){
+                    celula7 = new PdfPCell(new Phrase("0,04277",font7pt));  
+                } else if(c.getPlano().equals("COLOR I")){
+                      celula7 = new PdfPCell(new Phrase("000000",font7pt));  
+                }else if(c.getPlano().equals("COLOR II")){
+                     celula7 = new PdfPCell(new Phrase("0,2235907655",font7pt));   
+                }else if(c.getPlano().equals("VERAO")){
+                      celula7 = new PdfPCell(new Phrase("4,09818",font7pt));  
+                }
+               
+               
+                
+                PdfPCell celula8 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorAcordo().toString()),font7pt));
 
                 table.addCell(celula1);
                 table.addCell(celula2);
                 table.addCell(celula3);
                 table.addCell(celula4);
                 table.addCell(celula5);
+                table.addCell(celula6);
+                table.addCell(celula7);
+                table.addCell(celula8);
 
             }
 
@@ -222,8 +258,8 @@ public class GeradorPdf {
         
         String nomeArquivo = "Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj().toString() + ".pdf";
         
-        //FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
-        FileInputStream inputStream = new FileInputStream(new File("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        //FileInputStream inputStream = new FileInputStream(new File("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
         OutputStream out = externalContext.getResponseOutputStream();
         byte[] buffer = new byte[1024];
         int lenght;
