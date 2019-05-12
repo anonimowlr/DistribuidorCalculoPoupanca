@@ -627,7 +627,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         setComplementoPoupanca(getDaoComplementoPoupanca().localizar(index));
 
         geradorPdf.gerarDocumentoIndividual(getComplementoPoupanca());
-        geradorPdf.download(getPoupanca());
+        geradorPdf.downloadIndividual(getComplementoPoupanca());
 
     }
     
