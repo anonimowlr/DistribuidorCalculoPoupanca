@@ -5,8 +5,10 @@
  */
 package br.com.calculopoupanca.controller;
 
+import br.com.calculopoupanca.model.dao.ComplementoDAO;
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
+import br.com.calculopoupanca.model.pdf.GeradorPdf;
 import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
 import endidades.Funcionario;
@@ -14,6 +16,7 @@ import endidades.IdPoupanca;
 import endidades.Observacao;
 import endidades.Plano;
 import endidades.Poupanca;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -46,6 +49,7 @@ public class ControleGerencial implements Serializable {
     private IdPoupanca idPoupanca;
     private PoupancaDAO<Poupanca, IdPoupanca> daoPoupanca;
     private ObservacaoDAO<Observacao, IdPoupanca> daoObservacao;
+    private ComplementoDAO<ComplementoPoupanca,IdPoupanca> daoComplemento;
     private List<Observacao> listaObservacao = new ArrayList<>();
     private List<ComplementoPoupanca> listaComplementoPoupanca= new ArrayList<>();
 
@@ -125,6 +129,7 @@ public class ControleGerencial implements Serializable {
     public ControleGerencial() {
         daoPoupanca = new PoupancaDAO<>();
         daoObservacao = new ObservacaoDAO<>();
+        daoComplemento = new ComplementoDAO<>();
     }
 
     public void buscar() {
@@ -551,6 +556,29 @@ public class ControleGerencial implements Serializable {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
     
+    public void gerarPdfIndividual(Integer index) throws IOException, InterruptedException {
+        getDaoPoupanca().getEm().clear();
+        GeradorPdf geradorPdf = new GeradorPdf();
+        setComplementoPoupanca(getDaoComplemento().localizar(index));
+
+        geradorPdf.gerarDocumentoIndividual(getComplementoPoupanca());
+        geradorPdf.downloadIndividual(getComplementoPoupanca());
+
+    }
+
+    /**
+     * @return the daoComplemento
+     */
+    public ComplementoDAO<ComplementoPoupanca,IdPoupanca> getDaoComplemento() {
+        return daoComplemento;
+    }
+
+    /**
+     * @param daoComplemento the daoComplemento to set
+     */
+    public void setDaoComplemento(ComplementoDAO<ComplementoPoupanca,IdPoupanca> daoComplemento) {
+        this.daoComplemento = daoComplemento;
+    }
     
    
 }

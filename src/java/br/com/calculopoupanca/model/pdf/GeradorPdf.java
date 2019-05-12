@@ -197,26 +197,29 @@ public class GeradorPdf {
             tabelaResumoHonorario.addCell(celulaHonorario);
             tabelaResumoFinal.addCell(celulaResumoFinal);
             
-
+            PdfPTable tabelaTitulo = new PdfPTable(new float[]{48f});
+            
+            PdfPCell celulaTitulo= new PdfPCell(new Phrase("ATUALIZAÇÃO DAS DIFERENÇAS COM BASE NOS PARÂMETROS DO ACORDO DA FEBRABAN",font8Boldpt));
+            celulaTitulo.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tabelaTitulo.addCell(celulaTitulo);
+           
             Paragraph p = new Paragraph();
             p.setIndentationLeft(47f);
             Paragraph p2 = new Paragraph();
             p2.setIndentationLeft(47f);
-            Paragraph p3 = new Paragraph();
-            p3.setIndentationLeft(47f);
+           
             
             document.add(new Paragraph(" "));
             document.add(new Paragraph(" "));
             document.add(new Paragraph(" "));
            
-            p3.add(new Phrase("ATUALIZAÇÃO DAS DIFERENÇAS COM BASE NOS PARÂMETROS DO ACORDO DA FEBRABAN",font10pt));
-            p3.setAlignment(Element.ALIGN_CENTER);
+           
             
             p2.add(new Phrase("TITULAR: " + complementoPoupanca.getPoupador() + " - CPF: " + complementoPoupanca.getCpf(),font7pt));
             p.add(new Phrase("PROCESSO/NPJ: " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString(),font7pt));
             //p.setAlignment(Element.ALIGN_RIGHT);
-
-            document.add(p3);
+             document.add(tabelaTitulo);
+            
             document.add(new Paragraph(" "));
            
             document.add(p2);
@@ -241,15 +244,16 @@ public class GeradorPdf {
                 PdfPCell celula2 = new PdfPCell(new Phrase(Utils.tratarConta(c.getConta().toString()),font7pt));
                 PdfPCell celula3 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()),font7pt));
                 PdfPCell celula4 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()).subSequence(0, 2).toString(),font7pt));
+                celula4.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula5 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorBase().toString()),font7pt));
                 PdfPCell celula6 = new PdfPCell(new Phrase(c.getPlano(),font7pt));
                
                 PdfPCell celula7 = null;
                 if(c.getPlano().equals("BRESSER")){
                     celula7 = new PdfPCell(new Phrase("0,04277",font7pt));  
-                } else if(c.getPlano().equals("COLOR I")){
+                } else if(c.getPlano().equals("COLLOR I")){
                       celula7 = new PdfPCell(new Phrase("000000",font7pt));  
-                }else if(c.getPlano().equals("COLOR II")){
+                }else if(c.getPlano().equals("COLLOR II")){
                      celula7 = new PdfPCell(new Phrase("0,2235907655",font7pt));   
                 }else if(c.getPlano().equals("VERAO")){
                       celula7 = new PdfPCell(new Phrase("4,09818",font7pt));  
