@@ -181,6 +181,8 @@
                         <h:column>
                             <f:facet name="header">VALOR BASE</f:facet>
                             <h:outputText value="#{c.valorBase}">
+                              
+                              <f:converter converterId="converterMoney"></f:converter>   
 
                             </h:outputText>
 
@@ -195,6 +197,7 @@
                         <h:column>
                             <f:facet name="header">VALOR ACORDO</f:facet>
                             <h:outputText value="#{c.valorAcordo}">
+                                 <f:converter converterId="converterMoney"></f:converter>
 
                             </h:outputText>
 
