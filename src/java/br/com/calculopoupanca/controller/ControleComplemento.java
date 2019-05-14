@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.Email;
 import util.Util;
 
 /**
@@ -35,8 +36,12 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
     private ComplementoDAO<ComplementoPoupanca, IdPoupanca> daoComplementoPoupanca;
 
     public ControleComplemento() {
+       
         daoComplementoPoupanca = new ComplementoDAO<>();
         daoPoupanca = new PoupancaDAO<>();
+        
+        
+        
     }
 
     /**

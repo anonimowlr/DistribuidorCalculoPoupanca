@@ -28,6 +28,7 @@ public class ComplementoDAO<T,D> extends DAOGenerico<ComplementoPoupanca, IdPoup
        ordem = "npj";
        maximoObjeto = 300000000;
        
+       
       
        
         
@@ -44,6 +45,7 @@ public class ComplementoDAO<T,D> extends DAOGenerico<ComplementoPoupanca, IdPoup
         String jpql = "From  " + classePersistente.getSimpleName() + " c " + " where " + " (c.plano = null )" + "  order by " + ordem;
 
         return em.createQuery(jpql).getResultList();
+        
     }
 
     /**

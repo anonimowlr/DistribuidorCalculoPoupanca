@@ -31,6 +31,7 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
         maximoObjeto = 3000000;
         chaveComposta = IdPoupanca.class;
         em.clear();
+        
 
     }
 

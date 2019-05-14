@@ -48,6 +48,7 @@ public class DAOGenerico<T,D> implements Serializable {
     
 
     public List<T> getListaObjetos() { // retorna consulta paginada
+      
         String jpql = "From " + classePersistente.getSimpleName();
         String where = " ";
         filtro = filtro.replace("[';-]", ""); // retirendo carateres de injeção de sql
@@ -74,6 +75,7 @@ public class DAOGenerico<T,D> implements Serializable {
 
 
       return   em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(maximoObjeto).getResultList();
+      
      
 
     }
