@@ -20,7 +20,6 @@ public class EntityManagerUtil {
     
     
     public static EntityManager getEntityManager(){
-        
         if(factory == null){
             factory = Persistence.createEntityManagerFactory("ModelPU");
         }
@@ -29,8 +28,7 @@ public class EntityManagerUtil {
             em = factory.createEntityManager();
         }
         
-       
         return em;
-    } 
+    }
     
 }
