@@ -180,17 +180,17 @@
 
                 <h:panelGrid columns="2" rendered="#{controlePoupanca.editarComplemento || controlePoupanca.editarComplementoNovo}">
                     <f:facet name="header">
-                        <h:outputLabel  value=" NPJ: #{controlePoupanca.poupanca.idPoupanca.npj} " style="color: blue"></h:outputLabel>
+                        <h:outputLabel  value=" NPJ: #{controlePoupanca.poupanca.idPoupanca.npj} " style="color: blue;height: 30px"></h:outputLabel>
                     </f:facet>
 
 
                     <h:outputLabel value="Poupador:"></h:outputLabel>
-                    <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px" >
+                    <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px;height: 30px" >
                         <f:ajax listener="#{controlePoupanca.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
                     </h:inputText>
                     
                     <h:outputLabel value="Tipo Pessoa"></h:outputLabel>
-                    <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px">
+                    <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px;height: 30px">
                         <f:selectItem itemLabel="Física" itemValue="fisica" ></f:selectItem> 
                         <f:selectItem itemLabel="Jurídica" itemValue="juridica"></f:selectItem> 
                         <f:ajax execute="@this"  render="@form"  event="change"  immediate="true"></f:ajax>
@@ -198,33 +198,33 @@
                        
 
                     <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
-                    <p:inputMask id="cpfInput" validator="validaCpf" value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
+                    <p:inputMask id="cpfInput" validator="validaCpf" value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px;height: 30px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
                         <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
                     </p:inputMask>
                     
                     <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
-                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}">
+                    <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px;height: 30px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}">
                         <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
-                    <h:inputText id="txtAgencia"   value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px" maxlength="4" size="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
+                    <h:inputText id="txtAgencia"   value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px;height: 30px" maxlength="4" size="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
                        
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
-                    <p:inputText id="txtConta" value="#{controlePoupanca.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)'   >
+                    <p:inputText id="txtConta" value="#{controlePoupanca.complementoPoupanca.conta}" onkeyup='formataConta(document.getElementById("txtConta").value)' style="height: 30px"   >
                         <f:converter converterId="converterConta"></f:converter>
                     </p:inputText>
 
                     <h:outputLabel value="Data base:"></h:outputLabel>
-                    <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px" >
+                    <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px;height: 30px" >
                         <f:converter converterId="converterDate"></f:converter>
                           <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
-                    <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px">
+                    <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px;height: 30px">
                         
                         <f:converter converterId="converterMoney"></f:converter>
                          <f:ajax listener="#{controlePoupanca.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="blur"></f:ajax>
@@ -233,7 +233,7 @@
 
 
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
-                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 150px;color: blue"  disabled="true">
+                    <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 150px;color: blue;height: 30px"  disabled="true">
                              <f:converter converterId="converterMoney"></f:converter>
                         <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano selectObs" event="focus" ></f:ajax>
                     </h:inputText>
