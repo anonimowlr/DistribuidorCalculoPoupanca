@@ -32,9 +32,9 @@ public class ConnectionFactory {
 
     
     
-        private static final String DB_USER ="f5078775";
+        private static final String DB_USER ="root";
   
-        private static final String DB_PASSWORD ="jwalter1983";
+        private static final String DB_PASSWORD ="root";
       
     
 
@@ -45,7 +45,7 @@ public class ConnectionFactory {
     
     public static Connection conectar(String banco) throws ErroSistema{
         
-         String DB_CONEXAO ="jdbc:mysql://172.20.0.33/" + banco;
+         String DB_CONEXAO ="jdbc:mysql://localhost/" + banco;
        
         
         try {

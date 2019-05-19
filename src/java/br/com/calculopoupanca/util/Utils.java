@@ -138,7 +138,20 @@ public class Utils {
     
     public static String converterToMoney(String v) {
         String numeroTratado = "";
-
+ 
+        String carater = v.subSequence(v.length()-2, v.length()-1).toString();
+        
+        if(v.subSequence(v.length()-2, v.length()-1).toString().equals(".") || v.subSequence(v.length()-2, v.length()).toString().equals(",")){
+         v = v + "0";   
+        }
+        
+        
+        if(v.subSequence(0, 1).toString().equals("-")){
+          v =  v.subSequence(1, v.length()).toString();
+          numeroTratado = "-";
+        }
+        
+        
         int tamanhoValorRecebido = v.length();
         
         
@@ -149,7 +162,7 @@ public class Utils {
             String num = v.subSequence(i, i + 1).toString();
             
          
-            if (num.equals(".") &&  i==tamanhoValorRecebido-3) {
+            if (num.equals(".") &&  (i==tamanhoValorRecebido-3 || i == tamanhoValorRecebido-2)) {
                 num = ",";
                 numeroTratado = numeroTratado + num;
             }
@@ -161,7 +174,7 @@ public class Utils {
             }
             
                if(tamanhoValorRecebido>4){
-                 if(i == tamanhoValorRecebido- 7 || i == tamanhoValorRecebido-10 || i == tamanhoValorRecebido-13){
+                 if(i == tamanhoValorRecebido- 7 || i == tamanhoValorRecebido-10){
                    numeroTratado = numeroTratado + ".";  
                  }
                    
@@ -172,7 +185,9 @@ public class Utils {
 
         return  numeroTratado;
     }
-    
+
+
+
     
     public static Double converterStringParaDouble(String v) {
         String numeroTratado = "";
