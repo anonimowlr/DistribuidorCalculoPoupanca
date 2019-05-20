@@ -139,17 +139,7 @@ public class Utils {
     public static String converterToMoney(String v) {
         String numeroTratado = "";
  
-        String carater = v.subSequence(v.length()-2, v.length()-1).toString();
         
-        if(v.subSequence(v.length()-2, v.length()-1).toString().equals(".") || v.subSequence(v.length()-2, v.length()).toString().equals(",")){
-         v = v + "0";   
-        }
-        
-        
-        if(v.subSequence(0, 1).toString().equals("-")){
-          v =  v.subSequence(1, v.length()).toString();
-          numeroTratado = "-";
-        }
         
         
         int tamanhoValorRecebido = v.length();

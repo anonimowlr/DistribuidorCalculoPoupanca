@@ -541,9 +541,9 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         }
     }
 
-    public void excluir(Integer id) {
+    public void excluir(ComplementoPoupanca complementoPoupanca) {
 
-        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+        setComplementoPoupanca(complementoPoupanca);
 
         getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
         getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
@@ -589,11 +589,11 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
 
     }
 
-    public void duplicar(Integer index) {
+    public void duplicar(ComplementoPoupanca complementoPoupanca) {
 
         // mudarParaEditarComplemento();
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
-            if (c.getId().equals(index)) {
+            if (c.equals(complementoPoupanca)) {
                 setComplementoPoupanca(c);
                 break;
             }

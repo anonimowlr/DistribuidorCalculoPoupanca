@@ -128,11 +128,11 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
 
-    public void duplicar(Integer index) {
+    public void duplicar(ComplementoPoupanca complementoPoupanca) {
 
         // mudarParaEditarComplemento();
         for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
-            if (c.getId().equals(index)) {
+            if (c.equals(complementoPoupanca)) {
                 setComplementoPoupanca(c);
                 break;
             }
@@ -153,6 +153,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
         getDaoPoupanca().getEm().clear();
+        
 
     }
 
@@ -621,10 +622,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
     }
     
-     public void gerarPdfIndividual(Integer index) throws IOException, InterruptedException {
+     public void gerarPdfIndividual(ComplementoPoupanca complementoPoupanca) throws IOException, InterruptedException {
         getDaoPoupanca().getEm().clear();
         GeradorPdf geradorPdf = new GeradorPdf();
-        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(index));
+        setComplementoPoupanca(complementoPoupanca);
 
         geradorPdf.gerarDocumentoIndividual(getComplementoPoupanca());
         geradorPdf.downloadIndividual(getComplementoPoupanca());
@@ -641,9 +642,9 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
     }
 
-    public void excluir(Integer id) {
+    public void excluir(ComplementoPoupanca complementoPoupanca) {
 
-        setComplementoPoupanca(getDaoComplementoPoupanca().localizar(id));
+        setComplementoPoupanca(complementoPoupanca);
         getComplementoPoupanca().getPoupanca().getListaComplementoPoupanca().remove(getComplementoPoupanca());
         getDaoComplementoPoupanca().deletar(getComplementoPoupanca());
 
@@ -653,6 +654,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
         }
+        
+       
 
     }
 
