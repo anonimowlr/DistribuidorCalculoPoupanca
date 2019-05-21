@@ -10,6 +10,7 @@ import endidades.Funcionario;
 import endidades.IdPoupanca;
 import endidades.Poupanca;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -196,9 +197,9 @@ public class PoupancaDAO<T, D> extends DAOGenerico<Poupanca, IdPoupanca> {
                continue;
             }
             if(complementoPoupanca.getSomatorioPoupador() != null){
-                complementoPoupanca.setValorDesconto(complementoPoupanca.getPercentualDesconto().multiply(complementoPoupanca.getSomatorioPoupador()));
-                 complementoPoupanca.setValorApurado(complementoPoupanca.getSomatorioPoupador().subtract(complementoPoupanca.getValorDesconto()));
-                 complementoPoupanca.setValorHonorario(complementoPoupanca.getValorApurado().multiply(new BigDecimal("0.1")));
+                complementoPoupanca.setValorDesconto(complementoPoupanca.getPercentualDesconto().multiply(complementoPoupanca.getSomatorioPoupador()).setScale(2, RoundingMode.HALF_EVEN));
+                 complementoPoupanca.setValorApurado(complementoPoupanca.getSomatorioPoupador().subtract(complementoPoupanca.getValorDesconto()).setScale(2, RoundingMode.HALF_EVEN));
+                 complementoPoupanca.setValorHonorario(complementoPoupanca.getValorApurado().multiply(new BigDecimal("0.1")).setScale(2, RoundingMode.HALF_EVEN));
                  complementoPoupanca.setValorDespendidoBB(complementoPoupanca.getValorApurado().add(complementoPoupanca.getValorHonorario()));
             }
             

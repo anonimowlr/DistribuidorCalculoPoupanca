@@ -122,13 +122,13 @@ public class GeradorPdf {
         try {
             PdfWriter.getInstance(document, new FileOutputStream("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupador CPF - " + Utils.tratarVariavel(complementoPoupanca.getCpf())+  ".pdf"));
             //PdfWriter.getInstance(document, new FileOutputStream("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupador CPF - " + complementoPoupanca.getCpf()+ ".pdf"));
-            //PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + complementoPoupanca.getPoupanca().getIdPoupanca().getNpj().toString() + ".pdf"));
+            //PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupador CPF - " + Utils.tratarVariavel(complementoPoupanca.getCpf())+  ".pdf"));
 
             document.open();
 
             Image img = Image.getInstance("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/img/LogoRetangular.png");
            // Image img = Image.getInstance("/opt/apache-tomcat-8.5.39/webapps/utilitario/LogoRetangular.png");
-           // Image img = Image.getInstance("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\LogoRetangular.png");
+            //Image img = Image.getInstance("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\LogoRetangular.png");
             img.setAbsolutePosition(72, 765);
             document.add(img);
 
@@ -373,7 +373,7 @@ public class GeradorPdf {
         
         FileInputStream inputStream = new FileInputStream(new File("/usr/local/apache-tomcat-8.0.15/webapps/docsPoupanca/Resumo Poupador CPF - " + Utils.tratarVariavel(complemento.getCpf()) + ".pdf"));
         //FileInputStream inputStream = new FileInputStream(new File("/opt/apache-tomcat-8.5.39/webapps/utilitario/Resumo Poupador CPF - " + complemento.getCpf() + ".pdf"));
-        //FileInputStream inputStream = new FileInputStream(new File("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupadores NPJ - " + poupanca.getIdPoupanca().getNpj() + ".pdf"));
+        //FileInputStream inputStream = new FileInputStream(new File("C:\\Users\\f5078775\\Desktop\\DistribuidorPoupancaTeste\\Resumo Poupador CPF - " + Utils.tratarVariavel(complemento.getCpf()) + ".pdf"));
         OutputStream out = externalContext.getResponseOutputStream();
         byte[] buffer = new byte[1024];
         int lenght;

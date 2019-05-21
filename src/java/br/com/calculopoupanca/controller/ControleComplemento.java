@@ -125,6 +125,8 @@ public class ControleComplemento extends ControleGenerico implements Serializabl
             getDaoPoupanca().salvar(poupanca);
 
         }
+        
+        getDaoPoupanca().getEm().clear();
 
     }
 

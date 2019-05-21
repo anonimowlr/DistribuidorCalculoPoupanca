@@ -623,7 +623,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     }
     
      public void gerarPdfIndividual(ComplementoPoupanca complementoPoupanca) throws IOException, InterruptedException {
-        getDaoPoupanca().getEm().clear();
+       
         GeradorPdf geradorPdf = new GeradorPdf();
         setComplementoPoupanca(complementoPoupanca);
 
@@ -653,9 +653,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
+            
         }
         
-       
+       getDaoPoupanca().getEm().clear();
 
     }
 
