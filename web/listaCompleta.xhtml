@@ -317,8 +317,13 @@
                     <h:inputText id="valorBase" value="#{controleListaCompleta.complementoPoupanca.valorBase}" style="width: 100px ;height: 30px">
 
                         <f:converter converterId="converterMoney"></f:converter>
-                        <f:ajax listener="#{controleListaCompleta.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs correcaoEspera" event="change"></f:ajax>
                     </h:inputText>
+                    
+                    <h:outputLabel value="Correção esperada:" ></h:outputLabel>
+                    <h:outputLabel id="correcaoEspera" value="#{controleListaCompleta.complementoPoupanca.correcaoEsperada}" style="color: red">
+                     <f:converter converterId="converterMoney"></f:converter>
+                    </h:outputLabel>
 
 
 
@@ -348,6 +353,8 @@
 
                     <h:outputLabel value="Complemento:" ></h:outputLabel>
                     <h:inputTextarea value="#{controleListaCompleta.complementoPoupanca.complementoObs}"></h:inputTextarea>
+                    
+                    
 
 
                 </h:panelGrid>

@@ -23,7 +23,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -74,57 +73,57 @@ public class ControleGerencial implements Serializable {
        getPoupanca().setAdvogadoAdverso(getPoupanca().getAdvogadoAdverso().toUpperCase());
     }
 
-    public void calcularValorAcordo() {
-
-        try {
-            Date data1 = Utils.formataData("01/06/1987");
-            Date data2 = Utils.formataData("15/06/1987");
-            Date data3 = Utils.formataData("01/01/1989");
-            Date data4 = Utils.formataData("15/01/1989");
-            Date data5 = Utils.formataData("03/01/1991");
-            Date data6 = Utils.formataData("31/01/1991");
-            Date data7 = Utils.formataData("01/03/1990");
-            Date data8 = Utils.formataData("15/03/1990");
-
-            if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
-                getComplementoPoupanca().setPlano("BRESSER");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-            } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
-                getComplementoPoupanca().setPlano("VERAO");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-            } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
-                getComplementoPoupanca().setPlano("COLOR II");
-                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setFazJus("SIM");
-            } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
-                getComplementoPoupanca().setPlano("COLOR I");
-                getComplementoPoupanca().setFazJus("NAO");
-                getComplementoPoupanca().setValorAcordo(null);
-                getComplementoPoupanca().setObservacao(null);
-                
-                getComplementoPoupanca().setComplementoObs(null);
-                getComplementoPoupanca().setValorBase(null);
-            } else {
-                getComplementoPoupanca().setFazJus("NAO");
-                getComplementoPoupanca().setValorAcordo(null);
-                getComplementoPoupanca().setObservacao(null);
-                getComplementoPoupanca().setPlano("NAO FAZ JUS");
-                getComplementoPoupanca().setComplementoObs(null);
-                getComplementoPoupanca().setValorBase(null);
-            }
-
-        } catch (Exception e) {
-
-            Util.mensagemErro(Util.getMensagemErro(e));
-
-        }
-
-    }
+//    public void calcularValorAcordo() {
+//
+//        try {
+//            Date data1 = Utils.formataData("01/06/1987");
+//            Date data2 = Utils.formataData("15/06/1987");
+//            Date data3 = Utils.formataData("01/01/1989");
+//            Date data4 = Utils.formataData("15/01/1989");
+//            Date data5 = Utils.formataData("03/01/1991");
+//            Date data6 = Utils.formataData("31/01/1991");
+//            Date data7 = Utils.formataData("01/03/1990");
+//            Date data8 = Utils.formataData("15/03/1990");
+//
+//            if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
+//                getComplementoPoupanca().setPlano("BRESSER");
+//                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setFazJus("SIM");
+//            } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
+//                getComplementoPoupanca().setPlano("VERAO");
+//                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setFazJus("SIM");
+//            } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
+//                getComplementoPoupanca().setPlano("COLOR II");
+//                this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+//                getComplementoPoupanca().setFazJus("SIM");
+//            } else if ((getComplementoPoupanca().getDataBase().before(data8) || getComplementoPoupanca().getDataBase().equals(data8)) && (getComplementoPoupanca().getDataBase().after(data7) || getComplementoPoupanca().getDataBase().equals(data7))) {
+//                getComplementoPoupanca().setPlano("COLOR I");
+//                getComplementoPoupanca().setFazJus("NAO");
+//                getComplementoPoupanca().setValorAcordo(null);
+//                getComplementoPoupanca().setObservacao(null);
+//                
+//                getComplementoPoupanca().setComplementoObs(null);
+//                getComplementoPoupanca().setValorBase(null);
+//            } else {
+//                getComplementoPoupanca().setFazJus("NAO");
+//                getComplementoPoupanca().setValorAcordo(null);
+//                getComplementoPoupanca().setObservacao(null);
+//                getComplementoPoupanca().setPlano("NAO FAZ JUS");
+//                getComplementoPoupanca().setComplementoObs(null);
+//                getComplementoPoupanca().setValorBase(null);
+//            }
+//
+//        } catch (Exception e) {
+//
+//            Util.mensagemErro(Util.getMensagemErro(e));
+//
+//        }
+//
+//    }
 
     public ControleGerencial() {
         daoPoupanca = new PoupancaDAO<>();
@@ -499,29 +498,29 @@ public class ControleGerencial implements Serializable {
 
     }
 
-    public void complementar() {
-
-        try {
-            
-            if(getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta()==null || getComplementoPoupanca().getConta().equals("")){
-               Util.mensagemErro("Conta ou agência inválidos");
-               return;
-            }
-            FacesContext fc = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-
-            Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
-            getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
-            getComplementoPoupanca().setFunci(usuario.getChave());
-           
-            calcularValorAcordo();
-            mudarParaEditar();
-        } catch (Exception e) {
-
-            Util.mensagemErro(Util.getMensagemErro(e));
-        }
-
-    }
+//    public void complementar() {
+//
+//        try {
+//            
+//            if(getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta()==null || getComplementoPoupanca().getConta().equals("")){
+//               Util.mensagemErro("Conta ou agência inválidos");
+//               return;
+//            }
+//            FacesContext fc = FacesContext.getCurrentInstance();
+//            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+//
+//            Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+//            getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
+//            getComplementoPoupanca().setFunci(usuario.getChave());
+//           
+//            calcularValorAcordo();
+//            mudarParaEditar();
+//        } catch (Exception e) {
+//
+//            Util.mensagemErro(Util.getMensagemErro(e));
+//        }
+//
+//    }
 
     public void limpar() {
         getComplementoPoupanca().setAgencia(null);
@@ -556,10 +555,10 @@ public class ControleGerencial implements Serializable {
         this.listaComplementoPoupanca = listaComplementoPoupanca;
     }
     
-    public void gerarPdfIndividual(Integer index) throws IOException, InterruptedException {
-        getDaoPoupanca().getEm().clear();
+    public void gerarPdfIndividual(ComplementoPoupanca complementoPoupanca) throws IOException, InterruptedException {
+      
         GeradorPdf geradorPdf = new GeradorPdf();
-        setComplementoPoupanca(getDaoComplemento().localizar(index));
+        setComplementoPoupanca(complementoPoupanca);
 
         geradorPdf.gerarDocumentoIndividual(getComplementoPoupanca());
         geradorPdf.downloadIndividual(getComplementoPoupanca());

@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    
+
 
 
     <ui:composition template="header.xhtml" >
@@ -79,7 +79,7 @@
                         <h:column>
                             <f:facet name="header">POUPADOR</f:facet>
                             <h:outputText  value="#{c.poupador}"></h:outputText>
-                            
+
 
                         </h:column>
                         <h:column>
@@ -110,7 +110,7 @@
                         <h:column>
                             <f:facet name="header">VALOR BASE</f:facet>
                             <h:outputText value="#{c.valorBase}">
-                                 <f:converter converterId="converterMoney"></f:converter>
+                                <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
 
                         </h:column>
@@ -124,7 +124,7 @@
                         <h:column>
                             <f:facet name="header">VALOR ACORDO</f:facet>
                             <h:outputText value="#{c.valorAcordo}">
-                                 <f:converter converterId="converterMoney"></f:converter>
+                                <f:converter converterId="converterMoney"></f:converter>
                             </h:outputText>
 
                         </h:column>
@@ -148,10 +148,11 @@
 
                                 <f:ajax   listener="#{controlePoupanca.editarComplemento(c.id)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                             <h:commandButton       value="Duplicar" class="btn btn-link"  style="width: 60px; font-size: 8pt">
+                            <h:commandButton       value="Duplicar" class="btn btn-link"  style="width: 60px; font-size: 8pt">
                                 <f:ajax   listener="#{controlePoupanca.duplicar(c)}" execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
-                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?')) return false"   >
+                            <h:commandButton  value="Excluir"  class="btn btn-link"  style="width: 60px; font-size: 8pt" onclick="if (!confirm('Deseja realmente excluir?'))
+                                        return false"   >
 
                                 <f:ajax   listener="#{controlePoupanca.excluir(c)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
@@ -188,20 +189,20 @@
                     <h:inputText id="poupador" value="#{controlePoupanca.complementoPoupanca.poupador}" style="width: 400px;height: 30px" >
                         <f:ajax listener="#{controlePoupanca.alterarTamanhoLetra()}" execute="poupador" render="poupador" event="blur"></f:ajax>
                     </h:inputText>
-                    
+
                     <h:outputLabel value="Tipo Pessoa"></h:outputLabel>
                     <h:selectOneMenu id="tipoPessoa" value="#{controleGenerico.tipoPessoa}" immediate="true" style="width: 100px;height: 30px">
                         <f:selectItem itemLabel="Física" itemValue="fisica" ></f:selectItem> 
                         <f:selectItem itemLabel="Jurídica" itemValue="juridica"></f:selectItem> 
                         <f:ajax execute="@this"  render="@form"  event="change"  immediate="true"></f:ajax>
                     </h:selectOneMenu>
-                       
+
 
                     <h:outputLabel id="cpfLabel" value="CPF:" rendered="#{controleGenerico.isPessoaJuridica()==false}"></h:outputLabel>
                     <p:inputMask id="cpfInput" validator="validaCpf" value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px;height: 30px"  mask="999.999.999-99" rendered="#{controleGenerico.isPessoaJuridica()==false}" >
                         <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
                     </p:inputMask>
-                    
+
                     <h:outputLabel id="cnpjLabel" value="CNPJ:" rendered="#{controleGenerico.isPessoaJuridica()}" style="color: blue"></h:outputLabel>
                     <p:inputMask id="cnpjInput" validator="validaCnpj"  value="#{controlePoupanca.complementoPoupanca.cpf}" style="width: 150px;height: 30px"  mask="99.999.999/9999-99"  placeholder="informe o cnpj" rendered="#{controleGenerico.isPessoaJuridica()}">
                         <f:ajax listener="#{controlePoupanca.verificarLitispendencia()}" execute="@this" render="@form" event="blur"></f:ajax>
@@ -209,7 +210,7 @@
 
                     <h:outputLabel value="Agencia:"></h:outputLabel>
                     <h:inputText id="txtAgencia"   value="#{controlePoupanca.complementoPoupanca.agencia}" style="width: 100px;height: 30px" maxlength="4" size="4" onkeypress='saltarConta(document.getElementById("txtAgencia").value)' >
-                       
+
                     </h:inputText>
 
                     <h:outputLabel value="Conta"></h:outputLabel>
@@ -220,21 +221,27 @@
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px;height: 30px" >
                         <f:converter converterId="converterDate"></f:converter>
-                          <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
                     <h:inputText id="valorBase" value="#{controlePoupanca.complementoPoupanca.valorBase}" style="width: 100px;height: 30px">
-                        
+
                         <f:converter converterId="converterMoney"></f:converter>
-                         <f:ajax listener="#{controlePoupanca.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="blur"></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.informarValorAcima()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs correcaoEspera" event="blur"></f:ajax>
                     </h:inputText>
 
 
 
+                    <h:outputLabel value="Correção esperada:" ></h:outputLabel>
+                    <h:outputLabel id="correcaoEspera" value="#{controlePoupanca.complementoPoupanca.correcaoEsperada}" style="color: red">
+                        <f:converter converterId="converterMoney"></f:converter>
+                    </h:outputLabel>
+
+
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
                     <h:inputText id="valorAcordo" value="#{controlePoupanca.complementoPoupanca.valorAcordo}" style="width: 150px;color: blue;height: 30px"  disabled="true">
-                             <f:converter converterId="converterMoney"></f:converter>
+                        <f:converter converterId="converterMoney"></f:converter>
                         <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano selectObs" event="focus" ></f:ajax>
                     </h:inputText>
                     <h:outputLabel value="Plano:"></h:outputLabel>
@@ -251,7 +258,7 @@
 
                         <f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true"></f:selectItem>
                         <f:selectItems value="#{controlePoupanca.daoObservacao.listaTodos}" var="o" itemLabel="#{o.obs}" itemValue="#{o.obs}" ></f:selectItems>
-                          <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase  selectObs" event="change"></f:ajax>
                     </h:selectOneMenu>
 
 

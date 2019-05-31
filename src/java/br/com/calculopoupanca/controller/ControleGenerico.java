@@ -7,6 +7,7 @@ package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
+import java.awt.Dialog;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -58,7 +59,7 @@ public class ControleGenerico implements Serializable {
             if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
                 getComplementoPoupanca().setPlano("BRESSER");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.180205")).setScale(2, RoundingMode.HALF_EVEN));
                 getComplementoPoupanca().setFazJus("SIM");
                 //getComplementoPoupanca().setObservacao(null);
                 
@@ -74,7 +75,7 @@ public class ControleGenerico implements Serializable {
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
                 getComplementoPoupanca().setPlano("COLLOR II");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.2235907655")).setScale(2, RoundingMode.HALF_EVEN));
+                getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperadaParaPlanoColorDois());
                 getComplementoPoupanca().setFazJus("SIM");
                  //getComplementoPoupanca().setObservacao(null);
                   
@@ -157,5 +158,31 @@ public class ControleGenerico implements Serializable {
      
      public void mudarParaPessoaJuridica() {
         setTipoPessoa("juridica");
+    }
+
+    private BigDecimal correcaoEsperadaParaPlanoColorDois() {
+
+      BigDecimal indice = new BigDecimal(0.00);
+      
+      Integer diaBase = null;
+      
+      diaBase = Integer.parseInt(Utils.formatDataTexto(getComplementoPoupanca().getDataBase().toString()).subSequence(0, 2).toString());
+      switch (diaBase){
+          case 1:
+              indice = new BigDecimal("2.00");
+              break;
+          case 2:
+                  indice = new BigDecimal("500000");
+              break;
+                  
+      }
+             
+      
+        
+        
+        
+       return (getComplementoPoupanca().getValorBase().multiply((indice)).setScale(2, RoundingMode.HALF_EVEN));
+
+
     }
 }
