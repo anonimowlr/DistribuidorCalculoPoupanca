@@ -321,9 +321,10 @@
                     </h:inputText>
                     
                     <h:outputLabel value="Correção esperada:" ></h:outputLabel>
-                    <h:outputLabel id="correcaoEspera" value="#{controleListaCompleta.complementoPoupanca.correcaoEsperada}" style="color: red">
+                    <h:inputText id="correcaoEspera" value="#{controleListaCompleta.complementoPoupanca.correcaoEsperada}" style="width: 100px ;height: 30px;color: red" >
                      <f:converter converterId="converterMoney"></f:converter>
-                    </h:outputLabel>
+                     
+                    </h:inputText>
 
 
 

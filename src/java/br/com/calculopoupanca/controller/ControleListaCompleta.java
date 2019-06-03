@@ -577,6 +577,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getComplementoPoupanca().setObservacao(null);
         getComplementoPoupanca().setPlano(null);
         getComplementoPoupanca().setComplementoObs(null);
+        getComplementoPoupanca().setCorrecaoEsperada(null);
     }
 
     public void voltar() {
@@ -703,5 +704,14 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         }
 
     }
+    
+    
+    
+    public void validarCorrecaoEsperada(){
+        
+        
+        
+    }
+    
 
 }
