@@ -164,7 +164,7 @@ public class Utils {
             }
             
                if(tamanhoValorRecebido>4){
-                 if(i == tamanhoValorRecebido- 7 || i == tamanhoValorRecebido-10){
+                 if(i == tamanhoValorRecebido- 7 || i == tamanhoValorRecebido-10 || i == tamanhoValorRecebido-13){
                    numeroTratado = numeroTratado + ".";  
                  }
                    
