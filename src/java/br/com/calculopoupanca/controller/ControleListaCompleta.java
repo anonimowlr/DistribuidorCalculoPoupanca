@@ -526,6 +526,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         try {
 
+            BigDecimal correcaoDigitada = getComplementoPoupanca().getCorrecaoEsperada();
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 

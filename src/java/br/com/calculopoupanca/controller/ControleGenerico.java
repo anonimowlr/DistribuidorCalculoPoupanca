@@ -53,21 +53,21 @@ public class ControleGenerico implements Serializable {
             if ((getComplementoPoupanca().getDataBase().before(data2) || getComplementoPoupanca().getDataBase().equals(data2)) && (getComplementoPoupanca().getDataBase().after(data1) || getComplementoPoupanca().getDataBase().equals(data1))) {
                 getComplementoPoupanca().setPlano("BRESSER");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.04277")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
+                //getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
                 getComplementoPoupanca().setFazJus("SIM");
                 //getComplementoPoupanca().setObservacao(null);
 
             } else if ((getComplementoPoupanca().getDataBase().before(data4) || getComplementoPoupanca().getDataBase().equals(data4)) && (getComplementoPoupanca().getDataBase().after(data3) || getComplementoPoupanca().getDataBase().equals(data3))) {
                 getComplementoPoupanca().setPlano("VERAO");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("4.09818")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
+                //getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
                 getComplementoPoupanca().setFazJus("SIM");
                 //getComplementoPoupanca().setObservacao(null);
 
             } else if ((getComplementoPoupanca().getDataBase().before(data6) || getComplementoPoupanca().getDataBase().equals(data6)) && (getComplementoPoupanca().getDataBase().after(data5) || getComplementoPoupanca().getDataBase().equals(data5))) {
                 getComplementoPoupanca().setPlano("COLLOR II");
                 this.getComplementoPoupanca().setValorAcordo(getComplementoPoupanca().getValorBase().multiply(new BigDecimal("0.0014")).setScale(2, RoundingMode.HALF_EVEN));
-                getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
+               // getComplementoPoupanca().setCorrecaoEsperada(correcaoEsperada());
                 getComplementoPoupanca().setFazJus("SIM");
                 //getComplementoPoupanca().setObservacao(null);
 
