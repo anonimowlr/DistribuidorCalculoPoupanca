@@ -556,8 +556,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             calcularValorAcordo();
             
-            if(getComplementoPoupanca().getValorAcordo() !=null && correcaoEsperada().equals(correcaoDigitada)){
-                Util.mensagemInformacao("Valor correção inválido");
+            if(getComplementoPoupanca().getValorAcordo() !=null && !correcaoEsperada().equals(correcaoDigitada)){
+                Util.mensagemErro("Valor correção inválido");
                 return;
             }
 
