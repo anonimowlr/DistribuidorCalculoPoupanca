@@ -221,7 +221,7 @@
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask mask="99/99/9999" id="dataBase" value="#{controlePoupanca.complementoPoupanca.dataBase}" style="width: 100px;height: 30px" >
                         <f:converter converterId="converterDate"></f:converter>
-                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase" event="blur"></f:ajax>
+                        <f:ajax listener="#{controlePoupanca.calcularValorAcordo()}" execute="dataBase valorBase" render="valorAcordo selectPlano valorBase selectObs complemento" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
@@ -234,9 +234,9 @@
 
 
                     <h:outputLabel value="Correção esperada:" ></h:outputLabel>
-                    <h:outputLabel id="correcaoEspera" value="#{controlePoupanca.complementoPoupanca.correcaoEsperada}" style="color: red">
+                    <h:inputText id="correcaoEspera" value="#{controlePoupanca.complementoPoupanca.correcaoEsperada}" style="width: 100px ;height: 30px;color: red">
                         <f:converter converterId="converterMoney"></f:converter>
-                    </h:outputLabel>
+                    </h:inputText>
 
 
                     <h:outputLabel value="Valor Acordo:"></h:outputLabel>
@@ -264,7 +264,7 @@
 
 
                     <h:outputLabel value="Complemento:" ></h:outputLabel>
-                    <h:inputTextarea value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
+                    <h:inputTextarea id="complemento" value="#{controlePoupanca.complementoPoupanca.complementoObs}"></h:inputTextarea>
 
 
                 </h:panelGrid>

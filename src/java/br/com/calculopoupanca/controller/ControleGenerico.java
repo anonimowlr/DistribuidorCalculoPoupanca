@@ -78,7 +78,7 @@ public class ControleGenerico implements Serializable {
 
                 getComplementoPoupanca().setObservacao("COLLOR I");
 
-                getComplementoPoupanca().setComplementoObs(null);
+                getComplementoPoupanca().setComplementoObs("COLLOR I");
                 getComplementoPoupanca().setValorBase(null);
             } else {
                 getComplementoPoupanca().setFazJus("NAO");

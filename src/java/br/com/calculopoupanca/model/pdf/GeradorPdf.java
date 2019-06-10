@@ -241,27 +241,36 @@ public class GeradorPdf {
                 }
 
                 PdfPCell celula1 = new PdfPCell(new Phrase(c.getAgencia().toString(),font7pt));
+                celula1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula2 = new PdfPCell(new Phrase(Utils.tratarConta(c.getConta().toString()),font7pt));
+                celula2.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula3 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()),font7pt));
+                 celula3.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula4 = new PdfPCell(new Phrase(Utils.formatDataTexto(c.getDataBase().toString()).subSequence(0, 2).toString(),font7pt));
                 celula4.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula5 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorBase().toString()),font7pt));
+                 celula5.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula6 = new PdfPCell(new Phrase(c.getPlano(),font7pt));
                
                 PdfPCell celula7 = null;
                 if(c.getPlano().equals("BRESSER")){
                     celula7 = new PdfPCell(new Phrase("0,04277",font7pt));  
+                     celula7.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 } else if(c.getPlano().equals("COLLOR I")){
                       celula7 = new PdfPCell(new Phrase("000000",font7pt));  
+                      celula7.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 }else if(c.getPlano().equals("COLLOR II")){
-                     celula7 = new PdfPCell(new Phrase("0,2235907655",font7pt));   
+                     celula7 = new PdfPCell(new Phrase("0,2235907655",font7pt));  
+                     celula7.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 }else if(c.getPlano().equals("VERAO")){
                       celula7 = new PdfPCell(new Phrase("4,09818",font7pt));  
+                      celula7.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 }
                
                
                 
                 PdfPCell celula8 = new PdfPCell(new Phrase(Utils.converterToMoney(c.getValorAcordo().toString()),font7pt));
+                celula8.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
                 table.addCell(celula1);
                 table.addCell(celula2);

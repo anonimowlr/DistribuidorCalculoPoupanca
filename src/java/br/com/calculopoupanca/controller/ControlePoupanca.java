@@ -456,6 +456,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public void complementar() {
 
         try {
+             BigDecimal correcaoDigitada = getComplementoPoupanca().getCorrecaoEsperada();
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
@@ -463,7 +464,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
 
-            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC") || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
+            if (getComplementoPoupanca().getObservacao().contains("AUSÊN") || getComplementoPoupanca().getObservacao().equals("REDOC") || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
 
                 if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
                     Util.mensagemErro("Combinação de obervação e  complemento não permitida");
@@ -485,6 +486,13 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             }
 
             calcularValorAcordo();
+            
+             if(getComplementoPoupanca().getValorAcordo() !=null && !correcaoEsperada().equals(correcaoDigitada)){
+                Util.mensagemErro("Valor correção inválido");
+                return;
+            }
+            
+            
             getDaoPoupanca().somarValorPoupador(getPoupanca());
             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
@@ -577,6 +585,10 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
         for (Poupanca p : getDaoPoupanca().getListaTodos()) {
             int i = 0;
             while (i < p.getListaComplementoPoupanca().size()) {
+               
+                
+                
+                
                 if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && (!getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString().equals(p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()))) {
 
                     Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString());

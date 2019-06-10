@@ -28,6 +28,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.apache.tomcat.jni.File;
 import util.Util;
 
 /**
@@ -534,7 +535,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
 
-            if (getComplementoPoupanca().getObservacao().equals("AUSENCIA DE INFORMACOES") || getComplementoPoupanca().getObservacao().equals("REDOC")  || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
+            if (getComplementoPoupanca().getObservacao().contains("AUSÊN") || getComplementoPoupanca().getObservacao().equals("REDOC")  || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
                 if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
                     Util.mensagemErro("Combinação de obervação e  complemento não permitida");
                     return;
@@ -556,7 +557,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             calcularValorAcordo();
             
-            if(getComplementoPoupanca().getValorAcordo() !=null && !correcaoEsperada().equals(correcaoDigitada)){
+            if(getComplementoPoupanca().getValorAcordo() !=null  && !correcaoEsperada().equals(correcaoDigitada)){
                 Util.mensagemErro("Valor correção inválido");
                 return;
             }
@@ -699,6 +700,9 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         for (Poupanca p : getDaoPoupanca().getListaTodos()) {
             int i = 0;
             while (i < p.getListaComplementoPoupanca().size()) {
+                
+              
+                
                 if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && (!getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString().equals(p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()))) {
 
                     Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString());

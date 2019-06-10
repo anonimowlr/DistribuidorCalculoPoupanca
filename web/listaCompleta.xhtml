@@ -310,7 +310,7 @@
                     <h:outputLabel value="Data base:"></h:outputLabel>
                     <p:inputMask  mask="99/99/9999" id="dataBase" value="#{controleListaCompleta.complementoPoupanca.dataBase}" style="width: 100px;height: 30px" >
                         <f:converter converterId="converterDate"></f:converter>
-                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase txtAgencia txtConta" render="valorAcordo selectPlano valorBase txtAgencia txtConta" event="blur"></f:ajax>
+                        <f:ajax listener="#{controleListaCompleta.calcularValorAcordo()}" execute="dataBase valorBase txtAgencia txtConta" render="valorAcordo selectPlano valorBase txtAgencia txtConta selectObs complemento" event="blur"></f:ajax>
                     </p:inputMask>
 
                     <h:outputLabel value="Valor Base:"></h:outputLabel>
@@ -353,7 +353,7 @@
 
 
                     <h:outputLabel value="Complemento:" ></h:outputLabel>
-                    <h:inputTextarea value="#{controleListaCompleta.complementoPoupanca.complementoObs}"></h:inputTextarea>
+                    <h:inputTextarea id="complemento" value="#{controleListaCompleta.complementoPoupanca.complementoObs}"></h:inputTextarea>
                     
                     
 
