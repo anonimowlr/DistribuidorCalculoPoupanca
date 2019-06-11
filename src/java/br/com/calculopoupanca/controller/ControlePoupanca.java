@@ -479,6 +479,21 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
                 }
 
             }
+            
+            if(getComplementoPoupanca().getObservacao().contains("ESPÓ") ){
+               if(getComplementoPoupanca().getComplementoObs()== null || getComplementoPoupanca().getComplementoObs().equals("")){
+                  Util.mensagemErro("Informe no campo Complemento o nome do Titular da conta");
+                    return; 
+               } else{
+                   salvarParcial();
+
+                    mudarParaEditar();
+                    return;
+               }
+                
+            }
+            
+            
 
             if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
                 Util.mensagemErro("Conta ou agência inválidos");
@@ -488,7 +503,7 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             calcularValorAcordo();
             
              if(getComplementoPoupanca().getValorAcordo() !=null && !correcaoEsperada().equals(correcaoDigitada)){
-                Util.mensagemErro("Valor correção inválido");
+                Util.mensagemErro("Valor correção inválido, Valor aceito pelo sistema " + Utils.converterToMoney(correcaoEsperada().toString()));
                 return;
             }
             

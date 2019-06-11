@@ -32,6 +32,10 @@ public class ValidaCnpj implements Validator{
         value = Utils.limparPontos((value).toString());
         String cnpj = (String) value;
         
+        if(cnpj.equals("00000000000000")){
+            return;
+        }
+        
         if (cnpj.length() != 14 || !isCNPJ(cnpj)) {
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "CNPJ inválido.", "Favor informar um CPNPJ válido."));

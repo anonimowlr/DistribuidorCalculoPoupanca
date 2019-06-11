@@ -7,6 +7,7 @@ package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.util.Utils;
 import endidades.ComplementoPoupanca;
+import endidades.Poupanca;
 import java.awt.Dialog;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,8 +32,10 @@ public class ControleGenerico implements Serializable {
      */
     private String tipoPessoa = "fisica";
     private ComplementoPoupanca complementoPoupanca;
+    private Poupanca poupanca;
 
     private List<ComplementoPoupanca> listaComplementoPoupanca = new ArrayList<>();
+    private List<Poupanca> listaPoupanca = new ArrayList<>();
 
     public void calcularValorAcordo() {
         
@@ -261,15 +264,61 @@ public class ControleGenerico implements Serializable {
             case 28:
                 indice = new BigDecimal("12.7710");
                 break;
+             
         }
-        } else {
+        } else if(getComplementoPoupanca().getPlano().equals("VERAO")) {
             
              indice = new BigDecimal("0.2235907655");
+        } else {
+            
+            indice = new BigDecimal("0.180205");
         }
         
        
-        return (getComplementoPoupanca().getValorBase().multiply((indice)).setScale(2, RoundingMode.HALF_EVEN));
-
+        if(getComplementoPoupanca().getPlano().equals("VERAO")){
+             return (getComplementoPoupanca().getValorBase().multiply((indice)).setScale(2, RoundingMode.HALF_EVEN));
+        } else if(getComplementoPoupanca().getPlano().equals("BRESSER")){
+            return (getComplementoPoupanca().getValorBase().multiply((indice)).setScale(2, RoundingMode.HALF_EVEN));
+            
+        } else{
+           return (getComplementoPoupanca().getValorBase().multiply((indice)).setScale(2, RoundingMode.HALF_EVEN).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_EVEN));
+            
+        }
+        
+        
 
     }
+    
+    
+    
+   
+
+    /**
+     * @return the poupanca
+     */
+    public Poupanca getPoupanca() {
+        return poupanca;
+    }
+
+    /**
+     * @param poupanca the poupanca to set
+     */
+    public void setPoupanca(Poupanca poupanca) {
+        this.poupanca = poupanca;
+    }
+
+    /**
+     * @return the listaPoupanca
+     */
+    public List<Poupanca> getListaPoupanca() {
+        return listaPoupanca;
+    }
+
+    /**
+     * @param listaPoupanca the listaPoupanca to set
+     */
+    public void setListaPoupanca(List<Poupanca> listaPoupanca) {
+        this.listaPoupanca = listaPoupanca;
+    }
+    
 }

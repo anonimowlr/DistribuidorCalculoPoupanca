@@ -154,7 +154,6 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getComplementoPoupanca().setCpf(cpfMemoria);
         salvarParcial();
         getDaoPoupanca().getEm().clear();
-        
 
     }
 
@@ -449,7 +448,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             for (ComplementoPoupanca complemento : getPoupanca().getListaComplementoPoupanca()) {
 
-                if ((complemento.getPlano() == null || complemento.getPlano().equals("")) &&  (complemento.getObservacao()== null || complemento.getObservacao().equals(""))) {
+                if ((complemento.getPlano() == null || complemento.getPlano().equals("")) && (complemento.getObservacao() == null || complemento.getObservacao().equals(""))) {
 
                     Util.mensagemErro("Não é possível salvar, item sem calcular");
                     podeSalvar = false;
@@ -465,21 +464,20 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
                 Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
 
                 getPoupanca().setStatus("TRATADO");
-                 for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
-                    if(c.getObservacao().equals("REDOC")){
-                       getPoupanca().setStatus("PENDENTE REDOC"); 
-                       break;
+                for (ComplementoPoupanca c : getPoupanca().getListaComplementoPoupanca()) {
+                    if (c.getObservacao().equals("REDOC")) {
+                        getPoupanca().setStatus("PENDENTE REDOC");
+                        break;
                     }
-                     
+
                 }
-                
-                
-                
+
                 getPoupanca().setDataStatus(Utils.getDataAtualFormatoMysql());
                 getPoupanca().setAvocado(null);
                 getPoupanca().setDataAvocacao(null);
                 getPoupanca().setFunciAvocado(null);
                 getPoupanca().setDataAvocacao(null);
+                getPoupanca().setFunciStatus(usuario.getChave());
 
                 salvar();
 
@@ -535,7 +533,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
             getComplementoPoupanca().setDataExecucao(Utils.getDataAtualFormatoMysql());
             getComplementoPoupanca().setFunci(usuario.getChave());
 
-            if (getComplementoPoupanca().getObservacao().contains("AUSÊN") || getComplementoPoupanca().getObservacao().equals("REDOC")  || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
+            if (getComplementoPoupanca().getObservacao().contains("AUSÊN") || getComplementoPoupanca().getObservacao().equals("REDOC") || getComplementoPoupanca().getObservacao().equals("OUTROS")) {
                 if (getComplementoPoupanca().getPlano().equals("NAO FAZ JUS")) {
                     Util.mensagemErro("Combinação de obervação e  complemento não permitida");
                     return;
@@ -550,15 +548,28 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             }
 
+            if (getComplementoPoupanca().getObservacao().contains("ESPÓ")) {
+                if (getComplementoPoupanca().getComplementoObs() == null || getComplementoPoupanca().getComplementoObs().equals("")) {
+                    Util.mensagemErro("Informe no campo Complemento o nome do Titular da conta");
+                    return;
+                } else {
+                    salvarParcial();
+
+                    mudarParaEditar();
+                    return;
+                }
+
+            }
+
             if (getComplementoPoupanca().getAgencia() == null || getComplementoPoupanca().getAgencia().equals("") || getComplementoPoupanca().getConta() == null || getComplementoPoupanca().getConta().equals("")) {
                 Util.mensagemErro("Conta ou agência inválidos");
                 return;
             }
 
             calcularValorAcordo();
-            
-            if(getComplementoPoupanca().getValorAcordo() !=null  && !correcaoEsperada().equals(correcaoDigitada)){
-                Util.mensagemErro("Valor correção inválido");
+
+            if (getComplementoPoupanca().getValorAcordo() != null && !correcaoEsperada().equals(correcaoDigitada)) {
+                Util.mensagemErro("Valor correção inválido, Valor aceito pelo sistema " + Utils.converterToMoney(correcaoEsperada().toString()));
                 return;
             }
 
@@ -629,9 +640,9 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         geradorPdf.download(getPoupanca());
 
     }
-    
-     public void gerarPdfIndividual(ComplementoPoupanca complementoPoupanca) throws IOException, InterruptedException {
-       
+
+    public void gerarPdfIndividual(ComplementoPoupanca complementoPoupanca) throws IOException, InterruptedException {
+
         GeradorPdf geradorPdf = new GeradorPdf();
         setComplementoPoupanca(complementoPoupanca);
 
@@ -639,13 +650,27 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         geradorPdf.downloadIndividual(getComplementoPoupanca());
 
     }
-    
 
     public void desistir() {
 
         getPoupanca().setFunciAvocado(null);
         getPoupanca().setDataAvocacao(null);
         getPoupanca().setAvocado(null);
+        salvar();
+
+    }
+
+    public void gerarPendencia() {
+
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+
+        Funcionario usuario = (Funcionario) session.getAttribute("usuarioLogado");
+        getPoupanca().setFunciAvocado(null);
+        getPoupanca().setDataAvocacao(null);
+        getPoupanca().setAvocado(null);
+        getPoupanca().setStatus("PENDENTE");
+        getPoupanca().setFunciStatus(usuario.getChave());
         salvar();
 
     }
@@ -661,10 +686,10 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             getDaoPoupanca().atribuirFaixas(getPoupanca());
             salvarParcial();
-            
+
         }
-        
-       getDaoPoupanca().getEm().clear();
+
+        getDaoPoupanca().getEm().clear();
 
     }
 
@@ -700,9 +725,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         for (Poupanca p : getDaoPoupanca().getListaTodos()) {
             int i = 0;
             while (i < p.getListaComplementoPoupanca().size()) {
-                
-              
-                
+
                 if (getComplementoPoupanca().getCpf().equals(p.getListaComplementoPoupanca().get(i).getCpf()) && (!getComplementoPoupanca().getPoupanca().getIdPoupanca().getNpj().toString().equals(p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString()))) {
 
                     Util.mensagemErro("Indício Litispendência encontrada com o NPJ:" + p.getListaComplementoPoupanca().get(i).getPoupanca().getIdPoupanca().getNpj().toString());
@@ -714,14 +737,9 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         }
 
     }
-    
-    
-    
-    public void validarCorrecaoEsperada(){
-        
-        
-        
+
+    public void validarCorrecaoEsperada() {
+
     }
-    
 
 }

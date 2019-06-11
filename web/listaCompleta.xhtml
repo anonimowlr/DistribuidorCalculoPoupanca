@@ -37,6 +37,7 @@
                         <f:selectItem itemValue="dataAvocacao" itemLabel="DATA INICIO TRATAMENTO"></f:selectItem>
                         <f:selectItem itemValue="status" itemLabel="SITUACAO NPJ"></f:selectItem>
                         <f:selectItem itemValue="identificacaoDemanda" itemLabel="IDENTIFICACAO DA DEMANDA"></f:selectItem>
+                        <f:selectItem itemValue="funciStatus" itemLabel="RESPONSÁVEL SITUAÇÃO"></f:selectItem>
                         <f:ajax     execute="@this" render="listagem" event="change" ></f:ajax>
                     </h:selectOneMenu>
 
@@ -97,6 +98,7 @@
                             </p:outputLabel>
 
                         </h:column>
+                        
                         <h:column>
                             <f:facet name="header">DATA INICIO TRATAMENTO</f:facet>
                                 #{p.dataAvocacao}
@@ -108,6 +110,14 @@
                         <h:column>
                             <f:facet name="header">SITUAÇÃO NPJ</f:facet>
                                 #{p.status}
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">RESPONSÁVEL SITUAÇÃO</f:facet>
+
+                            <p:outputLabel value=" #{p.funciStatus}" onclick="window.open('https://humanograma.intranet.bb.com.br/#{p.funciStatus}')" title="Verificar  a chave : #{p.funciStatus}"  >
+                            </p:outputLabel>
+
                         </h:column>
 
                         <h:column >
@@ -260,6 +270,9 @@
                 </h:commandButton>
                 <h:commandButton       value="Desitir" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" >
                     <f:ajax   listener="#{controleListaCompleta.desistir()}" execute="@all" render="@all" event="click" ></f:ajax>
+                </h:commandButton>
+                <h:commandButton       value="Gerar Pendência" class="btn btn-link" rendered="#{controleListaCompleta.isEditar()}" style="color: red" >
+                    <f:ajax   listener="#{controleListaCompleta.gerarPendencia()}" execute="@all" render="@all" event="click" ></f:ajax>
                 </h:commandButton>
 
 
