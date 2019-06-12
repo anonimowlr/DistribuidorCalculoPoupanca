@@ -148,6 +148,12 @@
 
                                 <h:outputLabel value="DADOS DO NPJ: #{controleListaCompleta.poupanca.idPoupanca.npj}"></h:outputLabel>
                                 <br/>
+                                <h:outputLabel value="ID DEMANDA: #{controleListaCompleta.poupanca.identificacaoDemanda}"></h:outputLabel>
+                                <br/>
+                                <h:outputLabel value="#{controleListaCompleta.poupanca.dataUltimaDemanda}">
+                                    <f:converter converterId="converterDate"></f:converter>
+                                </h:outputLabel>
+                                <br/>
                                 <h:outputLabel value="Total poupadores: #{controleListaCompleta.poupanca.listaComplementoPoupanca.size()}"></h:outputLabel>
                             </f:facet> 
                         </div>>

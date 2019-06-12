@@ -126,6 +126,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
     public void novoComplemento() {
         setEstadoTela("editarComplementoNovo");
         setComplementoPoupanca(new ComplementoPoupanca());
+        getComplementoPoupanca().setIdArquivo(getPoupanca().getIdentificacaoDemanda());
+        getComplementoPoupanca().setDataImportacaoArquivo(getPoupanca().getDataUltimaDemanda());
         getPoupanca().adicionarComplementoPoupanca(getComplementoPoupanca());
     }
 
@@ -152,6 +154,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getPoupanca().getListaComplementoPoupanca().remove(getPoupanca().getListaComplementoPoupanca().size() - 1);
         getComplementoPoupanca().setPoupador(nomeMemoria);
         getComplementoPoupanca().setCpf(cpfMemoria);
+        getComplementoPoupanca().setIdArquivo(getPoupanca().getIdentificacaoDemanda());
+        getComplementoPoupanca().setDataImportacaoArquivo(getPoupanca().getDataUltimaDemanda());
         salvarParcial();
         getDaoPoupanca().getEm().clear();
 
