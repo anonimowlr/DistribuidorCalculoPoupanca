@@ -456,7 +456,6 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
     public void complementar() {
 
         try {
-             BigDecimal correcaoDigitada = getComplementoPoupanca().getCorrecaoEsperada();
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
@@ -501,9 +500,10 @@ public class ControlePoupanca extends ControleGenerico implements Serializable {
             }
 
             calcularValorAcordo();
+             
             
-             if(getComplementoPoupanca().getValorAcordo() !=null && !correcaoEsperada().equals(correcaoDigitada)){
-                Util.mensagemErro("Valor correção inválido, Valor aceito pelo sistema " + Utils.converterToMoney(correcaoEsperada().toString()));
+             if (getComplementoPoupanca().getValorAcordo() != null && !Utils.getIntervaloCorrecao(correcaoEsperada(), getComplementoPoupanca().getCorrecaoEsperada())) {
+                Util.mensagemErro("Valor correção inválido");
                 return;
             }
             

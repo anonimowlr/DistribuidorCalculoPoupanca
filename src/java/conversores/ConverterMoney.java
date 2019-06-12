@@ -14,6 +14,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import util.Util;
 
 
 /**
@@ -34,6 +35,9 @@ public class ConverterMoney implements  Serializable,Converter{
     @Override // da tela para o objeto
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
    
+       
+        
+        
             try{
                 BigDecimal retorno = new BigDecimal(Utils.tratarVariavel(string));
                

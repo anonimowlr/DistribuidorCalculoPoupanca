@@ -467,4 +467,19 @@ public static String tratarConta(String v) {
 
         return  numeroTratado;
     }
+
+    public static boolean getIntervaloCorrecao(BigDecimal correcaoEsperada, BigDecimal correcaoDigitata) {
+
+        BigDecimal primeiroValor = (BigDecimal) correcaoEsperada.subtract(new BigDecimal(1));
+        BigDecimal ultimoValor = (BigDecimal) correcaoEsperada.add(new BigDecimal(1));
+        
+        if(correcaoDigitata.compareTo(primeiroValor)>=0 && correcaoDigitata.compareTo(ultimoValor)<=0){
+            return true;
+        } else{
+          return  false;  
+        }
+        
+
+      
+    }
 }

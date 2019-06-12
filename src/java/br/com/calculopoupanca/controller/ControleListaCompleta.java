@@ -525,7 +525,7 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
         try {
 
-            BigDecimal correcaoDigitada = getComplementoPoupanca().getCorrecaoEsperada();
+            
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 
@@ -568,8 +568,8 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
 
             calcularValorAcordo();
 
-            if (getComplementoPoupanca().getValorAcordo() != null && !correcaoEsperada().equals(correcaoDigitada)) {
-                Util.mensagemErro("Valor correção inválido, Valor aceito pelo sistema " + Utils.converterToMoney(correcaoEsperada().toString()));
+            if (getComplementoPoupanca().getValorAcordo() != null && !Utils.getIntervaloCorrecao(correcaoEsperada(), getComplementoPoupanca().getCorrecaoEsperada())) {
+                Util.mensagemErro("Valor correção inválido");
                 return;
             }
 
