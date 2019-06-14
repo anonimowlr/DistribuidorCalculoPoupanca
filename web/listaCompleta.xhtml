@@ -126,6 +126,11 @@
 
                                 <f:ajax   listener="#{controleListaCompleta.editar(p.idPoupanca)}"  execute="@all" render="@all" event="click" ></f:ajax>
                             </h:commandButton>
+                            <h:commandButton  value="Excluir"  class="btn btn-link" rendered="#{funcionarioBean.isCargoGerencial()}" style="width: 60px; font-size: 8pt"  onclick="if (!confirm('Deseja realmente excluir?'))
+                                        return false"  >
+
+                                <f:ajax   listener="#{controleListaCompleta.excluirPoupanca(p)}"  execute="@all" render="@all" event="click" ></f:ajax>
+                            </h:commandButton>
 
 
 

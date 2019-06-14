@@ -696,6 +696,26 @@ public class ControleListaCompleta extends ControleGenerico implements Serializa
         getDaoPoupanca().getEm().clear();
 
     }
+    
+    
+    
+     public void excluirPoupanca(Poupanca poupanca) {
+
+       try{
+        getListaPoupanca().remove(poupanca);
+        getDaoPoupanca().deletar(poupanca);
+        Util.mensagemInformacao("Excluído com sucesso!!");
+           
+       }catch(Exception e){
+          Util.mensagemErro(Util.getMensagemErro(e));
+       }
+
+        
+
+       
+
+    }
+    
 
     /**
      * @return the listaComplemento
