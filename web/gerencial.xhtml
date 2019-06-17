@@ -126,6 +126,9 @@
                             <h:commandButton value="Incluir nova demanda" class="btn btn-link" style="font-size: 12pt" >
                                 <f:ajax listener="#{controleGerencial.novoGerencial()}" execute="@this"  render=":fomIndex"></f:ajax>
                             </h:commandButton>
+                            
+                            <h:commandButton value="Gerar Planilha" class="btn btn-link" style="font-size: 12pt" actionListener="#{controleComplemento.gerarPlanilha()}" >
+                            </h:commandButton>
                           
                             <h:outputLabel value="Pendente: #{controleComplemento.daoComplementoPoupanca.listaComplementoPendencias.size()} , Total: #{controleComplemento.daoComplementoPoupanca.listaTodos.size()}"></h:outputLabel>
                            

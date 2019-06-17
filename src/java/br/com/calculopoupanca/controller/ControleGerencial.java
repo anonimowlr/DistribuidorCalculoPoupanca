@@ -9,13 +9,14 @@ import br.com.calculopoupanca.model.dao.ComplementoDAO;
 import br.com.calculopoupanca.model.dao.ObservacaoDAO;
 import br.com.calculopoupanca.model.dao.PoupancaDAO;
 import br.com.calculopoupanca.model.pdf.GeradorPdf;
+import br.com.calculopoupanca.model.poi.GerarPlanilhaComplementoPoupanca;
 import br.com.calculopoupanca.util.Utils;
-import endidades.ComplementoPoupanca;
-import endidades.Funcionario;
-import endidades.IdPoupanca;
-import endidades.Observacao;
-import endidades.Plano;
-import endidades.Poupanca;
+import entidades.ComplementoPoupanca;
+import entidades.Funcionario;
+import entidades.IdPoupanca;
+import entidades.Observacao;
+import entidades.Plano;
+import entidades.Poupanca;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -27,6 +28,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import util.Util;
 
 /**
@@ -578,6 +580,7 @@ public class ControleGerencial implements Serializable {
     public void setDaoComplemento(ComplementoDAO<ComplementoPoupanca,IdPoupanca> daoComplemento) {
         this.daoComplemento = daoComplemento;
     }
+    
     
    
 }

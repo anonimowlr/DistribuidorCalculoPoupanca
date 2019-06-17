@@ -2,7 +2,7 @@
 package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.model.dao.FuncionarioDAO;
-import endidades.Funcionario;
+import entidades.Funcionario;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

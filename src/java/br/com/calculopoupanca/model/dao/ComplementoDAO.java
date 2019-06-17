@@ -5,10 +5,10 @@
  */
 package br.com.calculopoupanca.model.dao;
 
-import endidades.ComplementoPoupanca;
-import endidades.Funcionario;
-import endidades.IdPoupanca;
-import endidades.Poupanca;
+import entidades.ComplementoPoupanca;
+import entidades.Funcionario;
+import entidades.IdPoupanca;
+import entidades.Poupanca;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;

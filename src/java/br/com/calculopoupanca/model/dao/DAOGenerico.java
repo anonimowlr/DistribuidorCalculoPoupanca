@@ -6,10 +6,10 @@
 package br.com.calculopoupanca.model.dao;
 
 
-import br.com.calculopoupanca.jpa.EntityManagerUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import jpa.EntityManagerUtil;
 import util.Util;
 
 

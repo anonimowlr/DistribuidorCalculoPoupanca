@@ -6,8 +6,8 @@
 package br.com.calculopoupanca.controller;
 
 import br.com.calculopoupanca.util.Utils;
-import endidades.ComplementoPoupanca;
-import endidades.Poupanca;
+import entidades.ComplementoPoupanca;
+import entidades.Poupanca;
 import java.awt.Dialog;
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -5,10 +5,10 @@
  */
 package br.com.calculopoupanca.model.dao;
 
-import endidades.ComplementoPoupanca;
-import endidades.Funcionario;
-import endidades.IdPoupanca;
-import endidades.Poupanca;
+import entidades.ComplementoPoupanca;
+import entidades.Funcionario;
+import entidades.IdPoupanca;
+import entidades.Poupanca;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;

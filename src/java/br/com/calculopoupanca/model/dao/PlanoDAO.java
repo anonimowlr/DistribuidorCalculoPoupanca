@@ -5,9 +5,9 @@
  */
 package br.com.calculopoupanca.model.dao;
 
-import endidades.IdPoupanca;
-import endidades.Observacao;
-import endidades.Plano;
+import entidades.IdPoupanca;
+import entidades.Observacao;
+import entidades.Plano;
 
 
 /**
